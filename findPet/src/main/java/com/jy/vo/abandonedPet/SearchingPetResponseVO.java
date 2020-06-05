@@ -1,26 +1,31 @@
-package com.jy.vo;
+package com.jy.vo.abandonedPet;
 
 import java.util.Map;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ * 행정 구역 데이터를 담을 클래스
+ * @author JongYoung
+ *
+ */
 @XmlRootElement(name = "response")
-public class API_ResponseVO {
+public class SearchingPetResponseVO {
 	
 	private Map<String, String> header;
-    private ItemsDTO body;
+    private SearchingPetItemsDTO body;	// 행정 구역 리스트를 담을 필드
     
     public Map<String, String> getHeader() {
 		return header;
 	}
 
 
-	public ItemsDTO getBody() {
+	public SearchingPetItemsDTO getBody() {
 		return body;
 	}
 
 
-	public void setBody(ItemsDTO body) {
+	public void setBody(SearchingPetItemsDTO body) {
 		this.body = body;
 	}
 

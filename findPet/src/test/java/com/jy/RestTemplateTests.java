@@ -1,6 +1,7 @@
 package com.jy;
 
 import java.io.UnsupportedEncodingException;
+
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -16,9 +17,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestTemplate;
 
-import com.jy.vo.API_ResponseVO;
-import com.jy.vo.ItemDTO;
-import com.jy.vo.ItemsDTO;
+import com.jy.enums.RequestURI;
+import com.jy.vo.ShelterDTO;
+import com.jy.vo.abandonedPet.SearchingPetResponseVO;
+import com.jy.vo.administrativeArea.AdministrativeAreaResponseVO;
+import com.jy.vo.kind.KindResponseVO;
+import com.jy.vo.shelter.ShelterResponseVO;
+import com.jy.vo.administrativeArea.AdministrativeAreaItemsDTO;
 
 import lombok.extern.java.Log;
 
@@ -30,28 +35,96 @@ public class RestTemplateTests {
 	@Autowired
 	private RestTemplate restTemplate;
 	
-	private String SERVICE_KEY = "rwsa2gHO9MpieAaqrNbGiKNPFF7DVwar9YAf6bDkor5A%2F4rEGswSmAnQs8JQmzh8wiAHKsIzVX6fqPRCOh8YbA%3D%3D";
-	private String GET_SIDO = "http://openapi.animal.go.kr/openapi/service/rest/abandonmentPublicSrvc/sido?ServiceKey=";
-
-	
 	@Test
-	public void testURL() {
-		log.info("요청 URL 테스트 : " + GET_SIDO + SERVICE_KEY);
+	public void testURI() {
+		log.info("시/도 조회 URI : " + RequestURI.SIDO.getUri());
+		log.info("시/군/구 조회 URI : " + RequestURI.SIGUNGU.getUri());
+		log.info("보호소 조회 URI : " +  RequestURI.SHLETER.getUri());
+		log.info("품종 조회 URI : " +  RequestURI.KIND.getUri());
+		log.info("유기 동물 조회 URI : " + RequestURI.SEARCH.getUri());
 	}
 	
 	@Test
 	public void test_getSido() throws UnsupportedEncodingException, URISyntaxException {
-		StringBuilder uriBuilder = new StringBuilder("http://openapi.animal.go.kr/openapi/service/rest/abandonmentPublicSrvc/sido"); /*URL*/
-        uriBuilder.append("?" + URLEncoder.encode("ServiceKey","UTF-8") + "=" + SERVICE_KEY); /*Service Key*/
-        URI uri = new URI(uriBuilder.toString());
+        URI uri = new URI(RequestURI.SIDO.getUri());
         
+        log.info("요청 URI : " + uri.toString());
+        AdministrativeAreaResponseVO result = restTemplate.getForObject(uri, AdministrativeAreaResponseVO.class);
         
-        API_ResponseVO result = restTemplate.getForObject(uri, API_ResponseVO.class);
-        
-        List<ItemDTO> items = result.getBody().getItems();
-        
-        for(ItemDTO item : items) {
-        	log.info("item : " + item.toString());
-        }
+        printResult(result);
 	}
+	
+	
+	@Test
+	public void test_getSigungu() throws URISyntaxException {
+		URI uri = new URI(RequestURI.SIGUNGU.getUri() + "upr_cd=6110000");
+		log.info("요청 URI : " + uri.toString());
+		
+		AdministrativeAreaResponseVO result = restTemplate.getForObject(uri, AdministrativeAreaResponseVO.class);
+		 
+		printResult(result);
+		
+	}
+	
+	@Test
+	public void test_getShelter() throws URISyntaxException {
+		URI uri = new URI(RequestURI.SHLETER.getUri() + "upr_cd=6110000&org_cd=3060000");
+		log.info("요청 URI : " + uri.toString());
+		
+		ShelterResponseVO result = restTemplate.getForObject(uri, ShelterResponseVO.class);
+		
+		printResult(result);
+		
+	}
+	
+	@Test
+	public void test_getKind() throws URISyntaxException {
+		String dogCd = "417000";
+		String catCd = "422400";
+		String othersCd = "429900";
+		
+		URI uri = new URI(RequestURI.KIND.getUri() + "up_kind_cd=" + othersCd);
+		log.info("요청 URI : " + uri.toString());
+		
+		KindResponseVO result = restTemplate.getForObject(uri, KindResponseVO.class);
+		
+		printResult(result);
+		
+	}
+	
+	@Test
+	public void test_getSearchingResult() throws URISyntaxException {
+		URI uri = new URI(RequestURI.SEARCH.getUri());
+		log.info("요청 URI : " + uri.toString());
+		
+		SearchingPetResponseVO result = restTemplate.getForObject(uri, SearchingPetResponseVO.class);
+		
+		printResult(result);
+		
+	}
+	
+	private void printResult(SearchingPetResponseVO responseVO) {
+		responseVO.getBody().getItems().forEach(item -> {
+			log.info(item.toString());
+		});;
+	}
+
+	private void printResult(AdministrativeAreaResponseVO responseVO) {
+		responseVO.getBody().getItems().forEach(item -> {
+			log.info(item.toString());
+		});;
+	}
+	
+	private void printResult(ShelterResponseVO responseVO) {
+		responseVO.getBody().getItems().forEach(item -> {
+			log.info(item.toString());
+		});;
+	}
+	
+	private void printResult(KindResponseVO responseVO) {
+		responseVO.getBody().getItems().forEach(item -> {
+			log.info(item.toString());
+		});;
+	}
+	
 }
