@@ -16,10 +16,25 @@ import lombok.ToString;
 @ToString
 public class SearchingPetItemsDTO {
 	private List<SearchingPetItemDTO> items;
+	private int numOfRows;
+	private int pageNo;
+	private int totalCount;
 	
 	@XmlElementWrapper(name = "items")
 	@XmlElement(name = "item")
 	public List<SearchingPetItemDTO> getItems() {
 		return items;
+	}
+
+	public int getNumOfRows() {
+		return numOfRows;
+	}
+
+	public int getPageNo() {
+		return pageNo;
+	}
+
+	public int getTotalCount() {
+		return totalCount;
 	}
 }
