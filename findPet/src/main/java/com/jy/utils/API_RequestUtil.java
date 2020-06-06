@@ -3,6 +3,10 @@ package com.jy.utils;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 import org.apache.http.client.utils.URIBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +14,13 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import com.jy.enums.RequestURI;
+import com.jy.vo.abandonedPet.SearchingPetItemsDTO;
 import com.jy.vo.abandonedPet.SearchingPetResponseVO;
+import com.jy.vo.administrativeArea.AdministrativeAreaItemsDTO;
 import com.jy.vo.administrativeArea.AdministrativeAreaResponseVO;
+import com.jy.vo.kind.KindItemsDTO;
 import com.jy.vo.kind.KindResponseVO;
+import com.jy.vo.shelter.ShelterItemsDTO;
 import com.jy.vo.shelter.ShelterResponseVO;
 
 import lombok.extern.java.Log;
@@ -35,11 +43,11 @@ public class API_RequestUtil {
 	 * @return 시/도 정보
 	 * @throws URISyntaxException 
 	 */
-	public AdministrativeAreaResponseVO request_AdministrativeArea() throws URISyntaxException {
+	public AdministrativeAreaItemsDTO request_AdministrativeArea() throws URISyntaxException {
 		URI uri = new URI(RequestURI.SIDO.getUri());
 		log.info("요청 URI : " + uri.toString());
 		
-		return restTemplate.getForObject(uri, AdministrativeAreaResponseVO.class);
+		return restTemplate.getForObject(uri, AdministrativeAreaResponseVO.class).getBody();
 	}
 	
 	/**
@@ -48,28 +56,42 @@ public class API_RequestUtil {
 	 * @return 시/군/구 정보
 	 * @throws URISyntaxException 
 	 */
-	public AdministrativeAreaResponseVO request_AdministrativeArea(String upr_cd) throws URISyntaxException {
+	public AdministrativeAreaItemsDTO request_AdministrativeArea(String upr_cd) throws URISyntaxException {
 		URI uri = new URI(RequestURI.SIGUNGU.getUri() + "upr_cd=" + upr_cd);
 		log.info("요청 URI : " + uri.toString());
 		
-		return restTemplate.getForObject(uri, AdministrativeAreaResponseVO.class);
+		return restTemplate.getForObject(uri, AdministrativeAreaResponseVO.class).getBody();
 	}
 	
-	public ShelterResponseVO request_Shelter(String upr_cd, String org_cd) throws URISyntaxException {
+	public ShelterItemsDTO request_Shelter(String upr_cd, String org_cd) throws URISyntaxException {
 		URI uri = new URI(RequestURI.SHLETER.getUri() + "upr_cd=" + upr_cd + "&org_cd=" + org_cd);
 		log.info("요청 URI : " + uri.toString());
 		
-		return restTemplate.getForObject(uri, ShelterResponseVO.class);
+		return restTemplate.getForObject(uri, ShelterResponseVO.class).getBody();
 	}
 	
-	public KindResponseVO request_Kind(String up_kind_cd) throws URISyntaxException {
+	public KindItemsDTO request_Kind(String up_kind_cd) throws URISyntaxException {
 		URI uri = new URI(RequestURI.KIND.getUri() + "up_kind_cd=" + up_kind_cd);
 		log.info("요청 URI : " + uri.toString());
 		
-		return restTemplate.getForObject(uri, KindResponseVO.class);
+		return restTemplate.getForObject(uri, KindResponseVO.class).getBody();
 	}
 	
-	public SearchingPetResponseVO request_search(
+	/**
+	 * 오늘 버려진 유기 동물의 데이터를 반환
+	 * @return 오늘 버려진 유기동물의 SearchingPetResopnseVO
+	 * @throws URISyntaxException 
+	 */
+	public SearchingPetItemsDTO request_todayAbandoned() throws URISyntaxException {
+		LocalDate todayDate = LocalDate.now();
+		String todayStr = todayDate.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+		
+		return request_search(todayStr, todayStr, null, null, null, null, null, null, null, null, 100);
+		
+	}
+	
+	
+	public SearchingPetItemsDTO request_search(
 			String bgnde,	// 검색 시작일
 			String endde,	// 검색 종료일
 			String upkind,	// 축종 코드
@@ -79,7 +101,8 @@ public class API_RequestUtil {
 			String care_reg_no,	// 보호소 번호
 			String state,	// 상태
 			String neuter_yn,	// 중성화 여부
-			Integer pageNo	// 페이지 번호
+			Integer pageNo,	// 페이지 번호
+			Integer numOfRows	// 페이지 당 데이터 개수
 			) throws URISyntaxException {
 		
 		StringBuilder uriBuilder = new StringBuilder(RequestURI.SEARCH.getUri());
@@ -114,10 +137,13 @@ public class API_RequestUtil {
 		if(pageNo != null)
 			uriBuilder.append("&pageNo=" + pageNo);
 		
+		if(numOfRows != null)
+			uriBuilder.append("&numOfRows=" + numOfRows);
+		
 		URI uri = new URI(uriBuilder.toString());
 		
 		log.info("요청 URI : " + uri.toString());
 		
-		return restTemplate.getForObject(uri, SearchingPetResponseVO.class);
+		return restTemplate.getForObject(uri, SearchingPetResponseVO.class).getBody();
 	} 
 }

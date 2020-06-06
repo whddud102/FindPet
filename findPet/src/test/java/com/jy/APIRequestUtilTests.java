@@ -1,7 +1,6 @@
 package com.jy;
 
 import java.net.URISyntaxException;
-import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,12 +9,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.jy.utils.API_RequestUtil;
-import com.jy.vo.abandonedPet.SearchingPetItemDTO;
 import com.jy.vo.abandonedPet.SearchingPetItemsDTO;
-import com.jy.vo.abandonedPet.SearchingPetResponseVO;
-import com.jy.vo.administrativeArea.AdministrativeAreaResponseVO;
-import com.jy.vo.kind.KindResponseVO;
-import com.jy.vo.shelter.ShelterResponseVO;
+import com.jy.vo.administrativeArea.AdministrativeAreaItemsDTO;
+import com.jy.vo.kind.KindItemsDTO;
+import com.jy.vo.shelter.ShelterItemsDTO;
 
 import lombok.extern.java.Log;
 
@@ -73,12 +70,21 @@ public class APIRequestUtilTests {
 		String catCd = "422400";
 		String othersCd = "429900";
 		
-		printResult(requester.request_search("20200605", "20200605", null, null, null, null, null, null, null, 22));
+		printResult(requester.request_search("20200605", "20200605", null, null, null, null, null, null, null, 1, 10));
+	}
+	
+	@Test
+	public void request_todayAbandoned() throws URISyntaxException {
+		// 오늘 버려진 유기동물 데이터 요청
+		SearchingPetItemsDTO result = requester.request_todayAbandoned();
+		
+		printResult(result);
+		
 	}
 	
 	
-	private void printResult(SearchingPetResponseVO responseVO) {
-		SearchingPetItemsDTO response = responseVO.getBody();
+	private void printResult(SearchingPetItemsDTO ItemsDTO) {
+		SearchingPetItemsDTO response = ItemsDTO;
 		
 		response.getItems().forEach(item -> {
 			log.info(item.toString());
@@ -89,20 +95,20 @@ public class APIRequestUtilTests {
 		log.info("전체 데이터 수 : " + response.getTotalCount());
 	}
 
-	private void printResult(AdministrativeAreaResponseVO responseVO) {
-		responseVO.getBody().getItems().forEach(item -> {
+	private void printResult(AdministrativeAreaItemsDTO ItemsDTO) {
+		ItemsDTO.getItems().forEach(item -> {
 			log.info(item.toString());
 		});;
 	}
 	
-	private void printResult(ShelterResponseVO responseVO) {
-		responseVO.getBody().getItems().forEach(item -> {
+	private void printResult(ShelterItemsDTO ItemsDTO) {
+		ItemsDTO.getItems().forEach(item -> {
 			log.info(item.toString());
 		});;
 	}
 	
-	private void printResult(KindResponseVO responseVO) {
-		responseVO.getBody().getItems().forEach(item -> {
+	private void printResult(KindItemsDTO ItemsDTO) {
+		ItemsDTO.getItems().forEach(item -> {
 			log.info(item.toString());
 		});;
 	}
