@@ -4,112 +4,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="ContentTye" content="text/html; charset=utf-8">
 <link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
-	crossorigin="anonymous">
-
-<style type="text/css">
-@import
-	url('https://fonts.googleapis.com/css2?family=Gaegu:wght@700&display=swap');
-
-@import url('https://fonts.googleapis.com/css?family=Do+Hyeon:400');
-</style>
-
-<title>유기동물 검색</title>
-</head>
-<body>
-	<div class="container-fluid d-flex flex-column bg-primary min-vh-100 vh-100">
-		<!-- Header -->
-		<div th:insert="~{fragments/header::header}"></div>
-		
-		<div class="row bg-warning overflow-auto my-auto p-4" >
-			<div class="col">
-					<table class="table">
-						  <thead>
-						    <tr>
-						      <th scope="col">#</th>
-						      <th scope="col">First</th>
-						      <th scope="col">Last</th>
-						      <th scope="col">Handle</th>
-						    </tr>
-						  </thead>
-						  <tbody>
-						    <tr>
-						      <th scope="row">1</th>
-						      <td><img src="http://www.animal.dgo.kr/files/shelter/2020/06/202006051206181.jpg"></td>
-						      <td>Otto</td>
-						      <td>@mdo</td>
-						    </tr>
-						    
-						     <tr>
-						      <th scope="row">1</th>
-						      <td><img src="http://www.animal.go.kr/fdiles/shelter/2020/06/202006051206181.jpg"></td>
-						      <td>Otto</td>
-						      <td>@mdo</td>
-						    </tr>
-						    
-						     <tr>
-						      <th scope="row">1</th>
-						      <td><img src="http://www.animal.go.krd/files/shelter/2020/06/202006051206181.jpg"></td>
-						      <td>Otto</td>
-						      <td>@mdo</td>
-						    </tr>
-						    
-						     <tr>
-						      <th scope="row">1</th>
-						      <td><img src="http://www.animal.go.kr/filesd/shelter/2020/06/202006051206181.jpg"></td>
-						      <td>Otto</td>
-						      <td>@mdo</td>
-						    </tr>
-						    <tr>
-						      <th scope="row">2</th>
-						      <td>Jacob</td>
-						      <td>Thornton</td>
-						      <td>@fat</td>
-						    </tr>
-						    <tr>
-						      <th scope="row">3</th>
-						      <td>Larry</td>
-						      <td>the Bird</td>
-						      <td>@twitter</td>
-						    </tr>
-						  </tbody>
-						</table>
-			</div>
-		</div>
-		
-		<!-- Footer -->
-		<div th:insert="~{fragments/footer::footer}"></div>
-	</div>
-
-
-	<!-- Boot Strap -->
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
-		integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
-		crossorigin="anonymous"></script>
-</body>
-</html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta http-equiv="X-UA-Compatible" content="IE = edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="ContentTye" content="text/html; charset=utf-8">
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
 	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
 	crossorigin="anonymous">
 
 <style type="text/css">
+body {
+	background-color: #DBFFFB;
+}
+
 @import
-	url('https://fonts.googleapis.com/css2?family=Gaegu:wght@700&display=swap');
+	url('https://fonts.googleapis.com/css2?family=Gaegu:wght@700&display=swap')
+	;
 
 @import url('https://fonts.googleapis.com/css?family=Do+Hyeon:400');
 </style>
@@ -117,214 +25,140 @@
 <title>유기동물 검색</title>
 </head>
 <body>
-	<div class="container-fluid">
+	<div class="container-fluid d-flex flex-column min-vh-100 vh-100">
+
 
 		<!-- Header -->
 		<div th:insert="~{fragments/header::header}"></div>
 
-		<div class="row d-flex flex-column justify-content-center  mt-auto"
-			style="height: 95vh;">
-			<div
-				class="col bg-primary h-100 d-flex justify-content-center align-items-center">
-				<table class="table">
-					<thead>
-						<tr>
-							<th scope="col">#</th>
-							<th scope="col">First</th>
-							<th scope="col">Last</th>
-							<th scope="col">Handle</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<th scope="row">1</th>
-							<td>Mark</td>
-							<td>Otto</td>
-							<td>@mdo</td>
-						</tr>
-						<tr>
-							<th scope="row">2</th>
-							<td>Jacob</td>
-							<td>Thornton</td>
-							<td>@fat</td>
-						</tr>
-						<tr>
-							<th scope="row">3</th>
-							<td>Larry</td>
-							<td>the Bird</td>
-							<td>@twitter</td>
-						</tr>
-					</tbody>
-				</table>
+		<div class="row">
+			<div class="col bg-success">
+				<h1>오늘 유기된 반려동물 : [[${result.totalCount}]]</h1>
 			</div>
 		</div>
 
-		<!-- Footer -->
-		<div th:insert="~{fragments/footer::footer}"></div>
-	</div>
+		<div class="row h-100 bg-warning">
+
+			<div class="col d-flex align-items-center justify-content-center bg-dark">
 
 
-	<!-- Boot Strap -->
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
-		integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
-		crossorigin="anonymous"></script>
-</body>
-</html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta http-equiv="X-UA-Compatible" content="IE = edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="ContentTye" content="text/html; charset=utf-8">
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
-	crossorigin="anonymous">
+				<!-- Left Button -->
+				<div>
+					<a href="#"><i class="fa fa-chevron-left fa-3x"></i></a>
+				</div>
+				<!--/.Carousel Left Button-->
 
-<style type="text/css">
-@import
-	url('https://fonts.googleapis.com/css2?family=Gaegu:wght@700&display=swap');
+				<!--Carousel Wrapper-->
+				<div id="multi-item-carousel" class="carousel slide carousel-multi-item mx-3" data-ride="carousel">
 
-@import url('https://fonts.googleapis.com/css?family=Do+Hyeon:400');
-</style>
+							<div class="row">
+								<div class="col-md-3">
+									<div class="card mb-2" style="width : 18rem;">
+										<img class="card-img-top"
+											src="http://www.animal.go.kr/files/shelter/2020/06/202006071406454.jpg"
+											alt="Card image cap">
+										<div class="card-body">
+											<ul>
+												<li>2019년생</li>
+												<li>검정색</li>
+												<li>귀가 아픔</li>
+												<li>귀엽게 생겼음</li>
+												<li>남자</li>
+												<li>검정색</li>
+												<li>귀엽게 생겼음</li>
+												<li>귀엽게 생겼음</li>
+												<li>귀엽게 생겼음</li>
+												<li>귀엽게 생겼음</li>
+											</ul>
+										</div>
+									</div>
+								</div>
 
-<title>유기동물 검색</title>
-</head>
-<body>
-	<div class="container-fluid">
+								<div class="col-md-3 clearfix d-none d-md-block">
+									<div class="card mb-2" style="width : 18rem;">
+										<img class="card-img-top"
+											src="http://www.animal.go.kr/files/shelter/2020/06/202006071406125.jpg"
+											alt="Card image cap">
+										<div class="card-body">
+										<ul>
+												<li>2019년생</li>
+												<li>검정색</li>
+												<li>귀가 아픔</li>
+												<li>귀엽게 생겼음</li>
+												<li>남자</li>
+												<li>검정색</li>
+												<li>귀엽게 생겼음</li>
+												<li>귀엽게 생겼음</li>
+												<li>귀엽게 생겼음</li>
+												<li>귀엽게 생겼음</li>
+											</ul>
+										</div>
+									</div>
+								</div>
 
-		<!-- Header -->
-		<div th:insert="~{fragments/header::header}"></div>
+								<div class="col-md-3 clearfix d-none d-md-block">
+									<div class="card mb-2" style="width: 18rem;">
+										<img class="card-img-top"
+											src="http://www.animal.go.kr/files/shelter/2020/06/202006071406125.jpg"
+											alt="Card image cap">
+										<div class="card-body">
+											<ul>
+												<li>2019년생</li>
+												<li>검정색</li>
+												<li>귀가 아픔</li>
+												<li>귀엽게 생겼음</li>
+												<li>남자</li>
+												<li>검정색</li>
+												<li>귀엽게 생겼음</li>
+												<li>귀엽게 생겼음</li>
+												<li>귀엽게 생겼음</li>
+												<li>귀엽게 생겼음</li>
+											</ul>
+										</div>
+									</div>
+								</div>
 
-		<div class="row d-flex flex-column justify-content-center  mt-auto"
-			style="height: 95vh;">
-			<div
-				class="col bg-primary h-100 d-flex justify-content-center align-items-center">
-				<table class="table">
-					<thead>
-						<tr>
-							<th scope="col">#</th>
-							<th scope="col">First</th>
-							<th scope="col">Last</th>
-							<th scope="col">Handle</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<th scope="row">1</th>
-							<td>Mark</td>
-							<td>Otto</td>
-							<td>@mdo</td>
-						</tr>
-						<tr>
-							<th scope="row">2</th>
-							<td>Jacob</td>
-							<td>Thornton</td>
-							<td>@fat</td>
-						</tr>
-						<tr>
-							<th scope="row">3</th>
-							<td>Larry</td>
-							<td>the Bird</td>
-							<td>@twitter</td>
-						</tr>
-					</tbody>
-				</table>
+								<div class="col-md-3 clearfix d-none d-md-block">
+									<div class="card mb-2" style="width :18rem;">
+										<img class="card-img-top"
+											src="http://www.animal.go.kr/files/shelter/2020/06/20200607140618.jpg"
+											alt="Card image cap">
+										<div class="card-body">
+											<ul>
+												<li>2019년생</li>
+												<li>검정색</li>
+												<li>귀가 아픔</li>
+												<li>귀엽게 생겼음</li>
+												<li>남자</li>
+												<li>검정색</li>
+												<li>귀엽게 생겼음</li>
+												<li>귀엽게 생겼음</li>
+												<li>귀엽게 생겼음</li>
+												<li>귀엽게 생겼음</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+				</div>
+				<!--/.Carousel Wrapper-->
+
+				<!--Next Button-->
+				<div>
+					<a href="#"><i class="fa fa-chevron-right fa-3x"></i></a>
+				</div>
+				<!--/.Next Button-->
+
 			</div>
+			<!-- /.col -->
+
 		</div>
+		<!-- /.row -->
 
 		<!-- Footer -->
 		<div th:insert="~{fragments/footer::footer}"></div>
+
 	</div>
-
-
-	<!-- Boot Strap -->
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
-		integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
-		crossorigin="anonymous"></script>
-</body>
-</html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta http-equiv="X-UA-Compatible" content="IE = edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="ContentTye" content="text/html; charset=utf-8">
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
-	crossorigin="anonymous">
-
-<style type="text/css">
-@import
-	url('https://fonts.googleapis.com/css2?family=Gaegu:wght@700&display=swap');
-
-@import url('https://fonts.googleapis.com/css?family=Do+Hyeon:400');
-</style>
-
-<title>유기동물 검색</title>
-</head>
-<body>
-	<div class="container-fluid">
-
-		<!-- Header -->
-		<div th:insert="~{fragments/header::header}"></div>
-
-		<div class="row d-flex flex-column justify-content-center  mt-auto"
-			style="height: 95vh;">
-			<div
-				class="col bg-primary h-100 d-flex justify-content-center align-items-center">
-				<table class="table">
-					<thead>
-						<tr>
-							<th scope="col">#</th>
-							<th scope="col">First</th>
-							<th scope="col">Last</th>
-							<th scope="col">Handle</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<th scope="row">1</th>
-							<td>Mark</td>
-							<td>Otto</td>
-							<td>@mdo</td>
-						</tr>
-						<tr>
-							<th scope="row">2</th>
-							<td>Jacob</td>
-							<td>Thornton</td>
-							<td>@fat</td>
-						</tr>
-						<tr>
-							<th scope="row">3</th>
-							<td>Larry</td>
-							<td>the Bird</td>
-							<td>@twitter</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-
-		<!-- Footer -->
-		<div th:insert="~{fragments/footer::footer}"></div>
-	</div>
-
 
 	<!-- Boot Strap -->
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
