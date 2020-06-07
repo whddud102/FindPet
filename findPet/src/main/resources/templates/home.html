@@ -11,13 +11,9 @@
 	crossorigin="anonymous">
 
 <style type="text/css">
-body {
-	background-color: #DBFFFB;
-}
 
 @import
-	url('https://fonts.googleapis.com/css2?family=Gaegu:wght@700&display=swap')
-	;
+	url('https://fonts.googleapis.com/css2?family=Gaegu:wght@700&display=swap');
 
 @import url('https://fonts.googleapis.com/css?family=Do+Hyeon:400');
 </style>
@@ -25,7 +21,7 @@ body {
 <title>유기동물 검색</title>
 </head>
 <body>
-	<div class="container-fluid d-flex flex-column min-vh-100 vh-100">
+	<div class="container-fluid d-flex flex-column min-vh-100">
 
 
 		<!-- Header -->
@@ -37,123 +33,95 @@ body {
 			</div>
 		</div>
 
-		<div class="row h-100 bg-warning">
+		<!-- Main Row -->
+		<div class="main-row row p-3" style="min-height: 81.3vh;">
 
-			<div class="col d-flex align-items-center justify-content-center bg-dark">
-
-
-				<!-- Left Button -->
-				<div>
+			<div class="col d-flex align-items-center justify-content-center">
+				
+				
+				<div class="bg-warning">
+					<!-- Left Button -->
 					<a href="#"><i class="fa fa-chevron-left fa-3x"></i></a>
+					<!--/.Left Button-->
 				</div>
-				<!--/.Carousel Left Button-->
 
-				<!--Carousel Wrapper-->
-				<div id="multi-item-carousel" class="carousel slide carousel-multi-item mx-3" data-ride="carousel">
-
-							<div class="row">
-								<div class="col-md-3">
-									<div class="card mb-2" style="width : 18rem;">
-										<img class="card-img-top"
-											src="http://www.animal.go.kr/files/shelter/2020/06/202006071406454.jpg"
-											alt="Card image cap">
-										<div class="card-body">
-											<ul>
-												<li>2019년생</li>
-												<li>검정색</li>
-												<li>귀가 아픔</li>
-												<li>귀엽게 생겼음</li>
-												<li>남자</li>
-												<li>검정색</li>
-												<li>귀엽게 생겼음</li>
-												<li>귀엽게 생겼음</li>
-												<li>귀엽게 생겼음</li>
-												<li>귀엽게 생겼음</li>
-											</ul>
-										</div>
-									</div>
+				<!--  Cards Row -->
+				<div class="row mx-3  w-100">
+					
+					<!-- Left Column -->
+					<div class="col-xl-6">
+						
+						
+						<div class="card mb-2 border-dark" style="min-width: 30rem; background-color: #FAFAD2;">
+							<div class="row no-gutters">
+								<div class="col-md-4 d-flex">
+									<img id="card1_img" class="card-img img-thumbnail" alt="...">
 								</div>
-
-								<div class="col-md-3 clearfix d-none d-md-block">
-									<div class="card mb-2" style="width : 18rem;">
-										<img class="card-img-top"
-											src="http://www.animal.go.kr/files/shelter/2020/06/202006071406125.jpg"
-											alt="Card image cap">
-										<div class="card-body">
-										<ul>
-												<li>2019년생</li>
-												<li>검정색</li>
-												<li>귀가 아픔</li>
-												<li>귀엽게 생겼음</li>
-												<li>남자</li>
-												<li>검정색</li>
-												<li>귀엽게 생겼음</li>
-												<li>귀엽게 생겼음</li>
-												<li>귀엽게 생겼음</li>
-												<li>귀엽게 생겼음</li>
-											</ul>
-										</div>
-									</div>
-								</div>
-
-								<div class="col-md-3 clearfix d-none d-md-block">
-									<div class="card mb-2" style="width: 18rem;">
-										<img class="card-img-top"
-											src="http://www.animal.go.kr/files/shelter/2020/06/202006071406125.jpg"
-											alt="Card image cap">
-										<div class="card-body">
-											<ul>
-												<li>2019년생</li>
-												<li>검정색</li>
-												<li>귀가 아픔</li>
-												<li>귀엽게 생겼음</li>
-												<li>남자</li>
-												<li>검정색</li>
-												<li>귀엽게 생겼음</li>
-												<li>귀엽게 생겼음</li>
-												<li>귀엽게 생겼음</li>
-												<li>귀엽게 생겼음</li>
-											</ul>
-										</div>
-									</div>
-								</div>
-
-								<div class="col-md-3 clearfix d-none d-md-block">
-									<div class="card mb-2" style="width :18rem;">
-										<img class="card-img-top"
-											src="http://www.animal.go.kr/files/shelter/2020/06/20200607140618.jpg"
-											alt="Card image cap">
-										<div class="card-body">
-											<ul>
-												<li>2019년생</li>
-												<li>검정색</li>
-												<li>귀가 아픔</li>
-												<li>귀엽게 생겼음</li>
-												<li>남자</li>
-												<li>검정색</li>
-												<li>귀엽게 생겼음</li>
-												<li>귀엽게 생겼음</li>
-												<li>귀엽게 생겼음</li>
-												<li>귀엽게 생겼음</li>
-											</ul>
-										</div>
+								<div class="col-md-8">
+									<div class="card-body">
+										<ul id="card1_info">
+										</ul>
 									</div>
 								</div>
 							</div>
+						</div>
+						
+						<div class="card mb-2 border-dark" style="min-width: 30rem; background-color: #FAFAD2;">
+							<div class="row no-gutters">
+								<div class="col-md-4 d-flex">
+									<img id="card2_img" class="card-img img-thumbnail" alt="...">
+								</div>
+								<div class="col-md-8">
+									<div class="card-body">
+										<ul id="card2_info"></ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Left Column -->
+					
+					
+					<!-- Right Column -->
+					<div class="col-xl-6">
+						<div class="card mb-2 border-dark" style="min-width: 30rem; background-color: #FAFAD2;">
+							<div class="row no-gutters">
+								<div class="col-md-4 d-flex">
+									<img id="card3_img" class="card-img img-thumbnail" alt="...">
+								</div>
+								<div class="col-md-8">
+									<div class="card-body">
+										<ul id="card3_info"></ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					
+						<div class="card mb-2 border-dark" style="min-width: 30rem; background-color: #FAFAD2;">
+							<div class="row no-gutters">
+								<div class="col-md-4 d-flex">
+									<img id="card4_img" class="card-img img-thumbnail" alt="...">
+								</div>
+								<div class="col-md-8">
+									<div class="card-body">
+										<ul id="card4_info"></ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Right Column -->
+					
 				</div>
-				<!--/.Carousel Wrapper-->
 
-				<!--Next Button-->
-				<div>
+				<div class="bg-warning">
 					<a href="#"><i class="fa fa-chevron-right fa-3x"></i></a>
 				</div>
-				<!--/.Next Button-->
 
 			</div>
 			<!-- /.col -->
-
 		</div>
-		<!-- /.row -->
+		<!-- /.Main Row -->
 
 		<!-- Footer -->
 		<div th:insert="~{fragments/footer::footer}"></div>
@@ -172,5 +140,35 @@ body {
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
 		integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
 		crossorigin="anonymous"></script>
+		
+	<script th:inline="javascript">
+	$(document).ready(function() {
+		var items = [[${result.items}]];
+		
+		for(var i = 1; i <= 4; i++) {
+			// items의 인덱스는 0부터 시작하므로 1을 빼서 가져옴
+			var item = items[i-1];
+			
+			$("#card" + i + "_img").attr('src', item.popfile);
+			
+			var info= '';
+			
+			info += '<li class="m-1">나이 : ' + item.age + '</li>';
+			info += '<li class="m-1">색상 : ' + item.colorCd + '</li>';
+			info += '<li class="m-1">품종 :' + item.kindCd + '</li>';
+			info += '<li class="m-1">성별 : ' + (item.sexCd == 'F' ? '암컷' : '수컷') + '</li>';
+			info += '<li class="m-1">중성화 여부 : ' + (item.neuterYn == 'Y' ? 'O' : 'X') + '</li>';
+			info += '<li class="m-1">특징 : ' + item.specialMark + '</li>';
+			info += '<li class="m-1">체중 : ' + item.weight + '</li>';
+			info += '<li class="m-1">발견장소 : ' + item.happenPlace + '</li>';
+			info += '<li class="m-1">관할기관 : ' + item.orgNm + '</li>';
+			info += '<li class="m-1">상태 : ' + item.processState + '</li>';
+			
+			
+			$("#card" + i + "_info").html(info);
+		}
+	});
+	
+	</script>
 </body>
 </html>
