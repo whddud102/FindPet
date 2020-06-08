@@ -26,7 +26,12 @@ public class MainController {
 		
 		model.addAttribute("result", petService.getTodayPets(1));
 		log.info(petService.getTodayPets(1).toString());
+	}
+	
+	@GetMapping("/search")
+	public void goTo_search (Model model) {
 		
+		// 홈 페이지 요청 시, 항상 오늘 유기된 동물 1페이지 정보를 전달하도록 함
 	}
 	
 	
