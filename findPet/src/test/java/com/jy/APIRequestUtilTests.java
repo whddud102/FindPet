@@ -8,11 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.jy.domain.area.AdministrativeAreaItemsDTO;
+import com.jy.domain.kind.KindItemsDTO;
+import com.jy.domain.pet.SearchingPetItemsDTO;
+import com.jy.domain.shelter.ShelterItemsDTO;
 import com.jy.utils.API_RequestUtil;
-import com.jy.vo.abandonedPet.SearchingPetItemsDTO;
-import com.jy.vo.administrativeArea.AdministrativeAreaItemsDTO;
-import com.jy.vo.kind.KindItemsDTO;
-import com.jy.vo.shelter.ShelterItemsDTO;
 
 import lombok.extern.java.Log;
 
@@ -76,7 +76,7 @@ public class APIRequestUtilTests {
 	@Test
 	public void request_todayAbandoned() throws URISyntaxException {
 		// 오늘 버려진 유기동물 데이터 요청
-		SearchingPetItemsDTO result = requester.request_todayAbandoned();
+		SearchingPetItemsDTO result = requester.request_todayAbandoned(8);
 		
 		printResult(result);
 		

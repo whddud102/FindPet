@@ -2,26 +2,22 @@ package com.jy.utils;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URLEncoder;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-import org.apache.http.client.utils.URIBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import com.jy.domain.area.AdministrativeAreaItemsDTO;
+import com.jy.domain.area.AdministrativeAreaResponseVO;
+import com.jy.domain.kind.KindItemsDTO;
+import com.jy.domain.kind.KindResponseVO;
+import com.jy.domain.pet.SearchingPetItemsDTO;
+import com.jy.domain.pet.SearchingPetResponseVO;
+import com.jy.domain.shelter.ShelterItemsDTO;
+import com.jy.domain.shelter.ShelterResponseVO;
 import com.jy.enums.RequestURI;
-import com.jy.vo.abandonedPet.SearchingPetItemsDTO;
-import com.jy.vo.abandonedPet.SearchingPetResponseVO;
-import com.jy.vo.administrativeArea.AdministrativeAreaItemsDTO;
-import com.jy.vo.administrativeArea.AdministrativeAreaResponseVO;
-import com.jy.vo.kind.KindItemsDTO;
-import com.jy.vo.kind.KindResponseVO;
-import com.jy.vo.shelter.ShelterItemsDTO;
-import com.jy.vo.shelter.ShelterResponseVO;
 
 import lombok.extern.java.Log;
 
@@ -38,13 +34,21 @@ public class API_RequestUtil {
 	@Autowired
 	private RestTemplate restTemplate;
 	
+	private int NUM_OF_TODAY = 4;	// 오늘의 유기 동물 조회 요청 시, 요청할 데이터의 수
+	
 	/**
 	 * 시/도 조회 메서드
 	 * @return 시/도 정보
 	 * @throws URISyntaxException 
 	 */
-	public AdministrativeAreaItemsDTO request_AdministrativeArea() throws URISyntaxException {
-		URI uri = new URI(RequestURI.SIDO.getUri());
+	public AdministrativeAreaItemsDTO request_AdministrativeArea() {
+		URI uri = null;
+		try {
+			uri = new URI(RequestURI.SIDO.getUri());
+		} catch (URISyntaxException e) {
+			log.info("시/도 요청 실패");
+			e.printStackTrace();
+		}
 		log.info("요청 URI : " + uri.toString());
 		
 		return restTemplate.getForObject(uri, AdministrativeAreaResponseVO.class).getBody();
@@ -56,22 +60,40 @@ public class API_RequestUtil {
 	 * @return 시/군/구 정보
 	 * @throws URISyntaxException 
 	 */
-	public AdministrativeAreaItemsDTO request_AdministrativeArea(String upr_cd) throws URISyntaxException {
-		URI uri = new URI(RequestURI.SIGUNGU.getUri() + "upr_cd=" + upr_cd);
+	public AdministrativeAreaItemsDTO request_AdministrativeArea(String upr_cd){
+		URI uri = null;
+		try {
+			uri = new URI(RequestURI.SIGUNGU.getUri() + "upr_cd=" + upr_cd);
+		} catch (URISyntaxException e) {
+			log.info("시/군/구 요청 실패");
+			e.printStackTrace();
+		}
 		log.info("요청 URI : " + uri.toString());
 		
 		return restTemplate.getForObject(uri, AdministrativeAreaResponseVO.class).getBody();
 	}
 	
-	public ShelterItemsDTO request_Shelter(String upr_cd, String org_cd) throws URISyntaxException {
-		URI uri = new URI(RequestURI.SHLETER.getUri() + "upr_cd=" + upr_cd + "&org_cd=" + org_cd);
+	public ShelterItemsDTO request_Shelter(String upr_cd, String org_cd) {
+		URI uri = null;
+		try {
+			uri = new URI(RequestURI.SHLETER.getUri() + "upr_cd=" + upr_cd + "&org_cd=" + org_cd);
+		} catch (URISyntaxException e) {
+			log.info("보호소 요청 실패");
+			e.printStackTrace();
+		}
 		log.info("요청 URI : " + uri.toString());
 		
 		return restTemplate.getForObject(uri, ShelterResponseVO.class).getBody();
 	}
 	
-	public KindItemsDTO request_Kind(String up_kind_cd) throws URISyntaxException {
-		URI uri = new URI(RequestURI.KIND.getUri() + "up_kind_cd=" + up_kind_cd);
+	public KindItemsDTO request_Kind(String up_kind_cd) {
+		URI uri = null;
+		try {
+			uri = new URI(RequestURI.KIND.getUri() + "up_kind_cd=" + up_kind_cd);
+		} catch (URISyntaxException e) {
+			log.info("품종 요청 실패");
+			e.printStackTrace();
+		}
 		log.info("요청 URI : " + uri.toString());
 		
 		return restTemplate.getForObject(uri, KindResponseVO.class).getBody();
@@ -79,15 +101,15 @@ public class API_RequestUtil {
 	
 	/**
 	 * 오늘 버려진 유기 동물의 데이터를 반환
+	 * @param 요청할 페이지 번호
 	 * @return 오늘 버려진 유기동물의 SearchingPetResopnseVO
 	 * @throws URISyntaxException 
 	 */
-	public SearchingPetItemsDTO request_todayAbandoned() throws URISyntaxException {
+	public SearchingPetItemsDTO request_todayAbandoned(int pageNum)  {
 		LocalDate todayDate = LocalDate.now();
 		String todayStr = todayDate.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
-		
-		return request_search(todayStr, todayStr, null, null, null, null, null, null, null, null, 100);
-		
+			
+			return request_search(todayStr, todayStr, null, null, null, null, null, null, null, pageNum, NUM_OF_TODAY);
 	}
 	
 	
@@ -103,7 +125,7 @@ public class API_RequestUtil {
 			String neuter_yn,	// 중성화 여부
 			Integer pageNo,	// 페이지 번호
 			Integer numOfRows	// 페이지 당 데이터 개수
-			) throws URISyntaxException {
+			) {
 		
 		StringBuilder uriBuilder = new StringBuilder(RequestURI.SEARCH.getUri());
 		
@@ -140,7 +162,13 @@ public class API_RequestUtil {
 		if(numOfRows != null)
 			uriBuilder.append("&numOfRows=" + numOfRows);
 		
-		URI uri = new URI(uriBuilder.toString());
+		URI uri = null;
+		try {
+			uri = new URI(uriBuilder.toString());
+		} catch (URISyntaxException e) {
+			log.info("상세검색 요청 실패");
+			e.printStackTrace();
+		}
 		
 		log.info("요청 URI : " + uri.toString());
 		
