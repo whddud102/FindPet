@@ -1,4 +1,4 @@
-package com.jy.vo.administrativeArea;
+package com.jy.domain.kind;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -10,8 +10,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @XmlRootElement(name = "item")
-public class AdministrativeAreaItemDTO {
-	private String orgCd;
-	private String orgdownNm;
-	private String uprCd;
+public class KindItemDTO {
+	private String KNm;
+	private String kindCd;
 }

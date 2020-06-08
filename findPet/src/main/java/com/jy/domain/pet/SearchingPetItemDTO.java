@@ -1,4 +1,4 @@
-package com.jy.vo.abandonedPet;
+package com.jy.domain.pet;
 
 import javax.xml.bind.annotation.XmlRootElement;
 

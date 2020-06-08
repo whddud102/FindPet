@@ -1,4 +1,4 @@
-package com.jy.vo.shelter;
+package com.jy.domain.area;
 
 import java.util.Map;
 
@@ -10,22 +10,22 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  */
 @XmlRootElement(name = "response")
-public class ShelterResponseVO {
+public class AdministrativeAreaResponseVO {
 	
 	private Map<String, String> header;
-    private ShelterItemsDTO body;	// 행정 구역 리스트를 담을 필드
+    private AdministrativeAreaItemsDTO body;	// 행정 구역 리스트를 담을 필드
     
     public Map<String, String> getHeader() {
 		return header;
 	}
 
 
-	public ShelterItemsDTO getBody() {
+	public AdministrativeAreaItemsDTO getBody() {
 		return body;
 	}
 
 
-	public void setBody(ShelterItemsDTO body) {
+	public void setBody(AdministrativeAreaItemsDTO body) {
 		this.body = body;
 	}
 

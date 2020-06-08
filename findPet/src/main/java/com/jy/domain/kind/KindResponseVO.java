@@ -1,4 +1,4 @@
-package com.jy.vo.administrativeArea;
+package com.jy.domain.kind;
 
 import java.util.Map;
 
@@ -10,22 +10,22 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  */
 @XmlRootElement(name = "response")
-public class AdministrativeAreaResponseVO {
+public class KindResponseVO {
 	
 	private Map<String, String> header;
-    private AdministrativeAreaItemsDTO body;	// 행정 구역 리스트를 담을 필드
+    private KindItemsDTO body;	// 행정 구역 리스트를 담을 필드
     
     public Map<String, String> getHeader() {
 		return header;
 	}
 
 
-	public AdministrativeAreaItemsDTO getBody() {
+	public KindItemsDTO getBody() {
 		return body;
 	}
 
 
-	public void setBody(AdministrativeAreaItemsDTO body) {
+	public void setBody(KindItemsDTO body) {
 		this.body = body;
 	}
 

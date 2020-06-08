@@ -1,4 +1,4 @@
-package com.jy.vo;
+package com.jy.domain.shelter;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -10,9 +10,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @XmlRootElement(name = "item")
-public class ShelterDTO {
+public class ShelterItemDTO {
 	private String careRegNo;
 	private String careNm;
 }
-
-

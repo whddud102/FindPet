@@ -1,4 +1,4 @@
-package com.jy.vo.abandonedPet;
+package com.jy.domain.shelter;
 
 import java.util.Map;
 
@@ -10,22 +10,22 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  */
 @XmlRootElement(name = "response")
-public class SearchingPetResponseVO {
+public class ShelterResponseVO {
 	
 	private Map<String, String> header;
-    private SearchingPetItemsDTO body;	// 행정 구역 리스트를 담을 필드
+    private ShelterItemsDTO body;	// 행정 구역 리스트를 담을 필드
     
     public Map<String, String> getHeader() {
 		return header;
 	}
 
 
-	public SearchingPetItemsDTO getBody() {
+	public ShelterItemsDTO getBody() {
 		return body;
 	}
 
 
-	public void setBody(SearchingPetItemsDTO body) {
+	public void setBody(ShelterItemsDTO body) {
 		this.body = body;
 	}
 

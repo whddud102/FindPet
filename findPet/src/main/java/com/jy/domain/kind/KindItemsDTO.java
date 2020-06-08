@@ -1,4 +1,4 @@
-package com.jy.vo.administrativeArea;
+package com.jy.domain.kind;
 
 import java.util.List;
 
@@ -6,20 +6,18 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.jy.vo.ShelterDTO;
-
 import lombok.Setter;
 import lombok.ToString;
 
 @Setter
 @XmlRootElement(name = "body")
 @ToString
-public class AdministrativeAreaItemsDTO {
-	private List<AdministrativeAreaItemDTO> items;
+public class KindItemsDTO {
+	private List<KindItemDTO> items;
 	
 	@XmlElementWrapper(name = "items")
 	@XmlElement(name = "item")
-	public List<AdministrativeAreaItemDTO> getItems() {
+	public List<KindItemDTO> getItems() {
 		return items;
 	}
 }
