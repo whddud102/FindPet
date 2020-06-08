@@ -20,7 +20,10 @@ public class RestController {
 	
 	@GetMapping("/today/{pageNo}")
 	public ResultList getTodayPets(@PathVariable("pageNo") int pageNo) {
-		return petSerivce.getTodayPets(pageNo);
+		ResultList resultList = petSerivce.getTodayPets(pageNo);
+		log.info("오늘의 유기 동물 API 요청 : " + resultList);
+		
+		return resultList;
 	}
 	
 }
