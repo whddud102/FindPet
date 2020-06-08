@@ -66,10 +66,10 @@
 						<label class="col-md-4 col-form-label">축  종</label>
 						<div class="col-md-8">
 							<select id="upkind" name="upkind" class="form-control">
-								<option selected>전체</option>
-								<option>개</option>
-								<option>고양이</option>
-								<option>기타</option>
+								<option value="all" selected>전체</option>
+								<option value="417000">개</option>
+								<option value="422400">고양이</option>
+								<option value="429900">기타</option>
 							</select>
 						</div>
 					</div>
@@ -80,10 +80,7 @@
 						<label class="col-md-4 col-form-label">품  종</label>
 						<div class="col-md-8">
 							<select id="kind" name="kind" class="form-control">
-									<option selected>전체</option>
-									<option>개</option>
-									<option>고양이</option>
-									<option>기타</option>
+									<option value="all" selected>축종을 먼저 선택해주세요</option>
 							</select>
 						</div>
 					</div>
@@ -94,17 +91,17 @@
 						<label class="col-md-4 col-form-label">시/도</label>
 						<div class="col-md-8">
 							<select id="upr_cd" name="upr_cd" class="form-control">
-								<option value="" selected>전체</option>
-								<option>서울</option>
-								<option>부산</option>
-								<option>대구</option>
-								<option>인천</option>
-								<option>광주</option>
-								<option>세종</option>
-								<option>대전</option>
-								<option>울산</option>
-								<option>경기</option>
-								<option>강원</option>
+								<option value="all" selected>전체</option>
+								<option value="6110000">서울</option>
+								<option value="6260000">부산</option>
+								<option value="6270000">대구</option>
+								<option value="6280000">인천</option>
+								<option value="6290000">광주</option>
+								<option value="5690000">세종</option>
+								<option value="6300000">대전</option>
+								<option value="6310000">울산</option>
+								<option value="6410000">경기</option>
+								<option value="6420000">강원</option>
 							</select>
 						</div>
 					</div>
@@ -125,7 +122,7 @@
 					<div class="form-group row">
 						<label class="col-md-4 col-form-label">보호소</label>
 						<div class="col-md-8">
-							<select id="care_reg_no" name="care_reg_no" class="form-control">
+							<select id="shelter" name="shelter" class="form-control">
 								<option selected>시/군/구를 먼저 선택해주세요</option>
 							</select>
 						</div>
@@ -162,7 +159,7 @@
 					
 					<div class="row d-flex justify-content-center">
 						<div class="col-7 ">
-							<button class="btn btn-primary btn-block font-weight-bold">    검색     </button>
+							<button class="btn btn-primary btn-block font-weight-bold">검색 </button>
 						</div>
 					</div>
 						
@@ -212,37 +209,79 @@
  	
 	<script th:inline="javascript">
 	$(document).ready(function() {
-		$('#upkind').change(function(){
-			var val = $("#upkind").val()
+		
+		// 동적으로 선택한 시/도에 맞는 시/군/구 목록을 불러오는 코드
+		$('#upr_cd').change(function(){
 			
-			switch (val) {
+			var upr_cd = $("#upr_cd option:selected").val();
+			var option = '<option value="all" selected>전체</option>';
 			
-			case '전체':
-				alert("전체 클릭됨");
-				break;
-			case '개':
-				alert("개 클릭됨");
-				break;
-			case '고양이':
-				alert("고양이 클릭됨");
-				break;
-			case '기타':
-				alert("기타 클릭됨");
-				break;
+			if(upr_cd != 'all') {
+				$.getJSON("/api/sigungu/" + upr_cd, function(list, textStatus, req) {
+					
+					
+					$("#org_cd").html(option);
+					$("#shelter").html('<option value="all" selected>시/군/구를 먼저 선택해주세요</option>');
+					
+					for(var i = 0; i < list.length; i++) {
+						var sigungu = list[i];
+						option = '<option value="' + sigungu.orgCd + '">' + sigungu.orgdownNm + '</option>';
+						$("#org_cd").append(option);
+					}
+				});
+			} else {
+				$("#org_cd").html('<option value="all" selected>시/도를 먼저 선택해주세요</option>');
+				$("#shelter").html('<option value="all" selected>시/군/구를 먼저 선택해주세요</option>');
 			}
-			if(val == '개') {
-				var optionStr = '';
-				
-				optionStr += '<option>멍멍!</option>'; 
-				optionStr += '<option>으르렁!</option>';
-				optionStr += '<option>컹컹!</option>';
-				
-				$("#kind").html(optionStr);
-			} 
-				
+		});
+		
+		// 동적으로 선택한 시/군/구에 맞는 보호소 목록을 불러오는 코드
+		$('#org_cd').change(function(){
+			
+			var upr_cd = $("#upr_cd option:selected").val();
+			var org_cd = $("#org_cd option:selected").val();
+			var option = '<option value="all" selected>전체</option>';
 			
 			
+			if(upr_cd != 'all') {
+				$.getJSON("/api/shelter/" + upr_cd + "/" + org_cd, function(list, textStatus, req) {
+					
+					console.log("====== 해당 보호소 =========");
+					console.log(list);
+					
+					$("#shelter").html(option);
+					
+					for(var i = 0; i < list.length; i++) {
+						var shelter = list[i];
+						option = '<option value="' + shelter.careRegNo + '">' + shelter.careNm + '</option>';
+						$("#shelter").append(option);
+					}
+				});
+			}
+		});
+		
+		// 동적으로 선택한 축종에 맞는 품종 목록을 불러오는 코드
+		$('#upkind').change(function(){
 			
+			var upkind = $("#upkind option:selected").val();
+			
+			var option = '<option value="all" selected>전체</option>';
+			
+			if(upkind != 'all') {
+				$.getJSON("/api/kind/" + upkind, function(list, textStatus, req) {
+					
+					$("#kind").html(option);
+					
+					for(var i = 0; i < list.length; i++) {
+						var kind = list[i];
+						
+						option = '<option value="' + kind.kindCd + '">' + kind.knm + '</option>';
+						$("#kind").append(option);
+					}
+				});
+			} else {
+				$("#kind").html(option);
+			}
 		});
 		
 	});
