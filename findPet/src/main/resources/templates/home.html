@@ -127,12 +127,12 @@
 	$(document).ready(function() {
 		
 		var currentPageTag = $("#pageNo");	// 현재 보고 있는 페이지 번호를 가진 input Tag
-		var items = [[${result.items}]];	// 현재 페이지의 아이템 목록
+		var result = [[${result}]];	// 현재 페이지의 아이템 목록
 		
-		if(items.length == 0) {
+		if(result.totalCount == 0) {
 			alert("오늘 유기된 동물이 없습니다!");
 		} else {
-			printList(items);
+			printList(result);
 		}
 		
 		$("#left_btn").on("click", function(e) {
@@ -141,9 +141,8 @@
 			
 			$.getJSON("/api/today/" + prevPage, function(result, textStatus, req) {
 					currentPageTag.val(prevPage);
-					alert(prevPage + "페이지 요청 성공");
-					console.log("--- 오늘 버려진 유기동물 데이터 -----");
-					printList(result.petList);
+					console.log(prevPage + "페이지 요청 성공");
+					printList(result);
 			});
 			
 		});
@@ -155,9 +154,8 @@
 			
 			$.getJSON("/api/today/" + nextPage, function(result, textStatus, req) {
 				currentPageTag.val(nextPage);
-				alert(nextPage + "페이지 요청 성공");
-				console.log("--- 오늘 버려진 유기동물 데이터 -----");
-				printList(result.petList);
+				console.log(nextPage + "페이지 요청 성공");
+				printList(result);
 			});
 		});
 		

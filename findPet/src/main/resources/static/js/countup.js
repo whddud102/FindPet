@@ -1,5 +1,5 @@
 $(function() {
 			$('.count-num').rCounter({
-				duration : 40
+				duration : 30
 			});	
 });

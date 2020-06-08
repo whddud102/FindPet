@@ -1,10 +1,25 @@
-function printList(items) {
-	
+function printList(result) {
+		
+		if(result.prev == false) {
+			$("#left_btn").hide();
+		} else {
+			$("#left_btn").show();
+		}
+		
+		if(result.next == false) {
+			$("#right_btn").hide();
+		} else {
+			$("#right_btn").show();
+		}
+		
+		
 		$('#card_row').html("");
 		
-		for(var i = 1; i <= items.length; i++) {
+		var petList = result.petList;
+		
+		for(var i = 1; i <= petList.length; i++) {
 			// items의 인덱스는 0부터 시작하므로 1을 빼서 가져옴
-			var item = items[i-1];
+			var item = petList[i-1];
 			
 			var cardStr = '';
 			
