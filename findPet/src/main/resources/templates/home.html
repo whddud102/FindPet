@@ -11,9 +11,9 @@
 	crossorigin="anonymous">
 
 <style type="text/css">
-
 @import
-	url('https://fonts.googleapis.com/css2?family=Gaegu:wght@700&display=swap');
+	url('https://fonts.googleapis.com/css2?family=Gaegu:wght@700&display=swap')
+	;
 
 @import url('https://fonts.googleapis.com/css?family=Do+Hyeon:400');
 </style>
@@ -28,36 +28,35 @@
 		<div th:insert="~{fragments/header::header}"></div>
 
 		<div class="row">
-			<div class="col bg-success">
-				<h1>오늘 유기된 반려동물 : [[${result.totalCount}]]</h1>
+			<div class="col text-center mt-3">
+				<h1 style="font-family: 'Do Hyeon', sans-serif;">오늘 유기된 반려동물 : <span class="count-num font-weight-bold" style="color: #fc4444;">[[${result.totalCount}]]</span> 마리</h1>
 			</div>
 		</div>
 
 		<!-- Main Row -->
-		<div class="main-row row p-3" style="min-height: 81.3vh;">
+		<div id="main_row" class="main-row row p-3" 
+			style="min-height: 81vh;">
 
-			<div class="col d-flex align-items-center justify-content-center">
-				
-				
-				<div class="bg-warning">
-					<!-- Left Button -->
-					<a href="#"><i class="fa fa-chevron-left fa-3x"></i></a>
-					<!--/.Left Button-->
+			<div class="col d-flex justify-content-center">
+
+				<!-- Left Button -->				
+				<div class="align-self-center">
+					<a id="left_btn" href="#"><i class="fa fa-chevron-left fa-3x"></i></a>
 				</div>
+				<!--/.Left Button-->
 
 				<!--  Cards Row -->
-				<div class="row mx-3  w-100">
-					
+				<div class="row mx-3 d-flex align-items-center">
+
 					<!-- Left Column -->
 					<div class="col-xl-6">
-						
-						
-						<div class="card mb-2 border-dark" style="min-width: 30rem; background-color: #FAFAD2;">
+						<div class="card mb-2 border-dark"
+							style="min-width: 18rem; background-color: #FAFAD2;">
 							<div class="row no-gutters">
-								<div class="col-md-4 d-flex">
-									<img id="card1_img" class="card-img img-thumbnail" alt="...">
+								<div id="card1_img" class="col-md-4 d-flex align-items-center justify-content-center">
+									<img class="card-img img-thumbnail" alt="이미지 출력 불가">
 								</div>
-								<div class="col-md-8">
+								<div class="col-md-8 d-flex align-items-center">
 									<div class="card-body">
 										<ul id="card1_info">
 										</ul>
@@ -65,13 +64,17 @@
 								</div>
 							</div>
 						</div>
-						
-						<div class="card mb-2 border-dark" style="min-width: 30rem; background-color: #FAFAD2;">
+					</div>
+
+
+					<div class="col-xl-6">
+						<div class="card mb-2 border-dark"
+							style="min-width: 18rem; background-color: #FAFAD2;">
 							<div class="row no-gutters">
-								<div class="col-md-4 d-flex">
-									<img id="card2_img" class="card-img img-thumbnail" alt="...">
+								<div id="card2_img" class="col-md-4 d-flex align-items-center justify-content-center">
+									<img class="card-img img-thumbnail" alt="이미지 출력 불가">
 								</div>
-								<div class="col-md-8">
+								<div class="col-md-8 d-flex align-items-center">
 									<div class="card-body">
 										<ul id="card2_info"></ul>
 									</div>
@@ -80,29 +83,32 @@
 						</div>
 					</div>
 					<!-- Left Column -->
-					
-					
+
 					<!-- Right Column -->
 					<div class="col-xl-6">
-						<div class="card mb-2 border-dark" style="min-width: 30rem; background-color: #FAFAD2;">
+						<div class="card mb-2 border-dark"
+							style="min-width: 18rem; background-color: #FAFAD2;">
 							<div class="row no-gutters">
-								<div class="col-md-4 d-flex">
-									<img id="card3_img" class="card-img img-thumbnail" alt="...">
+								<div id="card3_img" class="col-md-4 d-flex align-items-center justify-content-center">
+									<img class="card-img img-thumbnail" alt="이미지 출력 불가">
 								</div>
-								<div class="col-md-8">
+								<div class="col-md-8 d-flex align-items-center">
 									<div class="card-body">
 										<ul id="card3_info"></ul>
 									</div>
 								</div>
 							</div>
 						</div>
-					
-						<div class="card mb-2 border-dark" style="min-width: 30rem; background-color: #FAFAD2;">
+					</div>
+
+					<div class="col-xl-6">
+						<div class="card mb-2 border-dark"
+							style="min-width: 18rem; background-color: #FAFAD2;">
 							<div class="row no-gutters">
-								<div class="col-md-4 d-flex">
-									<img id="card4_img" class="card-img img-thumbnail" alt="...">
+								<div id="card4_img" class="col-md-4 d-flex align-items-center justify-content-center">
+									<img class="card-img img-thumbnail" alt="이미지 출력 불가">
 								</div>
-								<div class="col-md-8">
+								<div class="col-md-8 d-flex align-items-center">
 									<div class="card-body">
 										<ul id="card4_info"></ul>
 									</div>
@@ -111,12 +117,15 @@
 						</div>
 					</div>
 					<!-- Right Column -->
-					
-				</div>
 
-				<div class="bg-warning">
-					<a href="#"><i class="fa fa-chevron-right fa-3x"></i></a>
 				</div>
+				<!-- Cards Rows -->
+				
+				<!-- Right Button -->
+				<div class="align-self-center">
+					<a id="right_btn" href="#"><i class="fa fa-chevron-right fa-3x"></i></a>
+				</div>
+				<!-- /Right Button -->
 
 			</div>
 			<!-- /.col -->
@@ -140,33 +149,63 @@
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
 		integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
 		crossorigin="anonymous"></script>
-		
+
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+ 	<script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.js"></script>
+ 	 <script th:src="@{/js/jquery.rcounterup.js}" type="text/javascript"></script>
+	<script th:src="@{/js/countup.js}"></script>
+	
 	<script th:inline="javascript">
 	$(document).ready(function() {
+		
 		var items = [[${result.items}]];
 		
-		for(var i = 1; i <= 4; i++) {
-			// items의 인덱스는 0부터 시작하므로 1을 빼서 가져옴
-			var item = items[i-1];
+		if(items.length == 0) {
+			var str = "<div class='col'><h1>오늘 유기된 동물이 없습니다!</h1></div>";
 			
-			$("#card" + i + "_img").attr('src', item.popfile);
-			
-			var info= '';
-			
-			info += '<li class="m-1">나이 : ' + item.age + '</li>';
-			info += '<li class="m-1">색상 : ' + item.colorCd + '</li>';
-			info += '<li class="m-1">품종 :' + item.kindCd + '</li>';
-			info += '<li class="m-1">성별 : ' + (item.sexCd == 'F' ? '암컷' : '수컷') + '</li>';
-			info += '<li class="m-1">중성화 여부 : ' + (item.neuterYn == 'Y' ? 'O' : 'X') + '</li>';
-			info += '<li class="m-1">특징 : ' + item.specialMark + '</li>';
-			info += '<li class="m-1">체중 : ' + item.weight + '</li>';
-			info += '<li class="m-1">발견장소 : ' + item.happenPlace + '</li>';
-			info += '<li class="m-1">관할기관 : ' + item.orgNm + '</li>';
-			info += '<li class="m-1">상태 : ' + item.processState + '</li>';
-			
-			
-			$("#card" + i + "_info").html(info);
+			$("#main_row").html(str);
+		} else {		
+			for(var i = 1; i <= 4; i++) {
+				// items의 인덱스는 0부터 시작하므로 1을 빼서 가져옴
+				var item = items[i-1];
+				
+				var img = '';
+				
+				img += '<a href="' + item.popfile +'" target="_blank">';
+				img += '<img class="card-img img-thumbnail" src="' + item.popfile + '" alt="이미지 출력 불가"></a>';
+				
+				$("#card" + i + "_img").html(img);
+				
+				var info= '';
+				
+				info += '<li class="m-1">나이 : <span class="font-weight-bold">' + item.age + '</span></li>';
+				info += '<li class="m-1">색상 : <span class="font-weight-bold">' + item.colorCd + '</span></li>';
+				info += '<li class="m-1">품종 : <span class="font-weight-bold">' + item.kindCd + '</span></li>';
+				info += '<li class="m-1">성별 : <span class="font-weight-bold">' + (item.sexCd == 'F' ? '암컷' : '수컷') + '</span></li>';
+				info += '<li class="m-1">중성화 여부 : <span class="font-weight-bold">' + (item.neuterYn == 'Y' ? 'O' : 'X') + '</span></li>';
+				info += '<li class="m-1">특징 : <span class="font-weight-bold">' + item.specialMark + '</span></li>';
+				info += '<li class="m-1">체중 : <span class="font-weight-bold">' + item.weight + '</span></li>';
+				info += '<li class="m-1">발견장소 : <span class="font-weight-bold">' + item.happenPlace + '</span></li>';
+				info += '<li class="m-1">관할기관 : <span class="font-weight-bold">' + item.orgNm + '</span></li>';
+				info += '<li class="m-1">상태 : <span class="font-weight-bold">' + item.processState + '</span></li>';
+				
+				$("#card" + i + "_info").html(info);
+			}
 		}
+		
+		
+		$("#left_btn").on("click", function(e) {
+			e.preventDefault();
+			alert("왼쪽 버튼 클릭");
+		});
+		
+		
+		$("#right_btn").on("click", function(e) {
+			e.preventDefault();
+			alert("오른쪽 버튼 클릭");
+		});
+		
 	});
 	
 	</script>
