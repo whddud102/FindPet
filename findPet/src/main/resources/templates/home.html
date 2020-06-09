@@ -31,7 +31,7 @@
 		
 		<div class="row">
 			<div class="col text-center mt-3">
-				<h1 style="font-family: 'Do Hyeon', sans-serif;">오늘 유기된 반려동물 : <span id="totalCount" class="count-num font-weight-bold" style="color: #fc4444;" th:text="${result.totalCount}">0</span> 마리</h1>
+				<h1 style="font-family: 'Do Hyeon', sans-serif;">오늘 구조된 유기동물 : <span id="totalCount" class="count-num font-weight-bold" style="color: #fc4444;" th:text="${result.totalCount}">0</span> 마리</h1>
 			</div>
 		</div>
 
@@ -91,7 +91,6 @@
 		
 		<!-- hidden input for info -->
 		<input type="hidden" id="pageNo" name="pageNo" th:value="${result.pageNo}">
-		<input type="hidden" id="endPage" name="endPage" th:value="${result}">
 		<!-- /hidden input -->
 		
 	</div>

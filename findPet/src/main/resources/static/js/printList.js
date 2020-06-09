@@ -46,6 +46,7 @@ function printList(result) {
 			cardStr += 							'<li class="m-1">중성화 여부 : <span class="font-weight-bold">' + (item.neuterYn == 'Y' ? 'O' : 'X') + '</span></li>';
 			cardStr += 							'<li class="m-1">특징 : <span class="font-weight-bold">' + item.specialMark + '</span></li>';
 			cardStr += 							'<li class="m-1">체중 : <span class="font-weight-bold">' + item.weight + '</span></li>';
+			cardStr +=							 '<li class="m-1">발견날짜 : <span class="font-weight-bold">' + item.happenDt.replace(/(\d{4})(\d{2})(\d{2})/, '$1-$2-$3') + '</span></li>';
 			cardStr +=							 '<li class="m-1">발견장소 : <span class="font-weight-bold">' + item.happenPlace + '</span></li>';
 			cardStr += 							'<li class="m-1">관할기관 : <span class="font-weight-bold">' + item.orgNm + '</span></li>';
 			cardStr += 							'<li class="m-1">상태 : <span class="font-weight-bold">' + item.processState + '</span></li>';
