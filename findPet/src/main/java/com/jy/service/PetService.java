@@ -15,5 +15,8 @@ public interface PetService {
 	public List<ShelterItemDTO> getShelter(String upr_cd, String org_cd);
 	
 	public List<KindItemDTO> getKind(String upkind);
+	
+	public ResultList getPetList(String bgnde, String endde, String upkind, String kind,
+			String upr_cd, String org_cd, String shelter, String state, String neuter_yn, Integer pageNo);
 }
 
