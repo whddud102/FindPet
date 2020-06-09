@@ -41,7 +41,7 @@
 					<h6 class="text-danger">모든 항목은 필수 선택이 아닙니다</h6>
 				</div>
 				
-				<form>
+				<form id="searchForm" method="get" th:action="@{/list}">
 					<hr>
 					
 					<div class="form-group row">
@@ -66,7 +66,7 @@
 						<label class="col-md-4 col-form-label">축  종</label>
 						<div class="col-md-8">
 							<select id="upkind" name="upkind" class="form-control">
-								<option value="all" selected>전체</option>
+								<option value="" selected>전체</option>
 								<option value="417000">개</option>
 								<option value="422400">고양이</option>
 								<option value="429900">기타</option>
@@ -80,7 +80,7 @@
 						<label class="col-md-4 col-form-label">품  종</label>
 						<div class="col-md-8">
 							<select id="kind" name="kind" class="form-control">
-									<option value="all" selected>축종을 먼저 선택해주세요</option>
+									<option value="" selected>축종을 먼저 선택해주세요</option>
 							</select>
 						</div>
 					</div>
@@ -91,7 +91,7 @@
 						<label class="col-md-4 col-form-label">시/도</label>
 						<div class="col-md-8">
 							<select id="upr_cd" name="upr_cd" class="form-control">
-								<option value="all" selected>전체</option>
+								<option value="" selected>전체</option>
 								<option value="6110000">서울</option>
 								<option value="6260000">부산</option>
 								<option value="6270000">대구</option>
@@ -123,7 +123,7 @@
 						<label class="col-md-4 col-form-label">보호소</label>
 						<div class="col-md-8">
 							<select id="shelter" name="shelter" class="form-control">
-								<option selected>시/군/구를 먼저 선택해주세요</option>
+								<option selected value="">시/군/구를 먼저 선택해주세요</option>
 							</select>
 						</div>
 					</div>
@@ -134,7 +134,7 @@
 						<label class="col-md-4 col-form-label">상  태</label>
 						<div class="col-md-8">
 							<select id="state" name="state" class="form-control">
-								<option selected>전체</option>
+								<option selected value="">전체</option>
 								<option value="notice">공고중</option>
 								<option value="protect">보호중</option>
 							</select>
@@ -147,7 +147,7 @@
 						<label class="col-md-4 col-form-label">중성화 여부</label>
 						<div class="col-md-8">
 							<select id="neuter_yn" name="neuter_yn" class="form-control">
-								<option selected>전체</option>
+								<option selected value="">전체</option>
 								<option value="y">예</option>
 								<option value="n">아니오</option>
 							</select>
@@ -159,7 +159,7 @@
 					
 					<div class="row d-flex justify-content-center">
 						<div class="col-7 ">
-							<button class="btn btn-primary btn-block font-weight-bold">검색 </button>
+							<button id="searchBtn" class="btn btn-primary btn-block font-weight-bold" type="submit">검색 </button>
 						</div>
 					</div>
 						
@@ -197,96 +197,17 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
  	<script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.js"></script>
 
-	<!-- Count up Animation js -->	
- 	 <script th:src="@{/js/jquery.rcounterup.js}" type="text/javascript"></script>
-	<script th:src="@{/js/countup.js}" type="text/javascript"></script>
- 	<!-- /Count up Animation js-->
+	<!-- 달력 태그의 최대 선택 날짜를 오늘로 제한하는 코드 -->
+ 	<script th:src="@{/js/setMaxDate.js}" type="text/javascript"></script>
+ 	<!-- /setMaxDate -->
  	
- 	<!-- 유기동물 리스트 출력 함수 -->
- 	<script th:src="@{/js/printList.js}" type="text/javascript"></script>
- 	<!-- /.PrintList -->
+ 	<!-- input 태그 액션 코드 -->
+ 	<script th:src="@{/js/searchAction.js}" type="text/javascript"></script>
+ 	<!-- /searchAction.js -->
  	
- 	
-	<script th:inline="javascript">
-	$(document).ready(function() {
-		
-		// 동적으로 선택한 시/도에 맞는 시/군/구 목록을 불러오는 코드
-		$('#upr_cd').change(function(){
-			
-			var upr_cd = $("#upr_cd option:selected").val();
-			var option = '<option value="all" selected>전체</option>';
-			
-			if(upr_cd != 'all') {
-				$.getJSON("/api/sigungu/" + upr_cd, function(list, textStatus, req) {
-					
-					
-					$("#org_cd").html(option);
-					$("#shelter").html('<option value="all" selected>시/군/구를 먼저 선택해주세요</option>');
-					
-					for(var i = 0; i < list.length; i++) {
-						var sigungu = list[i];
-						option = '<option value="' + sigungu.orgCd + '">' + sigungu.orgdownNm + '</option>';
-						$("#org_cd").append(option);
-					}
-				});
-			} else {
-				$("#org_cd").html('<option value="all" selected>시/도를 먼저 선택해주세요</option>');
-				$("#shelter").html('<option value="all" selected>시/군/구를 먼저 선택해주세요</option>');
-			}
-		});
-		
-		// 동적으로 선택한 시/군/구에 맞는 보호소 목록을 불러오는 코드
-		$('#org_cd').change(function(){
-			
-			var upr_cd = $("#upr_cd option:selected").val();
-			var org_cd = $("#org_cd option:selected").val();
-			var option = '<option value="all" selected>전체</option>';
-			
-			
-			if(upr_cd != 'all') {
-				$.getJSON("/api/shelter/" + upr_cd + "/" + org_cd, function(list, textStatus, req) {
-					
-					console.log("====== 해당 보호소 =========");
-					console.log(list);
-					
-					$("#shelter").html(option);
-					
-					for(var i = 0; i < list.length; i++) {
-						var shelter = list[i];
-						option = '<option value="' + shelter.careRegNo + '">' + shelter.careNm + '</option>';
-						$("#shelter").append(option);
-					}
-				});
-			}
-		});
-		
-		// 동적으로 선택한 축종에 맞는 품종 목록을 불러오는 코드
-		$('#upkind').change(function(){
-			
-			var upkind = $("#upkind option:selected").val();
-			
-			var option = '<option value="all" selected>전체</option>';
-			
-			if(upkind != 'all') {
-				$.getJSON("/api/kind/" + upkind, function(list, textStatus, req) {
-					
-					$("#kind").html(option);
-					
-					for(var i = 0; i < list.length; i++) {
-						var kind = list[i];
-						
-						option = '<option value="' + kind.kindCd + '">' + kind.knm + '</option>';
-						$("#kind").append(option);
-					}
-				});
-			} else {
-				$("#kind").html(option);
-			}
-		});
-		
-	});
-	
-	</script>
+ 	<!-- 버튼 클릭 이벤트 처리 코드 -->
+	<script th:src="@{/js/btnAction.js}" type="text/javascript"></script>
+	<!-- /.BtnAction -->
 </body>
 </html>
 
