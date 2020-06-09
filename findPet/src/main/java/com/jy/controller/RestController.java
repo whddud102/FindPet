@@ -1,10 +1,12 @@
 package com.jy.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -52,5 +54,26 @@ public class RestController {
 		
 		return petSerivce.getKind(upkind);
 	}
+	
+	
+	@GetMapping("/search")
+	public ResultList getPetList (@ModelAttribute("bgnde") String bgnde, 
+			String endde, 
+			String upkind, 
+			String kind,
+			String upr_cd, 
+			String org_cd, 
+			String shelter, 
+			String state, 
+			String neuter_yn,
+			Integer pageNo
+			) {
+		log.info("========= 유기동물 검색 api 요청 =========");
+		ResultList result = petSerivce.getPetList(bgnde, endde, upkind, kind, upr_cd, org_cd, shelter, state, neuter_yn, pageNo);
+		log.info("검색 결과 : " + result);
+		return result;
+	}
+	
+	
 	
 }
