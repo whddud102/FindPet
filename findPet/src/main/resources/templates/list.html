@@ -150,7 +150,7 @@
 			
 			// prev가 true라면
 			if(starPage != 1) {
-				li += '<li class="page-item"><a class="page-link" href="'+ (currentPage-1) + '">&laquo;</a></li>'
+				li += '<li class="page-item"><a class="page-link" href="'+ (starPage-1) + '">&laquo;</a></li>'
 			}
 			
 			for(var i = starPage; i <= current_end_page; i++) {
@@ -183,6 +183,27 @@
 			printTable(result.petList);
 			makePagination();
 		}
+		
+		
+		$("#pagination").on("click", "a", function(e) { 
+			event.preventDefault();
+			var targetPage = $(this).attr("href");
+			
+			$("#pageNo").val(targetPage);
+			
+			var URI = getURI();
+			
+			console.log("요청 URI : " + URI);
+			
+			$.getJSON(URI, function(result, textStatus, req) {
+				printTable(result.petList);
+				makePagination();
+				
+			})
+						
+		});
+
+		
 	});
 	</script>
 </body>
