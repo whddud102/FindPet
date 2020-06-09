@@ -80,8 +80,8 @@
 		<div th:insert="~{fragments/footer::footer}"></div>
 		
 		<!-- hidden input for info -->
-		<input type="hidden" id="pageNo" name="pageNo" value="1">
-		<input type="hidden" id="endPage" name="endPage" value="${result.endPage}">
+		<input type="hidden" id="pageNo" name="pageNo" th:value="${result.pageNo}">
+		<input type="hidden" id="endPage" name="endPage" th:value="${result.endPage}">
 		
 		<input type="hidden" id="bgnde" name="bgnde" th:value="${bgnde}">
 		<input type="hidden" id="endde" name="endde" th:value="${endde}">
@@ -126,6 +126,54 @@
  	<script th:src="@{/js/getURI.js}" type="text/javascript"></script>
  	<!-- /printTable -->
  	
+ 	<!-- Pagination 출력 함수  -->
+ 	<script th:inline="javascript">
+	 	function makePagination() {
+			var currentPage = parseInt($("#pageNo").val());
+			var endPage = parseInt($("#endPage").val());
+			var current_end_page = Math.ceil(currentPage/10.0) * 10;
+			var starPage = current_end_page - 9;
+			var prev = [[${result.prev}]];
+			var next = [[${result.next}]];
+			
+			// 현재 보고 있는 페이지의 끝 보다 전체 페이지의 끝이 더 작으면 현재 페이지의 끝을 전체 페이지의 끝으로 갱신
+			if(endPage < current_end_page) {
+				current_end_page = endPage;
+			}
+			
+			console.log("현재 페이지 : " + currentPage);
+			console.log("마지막 페이지 : " + endPage);
+			console.log("현재 쪽의  마지막 페이지 : " + current_end_page);
+			console.log("현재 쪽의  시작 페이지 : " + starPage);
+			
+			var li = '';
+			
+			// prev가 true라면
+			if(starPage != 1) {
+				li += '<li class="page-item"><a class="page-link" href="'+ (currentPage-1) + '">&laquo;</a></li>'
+			}
+			
+			for(var i = starPage; i <= current_end_page; i++) {
+				
+				if(i == currentPage) {
+					li += '<li class="page-item active"><a class="page-link" href="'+ i + '">' + i + '</a></li>';
+				} else {
+					li += '<li class="page-item"><a class="page-link" href="'+ i + '">' + i + '</a></li>';
+				}
+			}
+			
+			// next가 true라면
+			if(current_end_page != endPage) {
+				li += '<li class="page-item"><a class="page-link" href="'+ (current_end_page+1) + '">&raquo;</a></li>'
+			}
+			
+			$("#pagination").html(li);
+		}
+ 	</script>
+ 	<!-- /makePagination -->
+ 	
+ 	
+ 	
 	<script th:inline="javascript">
 	$(document).ready(function() {
 		
@@ -154,20 +202,9 @@
 		
 	});
 	
-	function makePagination() {
-		var currentPage = $("#pageNo").val();
-		
-		console.log("현재 페이지 : " + currentPage);
-		var li = '';
-		
-		for(var i = 0; i < 10; i++) {
-			li += '<li class="page-item"><a class="page-link" href="#">3</a></li>';
-		}	
-		
-		$("#pagination").html(li);
-	}
 	
 	</script>
 </body>
 </html>
+
 
