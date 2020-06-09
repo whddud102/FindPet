@@ -31,7 +31,7 @@
 		
 		<div class="row">
 			<div class="col text-center mt-3">
-				<h1 style="font-family: 'Do Hyeon', sans-serif;">오늘 유기된 반려동물 : <span class="count-num font-weight-bold" style="color: #fc4444;">[[${result.totalCount}]]</span> 마리</h1>
+				<h1 style="font-family: 'Do Hyeon', sans-serif;">오늘 유기된 반려동물 : <span id="totalCount" class="count-num font-weight-bold" style="color: #fc4444;" th:text="${result.totalCount}">0</span> 마리</h1>
 			</div>
 		</div>
 
@@ -48,12 +48,12 @@
 				<!--/.Left Button-->
 
 				<!--  Cards Row -->
-				<div id="card_row" class="row mx-3 d-flex align-items-center">
+				<div id="card_row" class="row mx-3 d-flex align-items-center justify-content-center">
 
 					<!-- Card Column -->
-					<div class="col-xl-6">
+					<div class="col-xl-6"> 
 						<!-- card -->
-						<div class="card mb-2 border-dark"
+						<div class="card mb-2"
 							style="min-width: 18rem; background-color: #FAFAD2;">
 							<div class="row no-gutters">
 								<div id="card_img" class="col-md-4 d-flex align-items-center justify-content-center">
