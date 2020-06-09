@@ -172,8 +172,6 @@
  	</script>
  	<!-- /makePagination -->
  	
- 	
- 	
 	<script th:inline="javascript">
 	$(document).ready(function() {
 		
@@ -182,27 +180,10 @@
 		if(result.totalCount == 0) {
 			alert("검색 결과에 해당하는 동물이 없습니다!");
 		} else {
-			printTable(result);
+			printTable(result.petList);
 			makePagination();
 		}
-		
-		var URI = getURI();
-		
-		console.log("요청 URI : " + URI);
-		
-	
-		var totalCount;	// 응답 데이터의 전체 개수를 담을 변수
-		
-		$.getJSON(URI, function(result, textStatus, req) {
-			
-			var list = result.petList;
-			printTable(list);
-			makePagination();
-		});
-		
 	});
-	
-	
 	</script>
 </body>
 </html>
