@@ -32,32 +32,32 @@
 		<!-- Main Row -->
 		<div id="main_row" class="main-row row p-3" style="min-height: 81vh;">
 			<div class="col-xl-7 d-flex align-items-center justify-content-center">
-				<img th:src="${result.popfile}" class="w-100 img-thumbnail">
+				<a th:href="${result.popfile}" target="_blank"><img th:src="${result.popfile}" class="img-thumbnail"></a>
 			</div>
 			
 			
-			<div class="col-xl-5 d-flex align-items-center">
+			<div class="col-xl-5 d-flex align-items-center min-vh-100">
 				<ul>
-					<li class="h4 p-2">나이 : <span class="font-weight-bold">[[${result.age}]]</span></li>
-					<li class="h4 p-2">품종 : <span class="font-weight-bold">[[${result.kindCd}]]</span></li>
-					<li class="h4 p-2">색상 : <span class="font-weight-bold">[[${result.colorCd}]]</span></li>
-					<li class="h4 p-2">체중 : <span class="font-weight-bold">[[${result.weight}]]</span></li>
-					<li class="h4 p-2">성별 : <span class="font-weight-bold">[[${result.sexCd}]]</span></li>
-					<li class="h4 p-2">중성화 여부 : <span class="font-weight-bold">[[${result.neuterYn}]]</span></li>
-					<li class="h4 p-2">특징 : <span class="font-weight-bold">[[${result.specialMark}]]</span></li>
-					<li class="h4 p-2">접수일 : <span class="font-weight-bold">[[${result.happenDt}]]</span></li>
-					<li class="h4 p-2">발견장소 : <span class="font-weight-bold">[[${result.happenPlace}]]</span></li>
-					<li class="h4 p-2">유기번호 : <span class="font-weight-bold">[[${result.desertionNo}]]</span></li>
-					<li class="h4 p-2">상태 : <span class="font-weight-bold">[[${result.processState}]]</span></li>
-					<li class="h4 p-2">공고번호 : <span class="font-weight-bold">[[${result.noticeNo}]]</span></li>
-					<li class="h4 p-2">공고 시작일 : <span class="font-weight-bold">[[${result.noticeSdt}]]</span></li>
-					<li class="h4 p-2">공고 종료일 : <span class="font-weight-bold">[[${result.noticeEdt}]]</span></li>
-					<li class="h4 p-2">보호소 이름 : <span class="font-weight-bold">[[${result.careNm}]]</span></li>
-					<li class="h4 p-2">보호소 전화번호 : <span class="font-weight-bold">[[${result.careTel}]]</span></li>
-					<li class="h4 p-2">보호장소 : <span class="font-weight-bold">[[${result.careAddr}]]</span></li>
-					<li class="h4 p-2">관할기관 : <span class="font-weight-bold">[[${result.orgNm}]]</span></li>
-					<li class="h4 p-2">담당자 : <span class="font-weight-bold">[[${result.chargeNm}]]</span></li>
-					<li class="h4 p-2">담당자 연락처 : <span class="font-weight-bold">[[${result.officetel}]]</span></li>
+					<li class="h6 p-1">나이 : <span class="font-weight-bold">[[${result.age}]]</span></li>
+					<li class="h6 p-1">품종 : <span class="font-weight-bold">[[${result.kindCd}]]</span></li>
+					<li class="h6 p-1">색상 : <span class="font-weight-bold">[[${result.colorCd}]]</span></li>
+					<li class="h6 p-1">체중 : <span class="font-weight-bold">[[${result.weight}]]</span></li>
+					<li class="h6 p-1">성별 : <span class="font-weight-bold">[[${result.sexCd}]]</span></li>
+					<li class="h6 p-1">중성화 여부 : <span class="font-weight-bold">[[${result.neuterYn}]]</span></li>
+					<li class="h6 p-1">특징 : <span class="font-weight-bold">[[${result.specialMark}]]</span></li>
+					<li class="h6 p-1">접수일 : <span class="font-weight-bold">[[${result.happenDt}]]</span></li>
+					<li class="h6 p-1">발견장소 : <span class="font-weight-bold">[[${result.happenPlace}]]</span></li>
+					<li class="h6 p-1">유기번호 : <span class="font-weight-bold">[[${result.desertionNo}]]</span></li>
+					<li class="h6 p-1">상태 : <span class="font-weight-bold">[[${result.processState}]]</span></li>
+					<li class="h6 p-1">공고번호 : <span class="font-weight-bold">[[${result.noticeNo}]]</span></li>
+					<li class="h6 p-1">공고 시작일 : <span class="font-weight-bold">[[${result.noticeSdt}]]</span></li>
+					<li class="h6 p-1">공고 종료일 : <span class="font-weight-bold">[[${result.noticeEdt}]]</span></li>
+					<li class="h6 p-1">보호소 이름 : <span class="font-weight-bold">[[${result.careNm}]]</span></li>
+					<li class="h6 p-1">보호소 전화번호 : <span class="font-weight-bold">[[${result.careTel}]]</span></li>
+					<li class="h6 p-1">보호장소 : <span class="font-weight-bold">[[${result.careAddr}]]</span></li>
+					<li class="h6 p-1">관할기관 : <span class="font-weight-bold">[[${result.orgNm}]]</span></li>
+					<li class="h6 p-1">담당자 : <span class="font-weight-bold">[[${result.chargeNm}]]</span></li>
+					<li class="h6 p-1">담당자 연락처 : <span class="font-weight-bold">[[${result.officetel}]]</span></li>
 				</ul>
 			</div>
 			<!-- /.col -->
@@ -68,6 +68,7 @@
 		<div th:insert="~{fragments/footer::footer}"></div>
 		
 		<!-- hidden input for info -->
+		
 		<!-- /hidden input -->
 		
 	</div>
@@ -88,8 +89,5 @@
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
  	<script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.js"></script>
-
-	
-	</script>
 </body>
 </html>
