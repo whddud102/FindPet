@@ -109,7 +109,7 @@ public class API_RequestUtil {
 		LocalDate todayDate = LocalDate.now();
 		String todayStr = todayDate.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
 			
-			return request_search(todayStr, todayStr, null, null, null, null, null, null, null, pageNum, NUM_OF_TODAY);
+			return request_search(todayStr, todayStr, null, null, null, null, null, null, pageNum, NUM_OF_TODAY);
 	}
 	
 	
@@ -121,7 +121,6 @@ public class API_RequestUtil {
 			String upr_cd,	// 시도 코드
 			String org_cd,	// 시군구 코드
 			String care_reg_no,	// 보호소 번호
-			String state,	// 상태
 			String neuter_yn,	// 중성화 여부
 			Integer pageNo,	// 페이지 번호
 			Integer numOfRows	// 페이지 당 데이터 개수
@@ -150,9 +149,6 @@ public class API_RequestUtil {
 		if(care_reg_no != null)
 			uriBuilder.append("&care_reg_no=" + care_reg_no);
 		
-		if(state != null)
-			uriBuilder.append("&state=" + state);
-			
 		if(neuter_yn != null)
 			uriBuilder.append("&neuter_yn=" + neuter_yn);
 			

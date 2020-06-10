@@ -69,7 +69,7 @@ public class RestController {
 			Integer pageNo
 			) {
 		log.info("========= 유기동물 검색 api 요청 =========");
-		ResultList result = petSerivce.getPetList(bgnde, endde, upkind, kind, upr_cd, org_cd, shelter, state, neuter_yn, pageNo);
+		ResultList result = petSerivce.getPetList(bgnde, endde, upkind, kind, upr_cd, org_cd, shelter, neuter_yn, pageNo);
 		log.info("검색 결과 : " + result);
 		return result;
 	}

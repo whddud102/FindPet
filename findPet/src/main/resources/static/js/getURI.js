@@ -18,7 +18,6 @@ function getURI() {
 	var upr_cd = $("#upr_cd").val();
 	var org_cd = $("#org_cd").val();
 	var shelter = $("#shelter").val();
-	var state = $("#state").val();
 	var neuter_yn = $("#neuter_yn").val();
 
 	var currentPage = $("#pageNo").val(); // 현재 보고 있는 페이지 번호를 가진 input Tag
@@ -31,7 +30,6 @@ function getURI() {
 	URI += "&upr_cd=" + upr_cd;
 	URI += "&org_cd=" + org_cd;
 	URI += "&shelter=" + shelter;
-	URI += "&state=" + state;
 	URI += "&neuter_yn=" + neuter_yn;
 	URI += "&pageNo=" + currentPage;
 

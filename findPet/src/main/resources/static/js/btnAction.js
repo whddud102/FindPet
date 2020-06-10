@@ -14,10 +14,6 @@
 					var state = $("#state").val();
 					var neuter_yn = $("#neuter_yn").val();
 					
-					// 날짜를 'yyyyMMdd' 형식으로 변환 시 사용할 배열
-					var dateArray;
-					
-					
 					// 시작, 종료 날짜 모두 선택한 경우
 					if(bgnde != '' && endde != '') {
 						var bgnDate = new Date(bgnde);
