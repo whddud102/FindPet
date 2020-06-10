@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.jy.domain.ResultList;
+import com.jy.domain.pet.SearchingPetItemDTO;
 import com.jy.domain.pet.SearchingPetItemsDTO;
 import com.jy.service.PetService;
 import com.jy.utils.API_RequestUtil;
@@ -37,7 +38,7 @@ public class MainController {
 	}
 	
 	@GetMapping("/list")
-	public String goTo_list (Model model, @ModelAttribute("bgnde") String bgnde, 
+	public void goTo_list (Model model, @ModelAttribute("bgnde") String bgnde, 
 			@ModelAttribute("endde") String endde, 
 			@ModelAttribute("upkind") String upkind, 
 			@ModelAttribute("kind") String kind,
@@ -60,11 +61,15 @@ public class MainController {
 		
 		// 리스트 화면에 검색 결과 중 1페이지의 데이터를 전달
 		ResultList result = petService.getPetList(bgnde, endde, upkind, kind, upr_cd, org_cd, shelter, state, neuter_yn, 1);
-		
 		model.addAttribute("result", result);
+		log.info(result.toString());
 		log.info("===============================");
-		
-		return "list";
+	}
+	
+	@GetMapping("/detail")
+	public void goTo_detail(SearchingPetItemDTO petDetail) {
+		log.info(" ======== 상세 페이지 요청 ========= ");
+		log.info(petDetail.toString());
 	}
 	
 

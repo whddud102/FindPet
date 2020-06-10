@@ -79,20 +79,46 @@
 		<!-- Footer -->
 		<div th:insert="~{fragments/footer::footer}"></div>
 		
-		<!-- hidden input for info -->
-		<input type="hidden" id="pageNo" name="pageNo" th:value="${result.pageNo}">
-		<input type="hidden" id="endPage" name="endPage" th:value="${result.endPage}">
-		
-		<input type="hidden" id="bgnde" name="bgnde" th:value="${bgnde}">
-		<input type="hidden" id="endde" name="endde" th:value="${endde}">
-		<input type="hidden" id="upkind" name="upkind" th:value="${upkind}">
-		<input type="hidden" id="kind" name="kind" th:value="${kind}">
-		<input type="hidden" id="upr_cd" name="upr_cd" th:value="${upr_cd}">
-		<input type="hidden" id="org_cd" name="org_cd" th:value="${org_cd}">
-		<input type="hidden" id="shelter" name="shelter" th:value="${shelter}">
-		<input type="hidden" id="state" name="state" th:value="${state}">
-		<input type="hidden" id="neuter_yn" name="neuter_yn" th:value="${neuter_yn}">
-		<!-- /hidden input -->
+		<!-- hidden form for info -->
+		<form id="detail_form" th:action="@{/detail}">
+			<input type="hidden" id="pageNo" name="pageNo" th:value="${result.pageNo}">
+			<input type="hidden" id="endPage" name="endPage" th:value="${result.endPage}">
+			
+			
+			<!-- 검색 조건 & 페이징 처리를 위한 정보 -->
+			<input type="hidden" id="bgnde" name="bgnde" th:value="${bgnde}">
+			<input type="hidden" id="endde" name="endde" th:value="${endde}">
+			<input type="hidden" id="upkind" name="upkind" th:value="${upkind}">
+			<input type="hidden" id="kind" name="kind" th:value="${kind}">
+			<input type="hidden" id="upr_cd" name="upr_cd" th:value="${upr_cd}">
+			<input type="hidden" id="org_cd" name="org_cd" th:value="${org_cd}">
+			<input type="hidden" id="shelter" name="shelter" th:value="${shelter}">
+			<input type="hidden" id="state" name="state" th:value="${state}">
+			<input type="hidden" id="neuter_yn" name="neuter_yn" th:value="${neuter_yn}">
+			
+			<!-- 상세 정보 조회를 위한 정보 -->
+			<input type="hidden" id="age" name="age" value="">
+			<input type="hidden" id="kindCd" name="kindCd" value="">
+			<input type="hidden" id="weight" name="weight" value="">
+			<input type="hidden" id="sexCd" name="sexCd" value="">
+			<input type="hidden" id="neuterYn" name="neuterYn" value="">
+			<input type="hidden" id="specialMark" name="specialMark" value="">
+			<input type="hidden" id="happenDt" name="happenDt" value="">
+			<input type="hidden" id="happenPlace" name="happenPlace" value="">
+			<input type="hidden" id="processState" name="processState" value="">
+			<input type="hidden" id="desertionNo" name="desertionNo" value="">
+			<input type="hidden" id="colorCd" name="colorCd" value="">
+			<input type="hidden" id="noticeNo" name="noticeNo" value="">
+			<input type="hidden" id="noticeSdt" name="noticeSdt" value="">
+			<input type="hidden" id="noticeEdt" name="noticeEdt" value="">
+			<input type="hidden" id="careNm" name="careNm" value="">
+			<input type="hidden" id="careTel" name="careTel" value="">
+			<input type="hidden" id="careAddr" name="careAddr" value="">
+			<input type="hidden" id="orgNm" name="orgNm" value="">
+			<input type="hidden" id="chargeNm" name="chargeNm" value="">
+			<input type="hidden" id="officetel" name="officetel" value="">
+		</form>
+		<!-- /hidden form -->
 		
 	</div>
 	<!-- /.Container -->
@@ -207,10 +233,68 @@
 			
 			var tr = $(this);
 			var td = tr.children();
-			console.log(td.eq(1).text());
-			console.log(td.eq(2).text());
-			console.log(td.eq(3).text());
 			
+			var age = td.eq(1).text();
+			$("#age").val(age);
+			
+			var kindCd = td.eq(2).text();
+			$("#kindCd").val(kindCd);
+			
+			var weight = td.eq(3).text();
+			$("#weight").val(weight);
+			
+			var sexCd = td.eq(4).text();
+			$("#sexCd").val(sexCd);
+			
+			var neuterYn = td.eq(5).text();
+			$("#neuterYn").val(neuterYn);
+			
+			var specialMark = td.eq(6).text();
+			$("#specialMark").val(specialMark);
+			
+			var happenDt = td.eq(7).text();
+			$("#happenDt").val(happenDt);
+			
+			var happenPlace = td.eq(8).text();
+			$("#happenPlace").val(happenPlace);
+			
+			var processState = td.eq(9).text();
+			$("#processState").val(processState);
+			
+			var desertionNo = td.eq(10).text();
+			$("#desertionNo").val(desertionNo);
+			
+			var colorCd = td.eq(11).text();
+			$("#colorCd").val(colorCd);
+			
+			var noticeNo = td.eq(12).text();
+			$("#noticeNo").val(noticeNo);
+			
+			var noticeSdt = td.eq(13).text();
+			$("#noticeSdt").val(noticeSdt);
+			
+			var noticeEdt = td.eq(14).text();
+			$("#noticeEdt").val(noticeEdt);
+			
+			var careNm = td.eq(15).text();
+			$("#careNm").val(careNm);
+			
+			var careTel = td.eq(16).text();
+			$("#careTel").val(careTel);
+			
+			var careAddr = td.eq(17).text();
+			$("#careAddr").val(careAddr);
+			
+			var orgNm = td.eq(18).text();
+			$("#orgNm").val(orgNm);
+			
+			var chargeNm = td.eq(19).text();
+			$("#chargeNm").val(chargeNm);
+			
+			var officetel = td.eq(20).text();
+			$("#officetel").val(officetel);
+			
+			$("#detail_form").submit();
 		});
 		
 		
