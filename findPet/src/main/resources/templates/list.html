@@ -150,6 +150,10 @@
   	<script th:src="@{/js/tableClickAction.js}" type="text/javascript"></script>
  	<!-- /Table Click Action.js -->
  	
+ 	<!-- 페이지네이션 클릭 이벤트 처리 함수  -->
+  	<script th:src="@{/js/paginationClickAction.js}" type="text/javascript"></script>
+ 	<!-- /Pagination Click Action.js -->
+ 	
  	
  	<!-- Pagination 출력 함수  -->
  	<script th:inline="javascript">
@@ -218,23 +222,7 @@
 		});
 		
 	
-		$("#pagination").on("click", "a", function(e) { 
-			event.preventDefault();
-			var targetPage = $(this).attr("href");
-			
-			$("#pageNo").val(targetPage);
-			
-			var URI = getURI();
-			
-			console.log("요청 URI : " + URI);
-			
-			$.getJSON(URI, function(result, textStatus, req) {
-				printTable(result.petList);
-				makePagination(result);
-			});
-		});
 		
-		 
 		
 	});
 	</script>
