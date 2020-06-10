@@ -38,7 +38,7 @@ public class MainController {
 	}
 	
 	@GetMapping("/list")
-	public void goTo_list (Model model, @ModelAttribute("bgnde") String bgnde, 
+	public void goTo_list (@ModelAttribute("bgnde") String bgnde, 
 			@ModelAttribute("endde") String endde, 
 			@ModelAttribute("upkind") String upkind, 
 			@ModelAttribute("kind") String kind,
@@ -56,19 +56,17 @@ public class MainController {
 		log.info("org_cd : " + org_cd);
 		log.info("shelter : " + shelter);
 		log.info("neuter_yn : " + neuter_yn);
-		
-		// 리스트 화면에 검색 결과 중 1페이지의 데이터를 전달
-		ResultList result = petService.getPetList(bgnde, endde, upkind, kind, upr_cd, org_cd, shelter, neuter_yn, 1);
-		model.addAttribute("result", result);
-		log.info(result.toString());
 		log.info("===============================");
 	}
 	
 	@GetMapping("/detail")
-	public void goTo_detail(@ModelAttribute("result") SearchingPetItemDTO petDetail) {
+	public void goTo_detail(@ModelAttribute("result") SearchingPetItemDTO petDetail, String pageNo) {
 		log.info(" ======== 상세 페이지 요청 ========= ");
+		log.info("현재 페이지 : " + pageNo);
 		log.info(petDetail.toString());
+		log.info("===============================");
 	}
+	
 	
 
 }
