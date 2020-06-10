@@ -69,9 +69,6 @@ $(document).ready(function() {
 		var popfile = td.eq(21).text();
 		$("#popfile").val(popfile);
 		
-		// 상세 조회 페이지로 이동하기 전, 현재 보고 있는 페이지 번호를 history에 저장
-		history.replaceState({pageNo : $('#pageNo').val()}, null);
-		
 		$("#detail_form").submit();
 	});
 });
