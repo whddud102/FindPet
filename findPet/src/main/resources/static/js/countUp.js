@@ -1,4 +1,4 @@
-$(function() {
+function countUp() {
 	
 	var totalCount = $("#totalCount").text();
 	
@@ -11,4 +11,7 @@ $(function() {
 			duration : 30
 		});	
 	}
-});
+	
+	
+	console.log("countUp 수행 됨");
+};
