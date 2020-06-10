@@ -11,7 +11,4 @@ function countUp() {
 			duration : 30
 		});	
 	}
-	
-	
-	console.log("countUp 수행 됨");
 };

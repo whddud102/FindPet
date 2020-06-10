@@ -20,7 +20,7 @@
 <title>유기동물 검색</title>
 </head>
 <body>
-	<div class="container-fluid d-flex flex-column min-vh-100">
+	<div class="container-fluid d-flex flex-column min-vh-100 bg-warning">
 
 	
 		<!-- Header -->
@@ -171,11 +171,6 @@
 				current_end_page = endPage;
 			}
 			
-			console.log("현재 페이지 : " + currentPage);
-			console.log("마지막 페이지 : " + endPage);
-			console.log("현재 쪽의  마지막 페이지 : " + current_end_page);
-			console.log("현재 쪽의  시작 페이지 : " + starPage);
-			
 			var li = '';
 			
 			// prev가 true라면
@@ -220,10 +215,6 @@
 			makePagination(result);
 			countUp();
 		});
-		
-	
-		
-		
 	});
 	</script>
 </body>
