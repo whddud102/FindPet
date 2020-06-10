@@ -20,7 +20,7 @@
 <title>유기동물 검색</title>
 </head>
 <body>
-	<div class="container-fluid d-flex flex-column min-vh-100 bg-warning">
+	<div class="container-fluid d-flex flex-column min-vh-100">
 
 	
 		<!-- Header -->
@@ -36,7 +36,7 @@
 		</div>
 
 		<!-- Main Row -->
-		<div id="main_row" class=" row p-3 d-flex justify-content-center align-items-center flex-row " style="min-height: 100vh;">
+		<div id="main_row" class="row p-3 d-flex justify-content-center align-items-center flex-row min-vh-100">
 		
 			<div class="col-12 table-responsive">
 				<table class="table table-hover text-center">
@@ -74,7 +74,7 @@
 		<div th:insert="~{fragments/footer::footer}"></div>
 		
 		<!-- hidden form for info -->
-		<form id="detail_form" th:action="@{/detail}">
+		<form id="detail_form" th:action="@{/detail}" class="d-none">
 			<input type="hidden" id="pageNo" name="pageNo" value="1">
 			<input type="hidden" id="endPage" name="endPage">
 			
