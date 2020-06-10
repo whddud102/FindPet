@@ -48,7 +48,7 @@
 							<th>체중</th>
 							<th>성별</th>
 							<th>중성화</th>
-							<th>특징</th>
+							<th class="w-25">특징</th>
 							<th>발견날짜</th>
 							<th>발견장소</th>
 							<th>상태</th>
@@ -198,11 +198,21 @@
 			$.getJSON(URI, function(result, textStatus, req) {
 				printTable(result.petList);
 				makePagination();
-				
 			})
-						
 		});
-
+		
+		
+		$("#tbody").on("click", "tr", function(e) { 
+			event.preventDefault();
+			
+			var tr = $(this);
+			var td = tr.children();
+			console.log(td.eq(1).text());
+			console.log(td.eq(2).text());
+			console.log(td.eq(3).text());
+			
+		});
+		
 		
 	});
 	</script>
