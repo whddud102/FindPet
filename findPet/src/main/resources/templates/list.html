@@ -117,6 +117,7 @@
 			<input type="hidden" id="orgNm" name="orgNm" value="">
 			<input type="hidden" id="chargeNm" name="chargeNm" value="">
 			<input type="hidden" id="officetel" name="officetel" value="">
+			<input type="hidden" id="popfile" name="popfile" value="">
 		</form>
 		<!-- /hidden form -->
 		
@@ -293,6 +294,9 @@
 			
 			var officetel = td.eq(20).text();
 			$("#officetel").val(officetel);
+			
+			var popfile = td.eq(21).text();
+			$("#popfile").val(popfile);
 			
 			$("#detail_form").submit();
 		});

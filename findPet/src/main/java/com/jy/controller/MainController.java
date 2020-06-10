@@ -67,7 +67,7 @@ public class MainController {
 	}
 	
 	@GetMapping("/detail")
-	public void goTo_detail(SearchingPetItemDTO petDetail) {
+	public void goTo_detail(@ModelAttribute("result") SearchingPetItemDTO petDetail) {
 		log.info(" ======== 상세 페이지 요청 ========= ");
 		log.info(petDetail.toString());
 	}

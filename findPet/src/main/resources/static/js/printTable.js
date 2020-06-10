@@ -40,6 +40,8 @@ function printTable(list) {
 			tbody += '<td class="d-none">' + item.chargeNm + '</td>';
 			// 담당자 연락처
 			tbody += '<td class="d-none">' + item.officetel + '</td>';
+			// 이미지
+			tbody += '<td class="d-none">' + item.popfile + '</td>';
 			
 			tbody += '</tr>'; 
 		}
