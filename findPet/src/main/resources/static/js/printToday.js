@@ -24,7 +24,7 @@ function printList(result) {
 			var cardStr = '';
 			
 			cardStr += '<div class="col-xl-6">';
-			cardStr += 		'<div class="card mb-2 border-dark pl-4" style="min-width: 18rem; background-color: #FAFAD2;">'; 
+			cardStr += 		'<div class="card mb-2 border-dark px-4 pt-2" style="min-width: 18rem; background-color: #FAFAD2;">'; 
 			cardStr += 			'<div class="row no-gutters">';
 			
 			// Card Image
