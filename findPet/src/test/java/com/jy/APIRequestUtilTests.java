@@ -70,7 +70,7 @@ public class APIRequestUtilTests {
 		String catCd = "422400";
 		String othersCd = "429900";
 		
-		printResult(requester.request_search("20200605", "20200605", null, null, null, null, null, null, null, 1, 10));
+		printResult(requester.request_search("20200605", "20200605", null, null, null, null, null, null, 1, 10));
 	}
 	
 	@Test
