@@ -15,7 +15,15 @@
 	url('https://fonts.googleapis.com/css2?family=Gaegu:wght@700&display=swap');
 
 @import url('https://fonts.googleapis.com/css?family=Do+Hyeon:400');
+
+.do-hyeon {
+	font-family: 'Do Hyeon', sans-serif;
+}
+
 </style>
+
+
+
 
 <title>유기동물 검색</title>
 </head>
@@ -31,7 +39,7 @@
 		
 		<div class="row">
 			<div class="col text-center mt-3">
-				<h1 style="font-family: 'Do Hyeon', sans-serif;">오늘 구조된 유기동물 : <span id="totalCount" class="count-num font-weight-bold" style="color: #fc4444;" th:text="${result.totalCount}">0</span> 마리</h1>
+				<h1 class="do-hyeon">오늘 구조된 유기동물 : <span id="totalCount" class="count-num font-weight-bold" style="color: #fc4444;" th:text="${result.totalCount}">0</span> 마리</h1>
 			</div>
 		</div>
 
@@ -128,7 +136,9 @@
 		var result = [[${result}]];	// 현재 페이지의 아이템 목록
 		
 		if(result.totalCount == 0) {
-			alert("현재까지 구조된 동물이 없습니다!");
+			$("#left_btn").hide();
+			$("#right_btn").hide();
+			$("#card_row").html("<h1 class='do-hyeon'>현재까지 구조된 동물이 없습니다</h1>");
 		} else {
 			printList(result);
 			countUp();
