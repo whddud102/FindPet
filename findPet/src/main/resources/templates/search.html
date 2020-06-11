@@ -38,26 +38,26 @@
 				</div>
 				
 				<div class="text-center">
-					<h6 class="text-danger">모든 항목은 필수 선택이 아닙니다</h6>
-					<h6 class="text-danger">아무것도 선택하지 않으면 전체 검색이 수행됩니다</h6>
+					<h6 class="text-danger"><span class="text-danger">*</span> 표시는 필수 선택 항목 입니다</h6>
+					<h6 class="text-danger">검색 기간은 시작일로 부터 최대 3개월 까지 가능합니다</h6>
 				</div>
 				
 				<form id="searchForm" method="get" th:action="@{/list}">
 					<hr>
 					
 					<div class="form-group row">
-						<label class="col-md-4 col-form-label">검색 시작 날짜</label>
+						<label class="col-md-4 col-form-label">검색 시작일 <span class="text-danger">*</span></label>
 						<div class="col-md-8">
-							<input type="date" id="bgnde" name="bgnde" class="form-control">
+							<input type="date" id="bgnde" name="bgnde" class="form-control" required>
 						</div>
 					</div>
 					
 					<hr>
 					
 					<div class="form-group row">
-						<label class="col-md-4 col-form-label">검색 종료 날짜</label>
+						<label class="col-md-4 col-form-label">검색 종료일 <span class="text-danger">*</span></label>
 						<div class="col-md-8">
-							<input type="date" id="endde" name="endde" class="form-control">
+							<input type="date" id="endde" name="endde" class="form-control" required>
 						</div>
 					</div>
 					
