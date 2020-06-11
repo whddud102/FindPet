@@ -130,33 +130,5 @@ $(document).ready(function() {
 			$("#endde").attr("min", min);
 			$("#endde").attr("max", max);
 		});
-	
-		/*
-		$("#endde").change(function() {
-			
-			// 선택된 날짜 값을 Date 객체로 가져옴
-			var endde = $("#endde").val();
-			var endDate = new Date(endde);
-			
-			var year = endDate.getFullYear();
-
-			var minMonth = endDate.getMonth() + 1;
-			var maxMonth = (endDate.getMonth() + 1) + 6;
-			minMonth = minMonth < 10 ? '0' + minMonth : minMonth;
-			maxMonth = maxMonth < 10 ? '0' + maxMonth : maxMonth;
-
-			var date = endDate.getDate();
-			date = date < 10 ? '0' + date : date;
-				
-			var min = [year, minMonth, date].join('-');
-			var max = [year, maxMonth, date].join('-');
-			
-			console.log("min : " + min);
-			console.log("max : " + max);
-			
-			$("#bgnde").attr("min", min);
-			$("#bgnde").attr("max", max);
-		});
-		*/
 	});
 	
