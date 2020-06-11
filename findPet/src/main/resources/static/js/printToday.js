@@ -1,5 +1,6 @@
-function printList(result) {
-		
+
+function printToday(result) {	
+	
 		if(result.prev == false) {
 			$("#left_btn").hide();
 		} else {
@@ -12,7 +13,6 @@ function printList(result) {
 			$("#right_btn").show();
 		}
 		
-		
 		$('#card_row').html("");
 		
 		var petList = result.petList;
@@ -24,14 +24,12 @@ function printList(result) {
 			var cardStr = '';
 			
 			cardStr += '<div class="col-xl-6">';
-			cardStr += 		'<div class="card mb-2 border-dark px-4 pt-2" style="min-width: 18rem; background-color: #FAFAD2;">'; 
+			cardStr += 		'<div id="card' + i + '" class="card mb-2 border-dark px-4 pt-2" style="min-width: 18rem; background-color: #FAFAD2;">'; 
 			cardStr += 			'<div class="row no-gutters">';
 			
 			// Card Image
 			cardStr += 				'<div class="col-md-4 d-flex align-items-center justify-content-center">';
-			cardStr +=  				'<a href="' + item.popfile + '" target="_black">';
 			cardStr +=	 					'<img class="card-img img-thumbnail" src=' + item.popfile  + '  alt="이미지 출력 불가">';
-			cardStr +=					'</a>';
 			cardStr += 				'</div>';
 			// Card Image End
 			
@@ -50,6 +48,18 @@ function printList(result) {
 			cardStr +=							 '<li class="m-1">발견장소 : <span class="font-weight-bold">' + item.happenPlace + '</span></li>';
 			cardStr += 							'<li class="m-1">관할기관 : <span class="font-weight-bold">' + item.orgNm + '</span></li>';
 			cardStr += 							'<li class="m-1">상태 : <span class="font-weight-bold">' + item.processState + '</span></li>';
+												
+												// 상세 페이지 조회를 위한 hidden 태그
+			cardStr += 							'<li class="d-none"><span>' + item.desertionNo + '</span></li>';
+			cardStr += 							'<li class="d-none"><span>' + item.noticeNo + '</span></li>';
+			cardStr += 							'<li class="d-none"><span>' + item.noticeSdt + '</span></li>';
+			cardStr += 							'<li class="d-none"><span>' + item.noticeEdt + '</span></li>';
+			cardStr += 							'<li class="d-none"><span>' + item.careNm + '</span></li>';
+			cardStr += 							'<li class="d-none"><span>' + item.careTel + '</span></li>';
+			cardStr += 							'<li class="d-none"><span>' + item.careAddr + '</span></li>';
+			cardStr += 							'<li class="d-none"><span>' + item.chargeNm + '</span></li>';
+			cardStr += 							'<li class="d-none"><span>' + item.officetel + '</span></li>';
+			cardStr += 							'<li class="d-none"><span>' + item.popfile + '</span></li>';
 			cardStr +=						'</ul>';
 			cardStr += 					'</div>';
 			cardStr += 				'</div>';
