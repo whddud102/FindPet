@@ -57,7 +57,6 @@
 							style="min-width: 18rem; background-color: #FAFAD2;">
 							<div class="row no-gutters">
 								<div id="card_img" class="col-md-4 d-flex align-items-center justify-content-center">
-									<img class="card-img img-thumbnail" alt="이미지 출력 불가">
 								</div>
 								<div class="col-md-8 d-flex align-items-center">
 									<div class="card-body">
@@ -129,7 +128,7 @@
 		var result = [[${result}]];	// 현재 페이지의 아이템 목록
 		
 		if(result.totalCount == 0) {
-			alert("오늘 유기된 동물이 없습니다!");
+			alert("현재까지 구조된 동물이 없습니다!");
 		} else {
 			printList(result);
 			countUp();

@@ -1,29 +1,21 @@
 package com.jy;
 
 import java.io.UnsupportedEncodingException;
-
-import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestTemplate;
 
+import com.jy.domain.area.AdministrativeAreaResponseVO;
+import com.jy.domain.kind.KindResponseVO;
+import com.jy.domain.pet.SearchingPetResponseVO;
+import com.jy.domain.shelter.ShelterResponseVO;
 import com.jy.enums.RequestURI;
-import com.jy.vo.ShelterDTO;
-import com.jy.vo.abandonedPet.SearchingPetResponseVO;
-import com.jy.vo.administrativeArea.AdministrativeAreaResponseVO;
-import com.jy.vo.kind.KindResponseVO;
-import com.jy.vo.shelter.ShelterResponseVO;
-import com.jy.vo.administrativeArea.AdministrativeAreaItemsDTO;
 
 import lombok.extern.java.Log;
 
