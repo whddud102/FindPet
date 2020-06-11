@@ -19,16 +19,9 @@ import lombok.extern.java.Log;
 @Controller
 public class MainController {
 	
-	@Autowired
-	private PetService petService; 
-	
 	@GetMapping("/home")
-	public void goTo_home (Model model) {
-		
-		// 홈 페이지 요청 시, 항상 오늘 유기된 동물 1페이지 정보를 전달하도록 함
-		
-		model.addAttribute("result", petService.getTodayPets(1));
-		log.info(petService.getTodayPets(1).toString());
+	public void goTo_home () {
+		// 홈페이지로 이동
 	}
 	
 	@GetMapping("/search")

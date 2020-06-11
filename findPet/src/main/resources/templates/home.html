@@ -39,7 +39,7 @@
 		
 		<div class="row">
 			<div class="col text-center mt-3">
-				<h1 class="do-hyeon">오늘 구조된 유기동물 : <span id="totalCount" class="count-num font-weight-bold" style="color: #fc4444;" th:text="${result.totalCount}">0</span> 마리</h1>
+				<h1 class="do-hyeon">오늘 구조된 유기동물 : <span id="totalCount" class="count-num font-weight-bold" style="color: #fc4444;">0</span> 마리</h1>
 			</div>
 		</div>
 
@@ -79,7 +79,7 @@
 		<div th:insert="~{fragments/footer::footer}"></div>
 		
 		<!-- hidden input for info -->
-		<input type="hidden" id="pageNo" name="pageNo" th:value="${result.pageNo}">
+		<input type="hidden" id="pageNo" name="pageNo" value="1">
 		
 		
 		<!-- 상세 정보 조회를 위한 정보 -->
@@ -144,22 +144,34 @@
 	<script th:inline="javascript">
 	$(document).ready(function() {
 		
-		var currentPageTag = $("#pageNo");	// 현재 보고 있는 페이지 번호를 가진 input Tag
-		var result = [[${result}]];	// 현재 페이지의 아이템 목록
-		
-		if(result.totalCount == 0) {
-			$("#left_btn").hide();
-			$("#right_btn").hide();
-			$("#card_row").html("<h1 class='do-hyeon'>현재까지 구조된 동물이 없습니다</h1>");
-		} else {
-			printToday(result);
-			countUp();
+		// 이전에 보고 있던 페이지가 있으면, 해당 페이지로 pageNo를 설정
+		if(history.state != null) {
+			$("#pageNo").val(history.state.pageNo);
 		}
+		
+		var currentPageTag = $("#pageNo");	// 현재 보고 있는 페이지 번호를 가진 input Tag		
+		
+		$.getJSON("/api/today/" + currentPageTag.val(), function(result, textStatus, req) {
+			
+			var totalCount = result.totalCount;
+			$("#totalCount").text(totalCount);
+			
+			if(totalCount == 0) {
+				$("#left_btn").hide();
+				$("#right_btn").hide();
+				$("#card_row").html("<h1 class='do-hyeon'>현재까지 구조된 동물이 없습니다</h1>");
+			} else {
+				printToday(result);
+				countUp();	
+			}
+		});
 		
 		$("#left_btn").on("click", function(e) {
 			e.preventDefault();
-			var prevPage = parseInt(currentPageTag.val()) - 1;
 			
+			var prevPage = parseInt(currentPageTag.val()) - 1;
+			history.replaceState({pageNo : prevPage}, null);
+				
 			$.getJSON("/api/today/" + prevPage, function(result, textStatus, req) {
 					currentPageTag.val(prevPage);
 					console.log(prevPage + "페이지 요청 성공");
@@ -172,6 +184,7 @@
 		$("#right_btn").on("click", function(e) {
 			e.preventDefault();
 			var nextPage = parseInt(currentPageTag.val()) + 1;
+			history.replaceState({pageNo : nextPage}, null);
 			
 			$.getJSON("/api/today/" + nextPage, function(result, textStatus, req) {
 				currentPageTag.val(nextPage);
