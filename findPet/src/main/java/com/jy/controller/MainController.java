@@ -60,9 +60,8 @@ public class MainController {
 	}
 	
 	@GetMapping("/detail")
-	public void goTo_detail(@ModelAttribute("result") SearchingPetItemDTO petDetail, String pageNo) {
+	public void goTo_detail(@ModelAttribute("result") SearchingPetItemDTO petDetail) {
 		log.info(" ======== 상세 페이지 요청 ========= ");
-		log.info("현재 페이지 : " + pageNo);
 		log.info(petDetail.toString());
 		log.info("===============================");
 	}
