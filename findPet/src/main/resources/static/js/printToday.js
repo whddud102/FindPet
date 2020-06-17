@@ -25,7 +25,7 @@ function printToday(result) {
 			
 			cardStr += '<div class="col-xl-6">';
 			cardStr += 		'<div id="card' + i + '" class="card mb-2 border-dark px-4 pt-2" style="min-width: 18rem; background-color: #FDFEF2;">'; 
-			cardStr += 			'<div class="row no-gutters">';
+			cardStr += 			'<div class="row no-gutters h-100">';
 			
 			// Card Image
 			cardStr += 				'<div class="col-md-4 d-flex align-items-center justify-content-center">';
