@@ -3,8 +3,6 @@ function makePagination(result) {
 	var endPage = result.endPage;
 	var current_end_page = Math.ceil(currentPage / 10.0) * 10;
 	var starPage = current_end_page - 9;
-	var prev = result.prev;
-	var next = result.next;
 
 	// 현재 보고 있는 페이지의 끝 보다 전체 페이지의 끝이 더 작으면 현재 페이지의 끝을 전체 페이지의 끝으로 갱신
 	if (endPage < current_end_page) {
