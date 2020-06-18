@@ -2,15 +2,17 @@
 function printToday(result) {	
 	
 		if(result.prev == false) {
-			$("#left_btn").hide();
+			$("#left_btn").css('visibility', 'hidden');
 		} else {
-			$("#left_btn").show();
+			$("#left_btn").css('visibility', 'visible');
+			$("#left_btn").css('background-color', '#e3f2fd');
 		}
 		
 		if(result.next == false) {
-			$("#right_btn").hide();
+			$("#right_btn").css('visibility', 'hidden');
 		} else {
-			$("#right_btn").show();
+			$("#right_btn").css('visibility', 'visible');
+			$("#right_btn").css('background-color', '#e3f2fd');
 		}
 		
 		$('#card_row').html("");
