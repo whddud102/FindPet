@@ -29,12 +29,14 @@ $(document).ready(function() {
 		if (bgnDate > endDate) {
 			alert("시작일은 종료일 보다 이전이어야 합니다");
 			return false;
-		} else if(endDate.getYear() - bgnDate.getYear() > 0 
+		}
+		/*
+		else if(endDate.getYear() - bgnDate.getYear() > 0 
 				||  endDate.getMonth() - bgnDate.getMonth() > 3  
 				||  endDate.getMonth() - bgnDate.getMonth() == 3 && endDate.getDate() - bgnDate.getDate() > 0) {
 			alert("검색 가능 기간은 최대 3개월 입니다");
 			return false;
-		} 
+		} */
 		
 		
 		console.log("종료 Year - 시작 Year : " + (endDate.getYear() - bgnDate.getYear()));
