@@ -50,8 +50,8 @@
 					<li class="h6 p-1">유기번호 : <span class="font-weight-bold">[[${result.desertionNo}]]</span></li>
 					<li class="h6 p-1">상태 : <span class="font-weight-bold">[[${result.processState}]]</span></li>
 					<li class="h6 p-1">공고번호 : <span class="font-weight-bold">[[${result.noticeNo}]]</span></li>
-					<li class="h6 p-1">공고 시작일 : <span class="font-weight-bold">[[${result.noticeSdt}]]</span></li>
-					<li class="h6 p-1">공고 종료일 : <span class="font-weight-bold">[[${result.noticeEdt}]]</span></li>
+					<li class="h6 p-1">공고 시작일 : <span class="font-weight-bold">[[${#temporals.createDate(result.noticeSdt, 'yyyyMMdd')}]]</span></li>
+					<li class="h6 p-1">공고 종료일 : <span class="font-weight-bold">[[${#temporals.createDate(result.noticeEdt, 'yyyyMMdd')}]]</span></li>
 					<li class="h6 p-1">보호소 이름 : <span class="font-weight-bold">[[${result.careNm}]]</span></li>
 					<li class="h6 p-1">보호소 전화번호 : <span class="font-weight-bold">[[${result.careTel}]]</span></li>
 					<li class="h6 p-1">보호장소 : <span class="font-weight-bold">[[${result.careAddr}]]</span></li>
