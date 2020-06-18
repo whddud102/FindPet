@@ -1,5 +1,12 @@
 $(document).ready(function() {
 		
+		$('#upkind').val("");
+		$('#kind').val("");
+		$('#upr_cd').val("");
+		$('#org_cd').val("");
+		$('#shelter').val("");
+		$('#neuter_yn').val("");
+		
 		// 동적으로 선택한 시/도에 맞는 시/군/구 목록을 불러오는 코드
 		$('#upr_cd').change(function(){
 			
