@@ -1,17 +1,12 @@
 package com.jy.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-import com.jy.domain.ResultList;
 import com.jy.domain.pet.SearchingPetItemDTO;
-import com.jy.domain.pet.SearchingPetItemsDTO;
-import com.jy.service.PetService;
-import com.jy.utils.API_RequestUtil;
 
 import lombok.extern.java.Log;
 

@@ -6,14 +6,12 @@ import com.jy.domain.pet.SearchingPetItemDTO;
 import com.jy.domain.pet.SearchingPetItemsDTO;
 
 import lombok.Data;
-import lombok.extern.java.Log;
 
 /**
  * 유기동물 리스트 + 페이지 정보를 담을 클래스
  * @author JongYoung
  *
  */
-@Log
 @Data
 public class ResultList {
 	private int pageNo;		// 현재 페이지 
