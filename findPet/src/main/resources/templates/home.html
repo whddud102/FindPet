@@ -73,7 +73,15 @@
 			<!-- /.col -->
 		</div>
 		<!-- /.Main Row -->
-
+		
+		<!-- paging 영역 -->
+		<div class="col d-flex justify-content-center" style="min-height: 7vh;" >
+			<ul id="pagination" class="pagination">
+				
+			</ul>
+		</div>
+		<!-- /.Paging -->	
+		
 		<!-- Footer -->
 		<div th:insert="~{fragments/footer::footer}"></div>
 		
@@ -139,10 +147,17 @@
  	<script th:src="@{/js/showDetail.js}" type="text/javascript"></script>
  	<!-- /.Show Detail -->
  	
+ 	<!-- Pagination 출력 함수  -->
+ 	<script th:src="@{/js/makePagination.js}"></script>
+ 	<!-- /makePagination -->
  	
+ 	<!-- 당일 유기동물 데이터 요청 URI 반환 함수  -->
+ 	<script th:src="@{/js/get_today_URI.js}"></script>
+ 	<!-- /get_today_URI.js -->
+ 	 	
 	<script th:inline="javascript">
 	$(document).ready(function() {
-		
+			
 		// 이전에 보고 있던 페이지가 있으면, 해당 페이지로 pageNo를 설정
 		if(history.state != null) {
 			$("#pageNo").val(history.state.pageNo);
@@ -161,20 +176,45 @@
 				$("#card_row").html("<h1 class='do-hyeon'>현재까지 구조된 동물이 없습니다</h1>");
 			} else {
 				printToday(result);
+				makePagination(result);
 				countUp();	
 			}
 		});
+		
+		$("#pagination").on("click", "a", function(e) { 
+			event.preventDefault();
+			var targetPage = $(this).attr("href");
+			
+			$("#pageNo").val(targetPage);
+			
+			// 페이지 버튼 클릭 시, 클릭한  페이지 번호를 history에 저장
+			history.replaceState({pageNo : targetPage}, null);
+			
+			var request_page = $("#pageNo").val();
+			var URI = get_today_URI(request_page);
+			
+			console.log(request_page + "페이지 요청 성공");
+			
+			$.getJSON(URI, function(result, textStatus, req) {
+				printToday(result);
+				makePagination(result);
+			});
+		});
+		
 		
 		$("#left_btn").on("click", function(e) {
 			e.preventDefault();
 			
 			var prevPage = parseInt(currentPageTag.val()) - 1;
+			var URI = get_today_URI(prevPage);
+			
 			history.replaceState({pageNo : prevPage}, null);
 				
-			$.getJSON("/api/today/" + prevPage, function(result, textStatus, req) {
+			$.getJSON(URI, function(result, textStatus, req) {
 					currentPageTag.val(prevPage);
 					console.log(prevPage + "페이지 요청 성공");
 					printToday(result);
+					makePagination(result);
 			});
 			
 		});
@@ -184,12 +224,15 @@
 			e.preventDefault();
 			
 			var nextPage = parseInt(currentPageTag.val()) + 1;
+			var URI = get_today_URI(nextPage);
+			
 			history.replaceState({pageNo : nextPage}, null);
 			
-			$.getJSON("/api/today/" + nextPage, function(result, textStatus, req) {
+			$.getJSON(URI, function(result, textStatus, req) {
 				currentPageTag.val(nextPage);
 				console.log(nextPage + "페이지 요청 성공");
 				printToday(result);
+				makePagination(result);
 			});
 		});
 	});
