@@ -43,4 +43,17 @@
 			WHERE bno = #{bno} 
 		]]>
 	</delete>
+	
+	<update id="update" parameterType="com.jy.domain.board.BoardDto">
+		<![CDATA[
+			UPDATE tbl_board
+			SET nickname = #{nickname},
+				password = #{password},
+				title = #{title},
+				contents = #{contents},
+				updated_datetime = now()
+			WHERE bno = #{bno}
+		]]>
+	</update>
+	
 </mapper> 

@@ -60,7 +60,7 @@ public class DatabaseTests {
 	@Test
 	public void testMapper_read() {
 		log.info("========== 게시글 조회 테스트 ===========");
-		BoardDto board = boardMapper.read(35);
+		BoardDto board = boardMapper.read(34);
 		log.info(board.toString());
 		log.info("=================================== ");
 	}
@@ -70,6 +70,24 @@ public class DatabaseTests {
 		log.info("========== 게시글 삭제 테스트 ===========");
 		int result = boardMapper.delete(32);
 		log.info("삭제 결과 : " + result);
+		log.info("=================================== ");
+	}
+	
+	@Test
+	public void testMapper_update() {
+		log.info("========== 게시글 수정 테스트 ===========");
+		BoardDto newBoard = new BoardDto();
+		
+		newBoard.setBno(34);
+		newBoard.setNickname("수정된 닉네임");
+		newBoard.setPassword("수정된 비밀번호");
+		newBoard.setTitle("수정된 제목");
+		newBoard.setContents("수정된 내용");
+		
+		boardMapper.update(newBoard);
+		BoardDto board = boardMapper.read(newBoard.getBno());
+		
+		log.info("수정 결과 : " + board);
 		log.info("=================================== ");
 	}
 }
