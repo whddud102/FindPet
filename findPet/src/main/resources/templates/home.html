@@ -164,8 +164,8 @@
 		}
 		
 		var currentPageTag = $("#pageNo");	// 현재 보고 있는 페이지 번호를 가진 input Tag		
-		
-		$.getJSON("/api/today/" + currentPageTag.val(), function(result, textStatus, req) {
+		var URI = get_today_URI(currentPageTag.val())
+		$.getJSON(URI, function(result, textStatus, req) {
 			
 			var totalCount = result.totalCount;
 			$("#totalCount").text(totalCount);

@@ -1,5 +1,7 @@
 $(document).ready(function() {
 		
+		var BASE_URI = "/api";
+		
 		$('#upkind').val("");
 		$('#kind').val("");
 		$('#upr_cd').val("");
@@ -14,7 +16,7 @@ $(document).ready(function() {
 			var option = '<option value="" selected>전체</option>';
 			
 			if(upr_cd != '') {
-				$.getJSON("/api/sigungu/" + upr_cd, function(list, textStatus, req) {
+				$.getJSON(BASE_URI + "/sigungu/" + upr_cd, function(list, textStatus, req) {
 					
 					
 					$("#org_cd").html(option);
@@ -41,7 +43,7 @@ $(document).ready(function() {
 			
 			
 			if(upr_cd != '') {
-				$.getJSON("/api/shelter/" + upr_cd + "/" + org_cd, function(list, textStatus, req) {
+				$.getJSON(BASE_URI + "/shelter/" + upr_cd + "/" + org_cd, function(list, textStatus, req) {
 					
 					console.log("====== 해당 보호소 =========");
 					console.log(list);
@@ -65,7 +67,7 @@ $(document).ready(function() {
 			var option = '<option value="" selected>전체</option>';
 			
 			if(upkind != '') {
-				$.getJSON("/api/kind/" + upkind, function(list, textStatus, req) {
+				$.getJSON(BASE_URI + "/kind/" + upkind, function(list, textStatus, req) {
 					
 					$("#kind").html(option);
 					
