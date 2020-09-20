@@ -22,9 +22,13 @@
 		]]>
 	</insert>
 	
-	<select id="getList" resultType="com.jy.domain.board.BoardDto">
+	<select id="getList" resultType="com.jy.domain.board.BoardDto" parameterType="int">
 		<![CDATA[
-			SELECT * FROM tbl_board WHERE bno > 0			
+			SELECT *
+			FROM tbl_board as p
+			JOIN (SELECT bno 
+			    FROM   tbl_board
+			    ORDER  BY bno LIMIT #{offset}, 10) AS t ON t.bno = p.bno; 			
 		]]>
 	</select>
 	
