@@ -1,0 +1,131 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE = edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="ContentTye" content="text/html; charset=utf-8">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+	crossorigin="anonymous">
+
+<style type="text/css">
+@import
+	url('https://fonts.googleapis.com/css2?family=Gaegu:wght@700&display=swap');
+
+@import url('https://fonts.googleapis.com/css?family=Do+Hyeon:400');
+</style>
+
+<title>유기동물 검색</title>
+</head>
+<body>
+	<div class="container-fluid d-flex flex-column min-vh-100">
+
+	
+		<!-- Header -->
+		<div class="sticky-top">
+			<div th:insert="~{fragments/header::header}"></div>
+		</div>
+		<!-- /Header -->		
+
+		<!-- Main Row -->
+		<div id="main_row" class="row p-3 d-flex justify-content-center align-items-center flex-row min-vh-100 ">
+			<div class="col">
+				<div class="card">
+					<h5 class="card-header">게시판</h5>
+					<div class="card-body">
+						<table class="table table-hover text-center">
+							<thead>
+								<tr>
+									<th scope="col" style="width: 10%">번호</th>
+									<th scope="col" style="width: 50%">제목</th>
+									<th scope="col" style="width: 15%">닉네임</th>
+									<th scope="col" style="width: 15%">작성일</th>
+									<th scope="col" style="width: 20%">수정일</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="board : ${boards}">
+									<td th:text="${board.bno}"></td>
+									<td th:text="${board.title}"></td>
+									<td th:text="${board.nickname}"></td>
+									<td th:text="${#temporals.format(board.created_datetime, 'yyyy-MM-dd HH:mm')}"></td>
+									<td th:text="${#temporals.format(board.updated_datetime, 'yyyy-MM-dd HH:mm')}"></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<!-- card -->
+			</div>
+			<!-- col -->
+			
+			
+			
+		</div>
+		<!-- /.Main Row -->
+		
+		<!-- paging 영역 -->
+		<div class="col d-flex justify-content-center" style="min-height: 7vh;" >
+			<ul id="pagination" class="pagination">
+			</ul>
+		</div>
+		<!-- /.Paging -->	
+	
+		<!-- Footer -->
+		<div th:insert="~{fragments/footer::footer}"></div>
+		
+		
+	</div>
+	<!-- /.Container -->
+
+	<!-- Boot Strap -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+		integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+		crossorigin="anonymous"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+ 	<script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.js"></script>
+
+ 	
+	<script th:inline="javascript">
+	$(document).ready(function() {
+		
+		// 이전에 보고 있던 페이지가 있으면, 해당 페이지로 pageNo를 설정
+		if(history.state != null) {
+			$("#pageNo").val(history.state.pageNo);
+		}
+		
+		// 컨트롤러로 부터 전달 받은 검색 조건을 이용해서, api 요청 주소를 완성
+		var URI = getURI();
+		
+		$.getJSON(URI, function(result, textStatus, req) {
+			
+			var totalCount = result.totalCount;
+			
+			$("#totalCount").text(totalCount);
+			printTable(result.petList);
+			makePagination(result);
+			
+			if(totalCount == 0) {
+				alert("해당하는 검색 결과가 없습니다");
+			} else {
+				countUp();	
+			}
+			
+		});
+	});
+	</script>
+</body>
+</html>
+
+
