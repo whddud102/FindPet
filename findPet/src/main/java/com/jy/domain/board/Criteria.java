@@ -2,7 +2,6 @@ package com.jy.domain.board;
 
 import lombok.Getter;
 import lombok.ToString;
-import lombok.Setter;
 
 /**
  * 게시판의 검색기준을 담고 있는 클래스
