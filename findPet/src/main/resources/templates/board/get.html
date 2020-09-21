@@ -34,7 +34,13 @@
 			<div class="col-8">
 				<div class="card">
 					<div class="card-header">
-						<span class="font-weight-bold h4">게시글 조회</span>
+						<div class="d-sm-inline">
+							<span class="font-weight-bold h4">게시글 조회</span>
+						</div>
+						<div class="d-sm-inline float-sm-right ml-md-1">
+							<a class="btn btn-primary btn-sm" th:href="@{/board/register}"> 수정하기</a>
+							<a class="btn btn-danger btn-sm" th:href="@{/board/register}"> 삭제</a>
+						</div>
 					</div>
 					<div class="card-body">
 						<div class="row">
