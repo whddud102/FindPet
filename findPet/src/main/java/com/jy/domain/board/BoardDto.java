@@ -11,6 +11,7 @@ public class BoardDto {
 	private String password;	// 비밀번호
 	private String title;		// 제목
 	private String contents;	// 내용
+	private String salt;		// 암호화, 복호화를 위한 salt
 	private int hit_cnt;		// 게시판 조회수
 	private LocalDateTime created_datetime;		// 작성시간
 	private LocalDateTime updated_datetime;		// 수정시간

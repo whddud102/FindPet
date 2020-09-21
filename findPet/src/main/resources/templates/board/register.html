@@ -30,34 +30,40 @@
 		<!-- /Header -->		
 
 		<!-- Main Row -->
-		<div id="main_row" class="row p-3 d-flex justify-content-center align-items-center flex-row min-vh-80">
-			<div class="col">
+		<div id="main_row" class="row p-3 d-flex justify-content-center align-items-center flex-row min-vh-100">
+			<div class="col-8">
 				<div class="card">
 					<div class="card-header">
-						<span class="font-weight-bold h4">게시판</span>
-							<a class="btn btn-primary btn-sm float-right" th:href="@{/board/register}"> 게시글 작성</a>
+						<span class="font-weight-bold h4">게시글 작성</span>
 					</div>
 					<div class="card-body">
-						<table class="table table-hover text-center">
-							<thead>
-								<tr>
-									<th scope="col" style="width: 10%">번호</th>
-									<th scope="col" style="width: 50%">제목</th>
-									<th scope="col" style="width: 15%">닉네임</th>
-									<th scope="col" style="width: 15%">작성일</th>
-									<th scope="col" style="width: 20%">수정일</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr th:each="board : ${boards}">
-									<td th:text="${board.bno}"></td>
-									<td th:text="${board.title}"></td>
-									<td th:text="${board.nickname}"></td>
-									<td th:text="${#temporals.format(board.created_datetime, 'yyyy-MM-dd')}"></td>
-									<td th:text="${#temporals.format(board.updated_datetime, 'yyyy-MM-dd')}"></td>
-								</tr>
-							</tbody>
-						</table>
+						<form th:action="@{/board/register}" method="post">
+						
+							<div class="form-row">
+								<div class="form-group col-md-6">
+									<label>닉네임</label> 
+									<input type="text" class="form-control" id="nickname" name="nickname" placeholder="닉네임" maxlength="10" required="required">
+								</div>
+							
+								<div class="form-group col-md-6">
+									<label>비밀번호</label> 
+									<input type="password" class="form-control" id="password" name="password" placeholder="비밀번호" 	maxlength="4" required="required" minlength="4">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label>제목</label> 
+									<input type="text" class="form-control" id="title" name="title"	placeholder="제목" maxlength="30" required="required">
+							</div>
+							
+							<div class="form-group">
+								<label>내용</label> 
+								<textarea class="form-control"id="contents" name="contents" rows="15" required="required" maxlength="1000"></textarea>
+							</div>
+							
+							
+							<input class="btn btn-primary btn-block btn-lg" type="submit" value="등록">
+						</form>
 					</div>
 				</div>
 				<!-- card -->
@@ -66,12 +72,6 @@
 		</div>
 		<!-- /.Main Row -->
 		
-		<!-- paging 영역 -->
-		<div class="col d-flex justify-content-center" style="min-height: 18vh;" >
-			<ul id="pagination" class="pagination">
-			</ul>
-		</div>
-		<!-- /.Paging -->	
 	
 		<!-- Footer -->
 		<div th:insert="~{fragments/footer::footer}"></div>

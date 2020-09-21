@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.jy.domain.board.BoardDto;
 import com.jy.domain.board.Criteria;
 import com.jy.mapper.BoardMapper;
+import com.jy.utils.SHA256Util;
 
 import lombok.extern.java.Log;
 
@@ -21,6 +22,11 @@ public class BoardSerivceImpl implements BoardService {
 	@Override
 	public void insert(BoardDto board) {
 		log.info("게시글 추가 : " + board);
+		
+		String salt = SHA256Util.generateSalt();
+		board.setSalt(salt);
+		board.setPassword(SHA256Util.getEncrypt(board.getPassword(), salt));
+		
 		boardMapper.insert(board);
 	}
 

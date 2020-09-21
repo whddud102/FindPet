@@ -10,6 +10,7 @@
 				password,
 				title,
 				contents,
+				salt,
 				created_datetime
 			)
 			VALUES (
@@ -17,6 +18,7 @@
 				#{password},
 				#{title},
 				#{contents},
+				#{salt},
 				NOW()
 			)
 		]]>
@@ -28,7 +30,7 @@
 			FROM tbl_board as p
 			JOIN (SELECT bno 
 			    FROM   tbl_board
-			    ORDER  BY bno LIMIT #{offset}, 10) AS t ON t.bno = p.bno; 			
+			    ORDER  BY bno DESC LIMIT #{offset}, 10) AS t ON t.bno = p.bno; 			
 		]]>
 	</select>
 	
