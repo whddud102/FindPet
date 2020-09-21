@@ -58,7 +58,7 @@
 							
 							<div class="form-group">
 								<label>내용</label> 
-								<textarea class="form-control"id="contents" name="contents" rows="15" required="required" maxlength="1000"></textarea>
+								<textarea class="form-control"id="contents" name="contents" rows="15" required="required" maxlength="3000"></textarea>
 							</div>
 							
 							
@@ -109,27 +109,6 @@
  	
 	<script th:inline="javascript">
 	$(document).ready(function() {
-		
-		// 이전에 보고 있던 페이지가 있으면, 해당 페이지로 pageNo를 설정
-		if(history.state != null) {
-			$("#pageNum").val(history.state.pageNo);
-		}
-		
-		var pageDTO = [[${pageDTO}]];
-		makePagination(pageDTO);
-		
-		$("#pagination").on("click", "a", function(e) { 
-			event.preventDefault();
-			var targetPage = $(this).attr("href");
-			
-			$("#pageNum").val(targetPage);
-			
-			// 페이지 버튼 클릭 시, 클릭한  페이지 번호를 history에 저장
-			history.replaceState({pageNo : targetPage}, null);
-			
-			$("#action_form").submit();
-		});
-		
 	});
 	</script>
 </body>
