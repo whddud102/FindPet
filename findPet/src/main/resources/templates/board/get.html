@@ -1,0 +1,120 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE = edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="ContentTye" content="text/html; charset=utf-8">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+	crossorigin="anonymous">
+
+<style type="text/css">
+@import
+	url('https://fonts.googleapis.com/css2?family=Gaegu:wght@700&display=swap');
+
+@import url('https://fonts.googleapis.com/css?family=Do+Hyeon:400');
+</style>
+
+<title>유기동물 검색</title>
+</head>
+<body>
+	<div class="container-fluid d-flex flex-column min-vh-100">
+
+	
+		<!-- Header -->
+		<div class="sticky-top">
+			<div th:insert="~{fragments/header::header}"></div>
+		</div>
+		<!-- /Header -->		
+
+		<!-- Main Row -->
+		<div id="main_row" class="row p-3 d-flex justify-content-center align-items-center flex-row min-vh-100">
+			<div class="col-8">
+				<div class="card">
+					<div class="card-header">
+						<span class="font-weight-bold h4">게시글 조회</span>
+					</div>
+					<div class="card-body">
+						<div class="row">
+							<div class="col">
+								<span class="font-weight-bold float-left" id="title" th:text="${board.title}"></span>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col">
+								<div class="d-md-inline float-md-left">
+									
+									<span th:text="${board.nickname}" class="mr-1"></span> | 
+									<span th:text="${#temporals.format(board.created_datetime, 'yyyy-MM-dd HH:mm')}" class="ml-1"></span>
+									
+								</div>
+								<div class="d-md-inline float-md-right">
+									조회수&nbsp; <span th:text="${board.hit_cnt}" class="mr-1"></span>
+									| 댓글&nbsp; <span th:text="${board.hit_cnt}"></span>
+								</div>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col">
+								<hr>
+								<p th:text="${board.contents}">
+							</div>
+						
+						</div>
+						
+					</div>
+					<!-- /.card body -->
+				</div>
+				<!-- card -->
+			</div>
+			<!-- col -->
+		</div>
+		<!-- /.Main Row -->
+		
+	
+		<!-- Footer -->
+		<div th:insert="~{fragments/footer::footer}"></div>
+		
+		<!-- hidden form for info -->
+		<form id="action_form" th:action="@{/board/list}" class="d-none">
+			<input type="hidden" id="pageNum" name="pageNum" value="1">
+		</form>
+		<!-- /hidden form -->
+		
+		
+		
+	</div>
+	<!-- /.Container -->
+
+	<!-- Boot Strap -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+		integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+		crossorigin="anonymous"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+ 	<script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.js"></script>
+
+	<!-- Pagination 출력 함수  -->
+ 	<script th:src="@{/js/makePagination.js}"></script>
+ 	<!-- /makePagination -->
+ 	
+	<script th:inline="javascript">
+	$(document).ready(function() {
+		
+	});
+	</script>
+</body>
+</html>
+
+

@@ -36,7 +36,7 @@
 	
 	<select id="read" parameterType="int" resultType="com.jy.domain.board.BoardDto">
 		<![CDATA[
-			SELECT bno, nickname, title, contents, hit_cnt, created_datetime, updated_datetime			
+			SELECT bno, nickname, title, contents, hit_cnt, created_datetime			
 			FROM tbl_board 
 			WHERE bno = #{bno}			
 		]]>
@@ -56,8 +56,7 @@
 			SET nickname = #{nickname},
 				password = #{password},
 				title = #{title},
-				contents = #{contents},
-				updated_datetime = now()
+				contents = #{contents}
 			WHERE bno = #{bno}
 		]]>
 	</update>
@@ -67,5 +66,13 @@
 			SELECT count(*) from tbl_board where bno > 0
 		]]>
 	</select>
+	
+	<update id="increase_hitCnt" parameterType="int">
+		<![CDATA[
+		    UPDATE tbl_board
+		    SET hit_cnt = hit_cnt + 1
+		    WHERE bno = #{bno};
+		]]>
+	</update>
 	
 </mapper> 

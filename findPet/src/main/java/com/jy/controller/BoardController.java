@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.jy.domain.board.BoardDto;
@@ -49,5 +50,11 @@ public class BoardController {
 		rttr.addFlashAttribute("isRegistered", true);
 		
 		return "redirect:/board/list";
+	}
+	
+	@GetMapping("/get")
+	public void get(@RequestParam("bno") int bno, Model model) {
+		log.info("======== " + bno + "번 게시글 조회 요청 =========");
+		model.addAttribute("board", boardService.read(bno));
 	}
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.jy.domain.board.BoardDto;
 import com.jy.domain.board.Criteria;
@@ -39,8 +40,10 @@ public class BoardSerivceImpl implements BoardService {
 	}
 
 	@Override
+	@Transactional
 	public BoardDto read(int bno) {
 		BoardDto board = boardMapper.read(bno);
+		boardMapper.increase_hitCnt(bno);
 		log.info(bno + "번 게시글 조회 : " + board);
 		return board;
 	}
