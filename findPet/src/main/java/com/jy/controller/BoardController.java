@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.jy.domain.board.BoardDto;
 import com.jy.domain.board.Criteria;
+import com.jy.domain.board.PageDto;
 import com.jy.service.BoardService;
 
 import lombok.extern.java.Log;
@@ -26,6 +27,7 @@ public class BoardController {
 	public void list(Model model, Criteria cri) {
 		log.info("======== 게시글 조회 요청 ==========");
 		
+		model.addAttribute("pageDTO", new PageDto(cri, boardService.getTotalCount(cri)));
 		List<BoardDto> boards = boardService.getList(cri);
 		model.addAttribute("boards", boards);
 		log.info(boards.size() + "개의 게시물 조회");

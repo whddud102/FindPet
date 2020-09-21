@@ -30,7 +30,7 @@
 		<!-- /Header -->		
 
 		<!-- Main Row -->
-		<div id="main_row" class="row p-3 d-flex justify-content-center align-items-center flex-row min-vh-100 ">
+		<div id="main_row" class="row p-3 d-flex justify-content-center align-items-center flex-row min-vh-80">
 			<div class="col">
 				<div class="card">
 					<h5 class="card-header">게시판</h5>
@@ -50,8 +50,8 @@
 									<td th:text="${board.bno}"></td>
 									<td th:text="${board.title}"></td>
 									<td th:text="${board.nickname}"></td>
-									<td th:text="${#temporals.format(board.created_datetime, 'yyyy-MM-dd HH:mm')}"></td>
-									<td th:text="${#temporals.format(board.updated_datetime, 'yyyy-MM-dd HH:mm')}"></td>
+									<td th:text="${#temporals.format(board.created_datetime, 'yyyy-MM-dd')}"></td>
+									<td th:text="${#temporals.format(board.updated_datetime, 'yyyy-MM-dd')}"></td>
 								</tr>
 							</tbody>
 						</table>
@@ -60,9 +60,6 @@
 				<!-- card -->
 			</div>
 			<!-- col -->
-			
-			
-			
 		</div>
 		<!-- /.Main Row -->
 		
@@ -75,6 +72,13 @@
 	
 		<!-- Footer -->
 		<div th:insert="~{fragments/footer::footer}"></div>
+		
+		<!-- hidden form for info -->
+		<form id="action_form" th:action="@{/board/list}" class="d-none">
+			<input type="hidden" id="pageNum" name="pageNum" value="1">
+		</form>
+		<!-- /hidden form -->
+		
 		
 		
 	</div>
@@ -96,33 +100,33 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
  	<script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.js"></script>
 
+	<!-- Pagination 출력 함수  -->
+ 	<script th:src="@{/js/makePagination.js}"></script>
+ 	<!-- /makePagination -->
  	
 	<script th:inline="javascript">
 	$(document).ready(function() {
 		
 		// 이전에 보고 있던 페이지가 있으면, 해당 페이지로 pageNo를 설정
 		if(history.state != null) {
-			$("#pageNo").val(history.state.pageNo);
+			$("#pageNum").val(history.state.pageNo);
 		}
 		
-		// 컨트롤러로 부터 전달 받은 검색 조건을 이용해서, api 요청 주소를 완성
-		var URI = getURI();
+		var pageDTO = [[${pageDTO}]];
+		makePagination(pageDTO);
 		
-		$.getJSON(URI, function(result, textStatus, req) {
+		$("#pagination").on("click", "a", function(e) { 
+			event.preventDefault();
+			var targetPage = $(this).attr("href");
 			
-			var totalCount = result.totalCount;
+			$("#pageNum").val(targetPage);
 			
-			$("#totalCount").text(totalCount);
-			printTable(result.petList);
-			makePagination(result);
+			// 페이지 버튼 클릭 시, 클릭한  페이지 번호를 history에 저장
+			history.replaceState({pageNo : targetPage}, null);
 			
-			if(totalCount == 0) {
-				alert("해당하는 검색 결과가 없습니다");
-			} else {
-				countUp();	
-			}
-			
+			$("#action_form").submit();
 		});
+		
 	});
 	</script>
 </body>
