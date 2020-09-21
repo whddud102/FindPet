@@ -46,7 +46,7 @@ public class BoardController {
 		log.info(board.toString());
 		boardService.insert(board);
 		
-		rttr.addFlashAttribute("result", board.getBno());
+		rttr.addFlashAttribute("isRegistered", true);
 		
 		return "redirect:/board/list";
 	}
