@@ -37,7 +37,7 @@
 						<span class="font-weight-bold h4">게시판</span>
 							<a class="btn btn-primary btn-sm float-right" th:href="@{/board/register}"> 게시글 작성</a>
 					</div>
-					<div class="card-body">
+					<div class="card-body table-responsive">
 						<table class="table table-hover text-center">
 							<thead>
 								<tr>
@@ -45,16 +45,16 @@
 									<th scope="col" style="width: 50%">제목</th>
 									<th scope="col" style="width: 15%">닉네임</th>
 									<th scope="col" style="width: 15%">작성일</th>
-									<th scope="col" style="width: 20%">수정일</th>
+									<th scope="col" style="width: 10%">조회수</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr th:each="board : ${boards}">
 									<td th:text="${board.bno}"></td>
-									<td th:text="${board.title}"></td>
+									<td><a th:href='${board.bno}' class="boardLink">[[${board.title}]]</a></td>
 									<td th:text="${board.nickname}"></td>
-									<td th:text="${#temporals.format(board.created_datetime, 'yyyy-MM-dd')}"></td>
-									<td th:text="${#temporals.format(board.updated_datetime, 'yyyy-MM-dd')}"></td>
+									<td th:text="${#temporals.format(board.created_datetime, 'yyyy-MM-dd HH:mm')}"></td>
+									<td th:text="${board.hit_cnt}"></td>
 								</tr>
 							</tbody>
 						</table>
@@ -77,11 +77,16 @@
 		<div th:insert="~{fragments/footer::footer}"></div>
 		
 		<!-- hidden form for info -->
-		<form id="action_form" th:action="@{/board/list}" class="d-none">
+		<form id="list_form" th:action="@{/board/list}" class="d-none">
 			<input type="hidden" id="pageNum" name="pageNum" value="1">
 		</form>
 		<!-- /hidden form -->
 		
+		<!-- hidden form for info -->
+		<form id="read_form" th:action="@{/board/get}" class="d-none">
+			<input type="hidden" id="bno" name="bno">
+		</form>
+		<!-- /hidden form -->
 		
 		
 	</div>
@@ -110,13 +115,11 @@
 	<script th:inline="javascript">
 	$(document).ready(function() {
 		
-		if([[${isRegistered}]]) {
+		console.log(history.state);
+		console.log([[${isRegistered}]]);
+		if([[${isRegistered}]] && history.state == null) {
 			alert("게시글 등록 완료");
-		}
-		
-		// 이전에 보고 있던 페이지가 있으면, 해당 페이지로 pageNo를 설정
-		if(history.state != null) {
-			$("#pageNum").val(history.state.pageNo);
+			history.replaceState({}, null, null);
 		}
 		
 		var pageDTO = [[${pageDTO}]];
@@ -127,13 +130,17 @@
 			var targetPage = $(this).attr("href");
 			
 			$("#pageNum").val(targetPage);
-			
-			// 페이지 버튼 클릭 시, 클릭한  페이지 번호를 history에 저장
-			history.replaceState({pageNo : targetPage}, null);
-			
-			$("#action_form").submit();
+			$("#list_form").submit();
 		});
 		
+		
+		$(".boardLink").click(function(e) {
+			e.preventDefault();
+			
+			var bno = $(this).attr("href");
+			$("#bno").val(bno);
+			$("#read_form").submit();
+		});
 	});
 	</script>
 </body>
