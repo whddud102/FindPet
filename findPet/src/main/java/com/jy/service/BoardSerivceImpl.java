@@ -52,4 +52,12 @@ public class BoardSerivceImpl implements BoardService {
 		log.info(board.getBno() + "번 게시글 수정 : " + board);
 		return result;
 	}
+
+	@Override
+	public int getTotalCount(Criteria cri) {
+		int totalCount = boardMapper.getTotalCount(cri);
+		
+		log.info("전체 게시글 수 : " + totalCount);
+		return totalCount;
+	}
 }
