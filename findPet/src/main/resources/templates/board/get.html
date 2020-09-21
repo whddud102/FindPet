@@ -37,9 +37,10 @@
 						<div class="d-sm-inline">
 							<span class="font-weight-bold h4">게시글 조회</span>
 						</div>
-						<div class="d-sm-inline float-sm-right ml-md-1">
-							<a class="btn btn-primary btn-sm" th:href="@{/board/register}"> 수정하기</a>
-							<a class="btn btn-danger btn-sm" th:href="@{/board/register}"> 삭제</a>
+						<div class="d-sm-inline float-sm-right">
+							<!-- Button trigger modal -->
+							<button type="button" id="btn_modify" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">수정하기</button>
+							<button type="button" id="btn_delete" class="btn btn-danger btn-sm" data-toggle="modal"	data-target="#myModal">삭제</button>
 						</div>
 					</div>
 					<div class="card-body">
@@ -90,8 +91,29 @@
 		</form>
 		<!-- /hidden form -->
 		
-		
-		
+
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="modalLongTitle">비밀번호</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<input id="password" type="password" class="form-control" minlength="4" maxlength="4" required="required">
+					</div>
+					<div class="modal-footer">
+						<button id="btn_close" type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+						<button id="btn_ok" type="button" class="btn btn-primary">확인</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Modal -->
+
 	</div>
 	<!-- /.Container -->
 
@@ -103,13 +125,15 @@
 		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
 		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
 		crossorigin="anonymous"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+ 	<script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.js"></script>
+
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
 		integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
 		crossorigin="anonymous"></script>
 
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
- 	<script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.js"></script>
 
 	<!-- Pagination 출력 함수  -->
  	<script th:src="@{/js/makePagination.js}"></script>
@@ -117,7 +141,34 @@
  	
 	<script th:inline="javascript">
 	$(document).ready(function() {
+		var password = $("#password");
 		
+		$('#btn_modify').on('click', function() {
+			$('#myModal').modal('show');
+			
+			console.log("수정 버튼 클릭");
+		});
+		
+		$('#btn_delete').on('click', function() {
+			$('#myModal').modal('show');
+			
+			console.log("삭제 버튼 클릭");
+		});
+		
+		$('#btn_ok').on('click', function() {
+			if(password.val().length != 4) {
+				alert("비밀번호를 전부 입력해주세요");
+				password.focus();
+			} else {
+				$('#myModal').modal('hide');
+			}
+	});
+		// 모달 안의 취소 버튼에 이벤트를 건다.
+		$('#btn_close').on('click', function() {
+				$('#myModal').modal('hide');
+				password.val("");
+				console.log("modal close");
+		});
 	});
 	</script>
 </body>
