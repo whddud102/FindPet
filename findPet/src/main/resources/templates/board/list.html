@@ -115,8 +115,16 @@
 	<script th:inline="javascript">
 	$(document).ready(function() {
 		
-		console.log(history.state);
-		console.log([[${isRegistered}]]);
+		if([[${isModified}]] && history.state == null) {
+			alert("게시글 수정 완료");
+			history.replaceState({}, null, null);
+		}
+		
+		if([[${isRemoved}]] && history.state == null) {
+			alert("게시글 삭제 완료");
+			history.replaceState({}, null, null);
+		}
+		
 		if([[${isRegistered}]] && history.state == null) {
 			alert("게시글 등록 완료");
 			history.replaceState({}, null, null);

@@ -57,4 +57,34 @@ public class BoardController {
 		log.info("======== " + bno + "번 게시글 조회 요청 =========");
 		model.addAttribute("board", boardService.read(bno));
 	}
+	
+	@GetMapping("/modify")
+	public void modifyGET(int bno, String encrypted_password, Model model) {
+		log.info("====== " + bno + " 번 게시글 수정 페이지로 이동 (비밀번호 : " + encrypted_password + ") =====");
+		BoardDto board = boardService.read(bno);
+		model.addAttribute("board", board);
+		model.addAttribute("encrypted_password", encrypted_password);
+	}
+	
+	@PostMapping("/modify")
+	public String modifyPOST(BoardDto newBoard, RedirectAttributes rttr) {
+		log.info(" ====== " + newBoard.getBno() + "번 게시글 수정 ======= ");
+		BoardDto oldBoard = boardService.read(newBoard.getBno());
+		oldBoard.setTitle(newBoard.getTitle());
+		oldBoard.setContents(newBoard.getContents());
+		boardService.update(oldBoard);
+		
+		rttr.addFlashAttribute("isModified", true);
+		
+		return  "redirect:/board/list";
+	}
+	
+	@PostMapping("/remove")
+	public String remove(int bno, RedirectAttributes rttr) {
+		log.info("========== " + bno + " 번 게시글 삭제 요청 =========");
+		
+		rttr.addFlashAttribute("isRemoved", true);
+		
+		return "redirect:/board/list";
+	}
 }

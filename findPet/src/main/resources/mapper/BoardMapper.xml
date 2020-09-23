@@ -36,7 +36,7 @@
 	
 	<select id="read" parameterType="int" resultType="com.jy.domain.board.BoardDto">
 		<![CDATA[
-			SELECT bno, nickname, title, contents, hit_cnt, created_datetime			
+			SELECT bno, nickname, title, contents, salt, hit_cnt, created_datetime, password			
 			FROM tbl_board 
 			WHERE bno = #{bno}			
 		]]>
@@ -53,10 +53,7 @@
 	<update id="update" parameterType="com.jy.domain.board.BoardDto">
 		<![CDATA[
 			UPDATE tbl_board
-			SET nickname = #{nickname},
-				password = #{password},
-				title = #{title},
-				contents = #{contents}
+			SET title = #{title}, contents = #{contents}
 			WHERE bno = #{bno}
 		]]>
 	</update>
