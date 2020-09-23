@@ -83,6 +83,7 @@ public class BoardController {
 	public String remove(int bno, RedirectAttributes rttr) {
 		log.info("========== " + bno + " 번 게시글 삭제 요청 =========");
 		
+		boardService.delete(bno);
 		rttr.addFlashAttribute("isRemoved", true);
 		
 		return "redirect:/board/list";
