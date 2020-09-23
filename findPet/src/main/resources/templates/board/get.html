@@ -142,18 +142,21 @@
  	
 	<script th:inline="javascript">
 	$(document).ready(function() {
+		var BASE_URI = '';			// findPet or "" 값을 가짐
+		
 		var password = $("#password");
 		var action_form = $("#action_form");
 		
 		$('#btn_modify').on('click', function() {
 			$('#myModal').modal('show');
-			action_form.attr("action", "/board/modify");
+			action_form.attr("action",  BASE_URI + "/board/modify");
+			
 			password.focus();			
 		});
 		
 		$('#btn_remove').on('click', function() {
 			$('#myModal').modal('show');
-			action_form.attr("action", "/board/remove");
+			action_form.attr("action", BASE_URI + "/board/remove");
 			action_form.attr("method", "post");
 			password.focus();
 		});
@@ -165,7 +168,7 @@
 			} else {
 				$.ajax({
 					type : 'post',
-					url : '/api/encrypt',
+					url :  BASE_URI + "/api/encrypt",
 					data : JSON.stringify({"password" : password.val(), "bno" : $("#bno").val()}),
 					contentType : "application/json; charset=utf-8",
 					success : function(result, status, xhr) {

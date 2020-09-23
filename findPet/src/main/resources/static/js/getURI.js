@@ -1,4 +1,6 @@
 function getURI() {
+	var BASE_URI = '/api';
+
 	// 'yyyy-MM-dd'  -> 'yyyyMMdd' 변환
 	var bgnde = $("#bgnde").val();
 	if (bgnde != '') {
@@ -22,7 +24,7 @@ function getURI() {
 
 	var currentPage = $("#pageNo").val(); // 현재 보고 있는 페이지 번호를 가진 input Tag
 
-	var URI = '/api/search?';
+	var URI = BASE_URI + '/search?';
 	URI += "bgnde=" + bgnde;
 	URI += "&endde=" + endde;
 	URI += "&upkind=" + upkind;

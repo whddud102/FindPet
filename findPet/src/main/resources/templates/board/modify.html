@@ -103,6 +103,7 @@
  	
 	<script th:inline="javascript">
 	$(document).ready(function() {
+		var BASE_URI = "";		// findPet 또는 "" 값을 가짐
 		
 		$('#btn_submit').on('click', function(e) {
 			e.preventDefault();
@@ -111,7 +112,7 @@
 			
 			$.ajax({
 				type : 'post',
-				url : '/api/check',
+				url : BASE_URI + '/api/check',
 				data : JSON.stringify({"encrypted_password" : encrypted_password, "bno" : $("#bno").val()}),
 				contentType : "application/json; charset=utf-8",
 				success : function(result, status, xhr) {
