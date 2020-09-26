@@ -11,7 +11,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.jy.domain.board.BoardDto;
 import com.jy.domain.board.Criteria;
+import com.jy.domain.reply.ReplyDto;
+import com.jy.mapper.ReplyMapper;
 import com.jy.service.BoardService;
+import com.jy.utils.SHA256Util;
 
 import lombok.extern.java.Log;
 
@@ -25,6 +28,9 @@ public class DatabaseTests {
 	
 	@Autowired
 	private BoardService boardSerivce; 
+	
+	@Autowired
+	ReplyMapper replyMapper;
 	
 	@Test
 	public void testSqlSession_exist() {
@@ -94,4 +100,58 @@ public class DatabaseTests {
 		log.info("수정 결과 : " + board);
 		log.info("=================================== ");
 	}
+	
+	@Test
+	public void testReply_insert() {
+		log.info("=== 댓글 추가 테스트 ======");
+
+		for (int i = 0; i < 20; i++) {
+			ReplyDto reply = new ReplyDto();
+			reply.setSalt("test" + i);
+			reply.setBno(381);
+			reply.setContents("댓글 테스트 입니다" + i);
+			reply.setNickname("admin");
+			reply.setPassword("1234");
+
+			replyMapper.insert(reply);
+		}
+	}
+	
+	
+	@Test
+	public void testReply_read() {
+		log.info(" ==== 댓글 조회 테스트 ====");
+		ReplyDto reply = replyMapper.read(1);
+		log.info(reply.toString());
+	}
+	
+	
+	@Test
+	public void testReply_delete() {
+		log.info(" ==== 댓글 삭제 테스트 ====");
+		log.info("result  : " + replyMapper.delete(2));
+	}
+	
+	@Test
+	public void testReply_update() {
+		log.info(" ==== 댓글 수정 테스트 ====");
+		ReplyDto oldReply = replyMapper.read(15);
+		oldReply.setContents("수정된 댓글입니다");
+		log.info("result  : " + replyMapper.update(oldReply));
+	}
+	
+	@Test
+	public void testReply_getList() {
+		log.info(" ==== 댓글 목록 조회 테스트 ====");
+		List<ReplyDto> list = replyMapper.getList(382);
+		
+		for(ReplyDto reply : list) {
+			log.info(reply.toString());
+		}
+		
+	}
+	
+	
+	
+	
 }

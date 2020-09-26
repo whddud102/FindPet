@@ -30,54 +30,145 @@
 		<!-- /Header -->		
 
 		<!-- Main Row -->
-		<div id="main_row" class="row p-3 d-flex justify-content-center align-items-center flex-row min-vh-100">
-			<div class="col-8">
-				<div class="card">
-					<div class="card-header">
-						<div class="d-sm-inline">
-							<span class="font-weight-bold h4">게시글 조회</span>
-						</div>
-						<div class="d-sm-inline float-sm-right">
-							<!-- Button trigger modal -->
-							<button type="button" id="btn_modify" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">수정하기</button>
-							<button type="button" id="btn_remove" class="btn btn-danger btn-sm" data-toggle="modal"	data-target="#myModal">삭제</button>
-						</div>
-					</div>
-					<div class="card-body">
-						<div class="row">
-							<div class="col">
-								<span class="font-weight-bold float-left" id="title" th:text="${board.title}"></span>
+		<div id="main_row" class="row p-3 d-flex justify-content-center flex-row min-vh-100">
+			<!--  Board row -->
+			<div class="row w-100 justify-content-center align-self-center">
+				<div class="col-md-10 col-lg-8">
+					<div class="card">
+						<div class="card-header">
+							<div class="d-inline">
+								<span class="font-weight-bold h4">게시글 조회</span>
+							</div>
+							<div class="d-inline float-right">
+								<!-- Button trigger modal -->
+								<button type="button" id="btn_modify" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">수정하기</button>
+								<button type="button" id="btn_remove" class="btn btn-danger btn-sm" data-toggle="modal"	data-target="#myModal">삭제</button>
 							</div>
 						</div>
-						<div class="row">
-							<div class="col">
-								<div class="d-md-inline float-md-left">
-									
-									<span th:text="${board.nickname}" class="mr-1"></span> | 
-									<span th:text="${#temporals.format(board.created_datetime, 'yyyy-MM-dd HH:mm')}" class="ml-1"></span>
-									
-								</div>
-								<div class="d-md-inline float-md-right">
-									조회수&nbsp; <span th:text="${board.hit_cnt}" class="mr-1"></span>
-									| 댓글&nbsp; <span th:text="${board.hit_cnt}"></span>
+						
+						<div class="card-body">
+							<div class="row">
+								<div class="col">
+									<span class="font-weight-bold float-left" id="title" th:text="${board.title}"></span>
 								</div>
 							</div>
-						</div>
-						
-						<div class="row">
-							<div class="col">
-								<hr>
-								<p th:text="${board.contents}">
+							<div class="row">
+								<div class="col">
+									<div class="d-md-inline float-md-left">
+										
+										<span th:text="${board.nickname}" class="mr-1"></span> | 
+										<span th:text="${#temporals.format(board.created_datetime, 'yyyy-MM-dd HH:mm')}" class="ml-1"></span>
+										
+									</div>
+									<div class="d-md-inline float-md-right">
+										조회수&nbsp; <span th:text="${board.hit_cnt}" class="mr-1"></span>
+										| 댓글&nbsp; <span th:text="${board.hit_cnt}"></span>
+									</div>
+								</div>
 							</div>
-						
+							
+							<div class="row">
+								<div class="col">
+									<hr>
+									<p th:text="${board.contents}">
+								</div>
+							
+							</div>
+							
 						</div>
-						
+						<!-- /.card body -->
 					</div>
-					<!-- /.card body -->
+					<!-- card -->
 				</div>
-				<!-- card -->
-			</div>
-			<!-- col -->
+				
+			<!-- Board-->
+			 </div>
+			 <!-- board row -->
+			 
+			 <!--  Replies -->
+			<div class="row m-2 w-100 justify-content-center align-self-start mt-0" id="replyArea">	
+				
+				<!-- Reply -->
+				<div class="row  d-flex justify-content-center mt-1 mb-1 w-100" >
+					<div class="col-md-10 col-lg-8 bg-warning w-100">
+						<div class="card bg-primary">
+							<div class="card-body row align-items-center">
+								<!-- reply nickname & datetime -->
+								<div class="col-12 col-xl-3  mb-1 mb-xl-0 ">
+									<span class="mr-1 font-weight-bold d-xl-block">닉네임</span> 
+									<span th:text="${#temporals.format(board.created_datetime, '(MM-dd HH:mm:ss)')}" class="ml-1 d-xl-block"></span>
+								</div >
+								<!-- /reply nickname & datetime -->
+								<hr>
+								
+								<!-- reply contents -->	
+								<div class="col-12 col-xl-7">
+									<p> 댓글 내용</p>
+								</div>
+								<!-- /reply contents -->
+								
+								<!-- reply modify & delete -->
+								<div class="col-12 col-xl-2">
+									<div class="w-100 justify-content-center d-flex">
+										<!-- Button trigger modal -->
+										<button type="button" id="btn_modify" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">수정</button>
+										<button type="button" id="btn_remove" class="btn btn-danger btn-sm ml-1" data-toggle="modal"	data-target="#myModal">삭제</button>
+									</div>
+								</div>
+								<!-- /reply contents -->
+								
+							</div>
+							<!-- /.card body -->
+						</div>
+						<!-- card -->
+					</div>
+				</div>
+				<!-- /reply -->
+				
+			 </div>
+			 <!-- Replies -->
+			 
+			 <!--  Replie Register Area -->
+			<div class="row w-100 justify-content-center">
+				<div class="col-12"><hr></div>
+				<div class="col-md-10 col-lg-8">
+					<div class="card">
+						<div class="card-header">
+							<div class="d-inline">
+								<span class="font-weight-bold h4">댓글 작성</span>
+							</div>
+							<div class="d-inline float-right">
+								<!-- Button trigger modal -->
+								<button type="button" id="btn_remove" class="btn btn-primary btn-sm" data-toggle="modal"	data-target="#myModal">등록</button>
+							</div>
+						</div>
+						<div class="card-body row">
+							<!-- reply nickname & password -->
+							<div class="col-sm-4 col-md-3 col-xl-2 col-12">
+								<form>
+									<div class="form-group">
+										<input type="text" id="reply_nickname" name="reply_nickname" required="required" maxlength="10" placeholder="닉네임" class="form-control mb-2">
+										<input type="password" id="reply_password" name="reply_password" required="required" maxlength="4" minlength="4" placeholder="비밀번호" class="form-control">
+									</div>
+										
+								</form>
+							</div >
+							<!-- /reply nickname & password -->
+							
+							<!-- reply contents -->
+							<div class="col-sm-8 col-md-9 col-xl-10 col-12">
+								<textarea rows="4" class="form-control" placeholder="댓글을 입력하세요" style="resize: none;"></textarea>
+							</div>
+							<!-- /reply contents -->
+							
+						</div>
+						<!-- /.card body -->
+					</div>
+					<!-- card -->
+				</div>
+			 </div>
+			 <!-- Reply Register Area -->
+			
 		</div>
 		<!-- /.Main Row -->
 		
@@ -136,9 +227,29 @@
 		crossorigin="anonymous"></script>
 
 
-	<!-- Pagination 출력 함수  -->
- 	<script th:src="@{/js/makePagination.js}"></script>
- 	<!-- /makePagination -->
+	<!-- ReplyManager load -->
+ 	<script th:inline="javascript" th:src="@{/js/reply.js}"></script>
+ 	<!-- /ReplyManager load -->
+ 	
+ 	<!-- Format Date -->
+ 	<script th:inline="javascript" th:src="@{/js/formatDate.js}"></script>
+ 	<!-- Format Date -->
+ 	
+ 	<!-- print Reply -->
+ 	<script th:inline="javascript" th:src="@{/js/printReply.js}"></script>
+ 	<!-- /print Reply -->
+	
+	<!-- Reply List Load -->
+	<script th:inline="javascript">
+		$(document).ready(function (e) {
+			
+			replyManager.getAll([[${board.bno}]], function(reply_list) {
+			printReply(reply_list);				
+			});
+		});
+	</script>
+	<!-- /Reply List Load -->
+
  	
 	<script th:inline="javascript">
 	$(document).ready(function() {
