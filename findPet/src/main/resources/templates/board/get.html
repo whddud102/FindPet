@@ -139,7 +139,7 @@
 							</div>
 							<div class="d-inline float-right">
 								<!-- Button trigger modal -->
-								<button type="button" id="btn_remove" class="btn btn-primary btn-sm" data-toggle="modal"	data-target="#myModal">등록</button>
+								<button type="button" id="btn_registerReply" class="btn btn-primary btn-sm">등록</button>
 							</div>
 						</div>
 						<div class="card-body row">
@@ -157,7 +157,7 @@
 							
 							<!-- reply contents -->
 							<div class="col-sm-8 col-md-9 col-xl-10 col-12">
-								<textarea rows="4" class="form-control" placeholder="댓글을 입력하세요" style="resize: none;"></textarea>
+								<textarea id="reply_contents" rows="4" class="form-control" placeholder="댓글을 입력하세요" required="required" style="resize: none;"></textarea>
 							</div>
 							<!-- /reply contents -->
 							
@@ -244,7 +244,7 @@
 		$(document).ready(function (e) {
 			
 			replyManager.getAll([[${board.bno}]], function(reply_list) {
-			printReply(reply_list);				
+				printReply(reply_list);				
 			});
 		});
 	</script>
@@ -305,6 +305,44 @@
 			$('#myModal').modal('hide');
 			password.val("");
 			console.log("modal close");
+		});
+		
+		
+		$('#btn_registerReply').on('click', function() {
+			
+			var nickname = $("#reply_nickname");
+			var password = $("#reply_password");
+			var contents = $("#reply_contents");
+			
+			if(nickname.val().length == 0) {
+				alert("닉네임을 입력해주세요");
+				nickname.focus();
+				return false;
+			}
+			
+			if(password.val().length != 4) {
+				alert("비밀번호 4자리를 모두 입력해주세요");
+				password.focus();
+				return false;
+			}
+			
+			if(contents.val().length == 0) {
+				alert("내용을 입력해주세요");
+				contents.focus();
+				return false;
+			}
+			
+			
+			var bno = [[${board.bno}]];
+		
+			var reply = {bno : bno, nickname : nickname.val(), password : password.val(), contents : contents.val()};
+			
+			replyManager.add(reply, function(reply_list){
+				alert("댓글 등록 완료");
+				printReply(reply_list);
+				
+				$("#reply_contents").val("");
+			});
 		});
 	});
 	</script>

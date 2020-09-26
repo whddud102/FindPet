@@ -26,7 +26,7 @@ public class SHA256Util {
 	 * @param salt(byte[]) SALT 값
 	 * @return
 	 */
-	public static String getEncrypt(String source, byte[] salt) {
+	private static String getEncrypt(String source, byte[] salt) {
 		
 		String result = "";
 		

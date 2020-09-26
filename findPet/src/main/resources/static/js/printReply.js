@@ -3,8 +3,6 @@ function printReply(list) {
 	var reply; 
 	var str = "";
 	
-	console.log(list);
-	
 	for(var i = 0; i < list.length; i++) {
 		reply = list[i];
 		

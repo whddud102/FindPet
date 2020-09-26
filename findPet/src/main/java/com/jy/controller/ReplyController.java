@@ -28,13 +28,10 @@ public class ReplyController {
 	@Autowired
 	private ReplyService replyService;
 	
-	@PostMapping("/{bno}")
-	public ResponseEntity<List<ReplyDto>> insert(@RequestBody ReplyDto reply, @PathVariable("bno") int bno) {
-		log.info("==== ReplyController : " + bno + "번 게시글 댓글 등록 요청 =======");
-		log.info(reply.toString());
-		
+	@PostMapping("/new")
+	public ResponseEntity<List<ReplyDto>> insert(@RequestBody ReplyDto reply) {
 		replyService.insert(reply);
-		return new ResponseEntity<List<ReplyDto>>(getList(bno) ,HttpStatus.CREATED);
+		return new ResponseEntity<List<ReplyDto>>(getList(reply.getBno()) ,HttpStatus.CREATED);
 	}
 	
 	private List<ReplyDto> getList(int bno) {

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.jy.domain.reply.ReplyDto;
 import com.jy.mapper.ReplyMapper;
+import com.jy.utils.SHA256Util;
 
 import lombok.extern.java.Log;
 
@@ -18,7 +19,11 @@ public class ReplyServiceImpl implements ReplyService {
 	
 	@Override
 	public int insert(ReplyDto reply) {
-		log.info("==== 댓글 등록 요청 =======");
+		log.info("==== " + reply.getBno()  + "번 게시글 댓글 등록 요청 =======");
+		String salt = SHA256Util.generateSalt();
+		reply.setSalt(salt);
+		
+		reply.setPassword(SHA256Util.getEncrypt(reply.getPassword(), salt));
 		log.info(reply.toString());
 		return replyMapper.insert(reply);
 	}
