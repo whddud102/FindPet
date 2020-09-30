@@ -56,6 +56,7 @@ public class BoardController {
 	public void get(@RequestParam("bno") int bno, Model model) {
 		log.info("======== " + bno + "번 게시글 조회 요청 =========");
 		model.addAttribute("board", boardService.read(bno));
+		boardService.increase_hitCnt(bno);
 	}
 	
 	@GetMapping("/modify")

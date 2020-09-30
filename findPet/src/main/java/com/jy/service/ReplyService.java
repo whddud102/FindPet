@@ -10,4 +10,5 @@ public interface ReplyService {
 	public int delete(int rno);
 	public int update(ReplyDto reply);
 	public List<ReplyDto> getList(int bno);
+	public String get_encryptedPassword(int rno, String password_raw);
 }

@@ -12,4 +12,6 @@ public interface BoardService {
 	public int delete(int bno);
 	public int update(BoardDto board);
 	public int getTotalCount(Criteria cri);
+	public int increase_hitCnt(int bno);
+	public String get_encryptedPassword(int bno, String password_raw);
 }

@@ -16,9 +16,11 @@ import com.jy.domain.ResultList;
 import com.jy.domain.area.AdministrativeAreaItemDTO;
 import com.jy.domain.board.BoardDto;
 import com.jy.domain.kind.KindItemDTO;
+import com.jy.domain.reply.ReplyDto;
 import com.jy.domain.shelter.ShelterItemDTO;
 import com.jy.service.BoardService;
 import com.jy.service.PetService;
+import com.jy.service.ReplyService;
 import com.jy.utils.SHA256Util;
 
 import lombok.extern.java.Log;
@@ -33,6 +35,9 @@ public class RestController {
 	
 	@Autowired
 	private BoardService boardService;
+	
+	@Autowired
+	private ReplyService replyService;
 	
 	@GetMapping("/today/{pageNo}")
 	public ResultList getTodayPets(@PathVariable("pageNo") int pageNo) {
@@ -84,28 +89,29 @@ public class RestController {
 	
 	@PostMapping(value = "/encrypt", consumes = "application/json", produces = {MediaType.TEXT_PLAIN_VALUE})
 	public String getEncrypt(@RequestBody Map<String, String> map) {
+		String type = map.get("type");
 		String password_raw = map.get("password");
-		int bno = Integer.parseInt(map.get("bno"));
+		String password_encrypted;
+		int id = Integer.parseInt(map.get("id"));
 		
-		log.info("===== 암호화 api 요청 받음 ======");
+		log.info("getEncrypt() : 비밀번호 (" + password_raw + ") 암호화 요청, 타입 : " + type + " ====" );
 		
-		BoardDto board = boardService.read(bno);
-		String password_encrypted = SHA256Util.getEncrypt(password_raw, board.getSalt());
-		
-		if(password_encrypted.equals(board.getPassword())) {
-			log.info("비밀번호 일치 : " + password_encrypted);
-			return password_encrypted;
-		} else {
-			log.info("비밀번호 불일치");
-			return "false";
+		// 게시판의 암호화된 비밀번호를 요청한 경우
+		if(type.equals("board")) {
+			password_encrypted = boardService.get_encryptedPassword(id, password_raw);
+		} else {	// 댓글의 암호화된 비밀번호를 요청한 경우
+			password_encrypted = replyService.get_encryptedPassword(id, password_raw);
 		}
+
+		log.info("암호화 된 비밀번호 : " + password_encrypted);
+		return password_encrypted;
 	}
 	
 	
 	@PostMapping(value = "/check", consumes = "application/json", produces = {MediaType.TEXT_PLAIN_VALUE})
 	public String checkEncryptedPassword(@RequestBody Map<String, String> map) {
 		String encrypted_password = map.get("encrypted_password");
-		int bno = Integer.parseInt(map.get("bno"));
+		int bno = Integer.parseInt(map.get("id"));
 		BoardDto board = boardService.read(bno);
 		
 		log.info(" ===== 암호화된 비밀번호 비교 요청 =======");

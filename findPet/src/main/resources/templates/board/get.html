@@ -239,6 +239,10 @@
  	<script th:inline="javascript" th:src="@{/js/printReply.js}"></script>
  	<!-- /print Reply -->
 	
+	<!-- encryptPassword -->
+ 	<script th:inline="javascript" th:src="@{/js/encryptPassword.js}"></script>
+ 	<!-- /encryptPassword -->
+	
 	<!-- Reply List Load -->
 	<script th:inline="javascript">
 		$(document).ready(function (e) {
@@ -260,44 +264,42 @@
 		
 		$('#btn_modify').on('click', function() {
 			$('#myModal').modal('show');
+			$("#btn_ok").data("type", "board");	// 지정된 타입의 비밀번호 암호화를 요청 (게시판 : board, 댓글 : reply)
+			$("#btn_ok").data("id", [[${board.bno}]]);	// data-id 에 bno 값을 세팅
 			action_form.attr("action",  BASE_URI + "/board/modify");
 			
-			password.focus();			
+			password.focus();	
 		});
 		
 		$('#btn_remove').on('click', function() {
 			$('#myModal').modal('show');
+			$("#btn_ok").data("type", "board");	// 지정된 타입의 비밀번호 암호화를 요청 (게시판 : board, 댓글 : reply)
+			$("#btn_ok").data("id", [[${board.bno}]]);	// data-id 에 bno 값을 세팅
 			action_form.attr("action", BASE_URI + "/board/remove");
 			action_form.attr("method", "post");
+			
 			password.focus();
 		});
 		
-		$('#btn_ok').on('click', function() {
+		$('#btn_ok').on('click', function(event) {
 			if(password.val().length != 4) {
 				alert("비밀번호 4자리를 모두 입력해주세요");
 				password.focus();
 			} else {
-				$.ajax({
-					type : 'post',
-					url :  BASE_URI + "/api/encrypt",
-					data : JSON.stringify({"password" : password.val(), "bno" : $("#bno").val()}),
-					contentType : "application/json; charset=utf-8",
-					success : function(result, status, xhr) {
-						if(result != "false") {
-							$("#encrypted_password").val(result);							
-							$('#myModal').modal('hide');
-							
-							action_form.submit();
-						} else {
-							password.val("");
-							alert("비밀번호가 일치하지 않습니다");
-							password.focus();
-						}
-					},
-					error: function(xhr, status, error) {
-						console.log("비밀번호 암호화 요청 실패....");
-					}
-				});
+				var type = $(event.target).data("type");
+				var id = $(event.target).data("id");
+				
+				var result = encryptPassword(password.val(), id, type);
+				
+				if(result != "false") {
+					$("#encrypted_password").val(result);							
+					$('#myModal').modal('hide');
+					action_form.submit();
+				} else {
+					password.val("");
+					alert("비밀번호가 일치하지 않습니다");
+					password.focus();
+				}
 			}
 		});
 		
@@ -344,6 +346,25 @@
 				$("#reply_contents").val("");
 			});
 		});
+		
+		
+		// 댓글 삭제 버튼 클릭 이벤트
+		$(document).on('click', '#btn_removeReply', function(event) {
+			var rno = $(event.target.closest(".card-body")).data("rno");
+			$("#btn_ok").data("type", "reply");	// 지정된 타입의 비밀번호 암호화를 요청 (게시판 : board, 댓글 : reply)
+			$("#btn_ok").data("id", rno);	// data-id 에 rno 값을 세팅
+			$('#myModal').modal('show');
+			
+		});
+		
+		// 댓글 수정 버튼 클릭 이벤트
+		$(document).on('click', '#btn_modifyReply', function() {
+			var rno = $(event.target.closest(".card-body")).data("rno");
+			$("#btn_ok").data("type", "reply");	// 지정된 타입의 비밀번호 암호화를 요청 (게시판 : board, 댓글 : reply)
+			$("#btn_ok").data("id", rno);	// data-id 에 rno 값을 세팅
+			$('#myModal').modal('show');
+		});
+		
 	});
 	</script>
 </body>

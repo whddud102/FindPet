@@ -42,7 +42,6 @@ public class BoardSerivceImpl implements BoardService {
 	@Transactional
 	public BoardDto read(int bno) {
 		BoardDto board = boardMapper.read(bno);
-		boardMapper.increase_hitCnt(bno);
 		log.info(bno + "번 게시글 조회 : " + board);
 		return board;
 	}
@@ -67,5 +66,23 @@ public class BoardSerivceImpl implements BoardService {
 		
 		log.info("전체 게시글 수 : " + totalCount);
 		return totalCount;
+	}
+
+	@Override
+	public int increase_hitCnt(int bno) {
+		return boardMapper.increase_hitCnt(bno);
+	}
+
+	@Override
+	public String get_encryptedPassword(int bno, String password_raw) {
+		BoardDto board = boardMapper.read(bno);
+		
+		String password_encrypted = SHA256Util.getEncrypt(password_raw, board.getSalt());	// 해당 게시글의 salt를 이용해 전달받은 비밀번호를 암호화
+		
+		if(!password_encrypted.equals(board.getPassword())) {
+			return "false";
+		} else {
+			return password_encrypted;
+		}
 	}
 }

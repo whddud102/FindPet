@@ -54,4 +54,16 @@ public class ReplyServiceImpl implements ReplyService {
 		return replyMapper.getList(bno);
 	}
 
+	@Override
+	public String get_encryptedPassword(int rno, String password_raw) {
+		ReplyDto reply = replyMapper.read(rno);
+		String password_encrypted = SHA256Util.getEncrypt(password_raw, reply.getSalt());	// 해당 게시글의 salt를 이용해 전달받은 비밀번호를 암호화
+		
+		if(!password_encrypted.equals(reply.getPassword())) {
+			return "false";
+		} else {
+			return password_encrypted;
+		}
+	}
+
 }

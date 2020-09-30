@@ -115,6 +115,9 @@
 	<script th:inline="javascript">
 	$(document).ready(function() {
 		
+		var pageDTO = [[${pageDTO}]];
+		makePagination(pageDTO);
+		
 		if([[${isModified}]] && history.state == null) {
 			alert("게시글 수정 완료");
 			history.replaceState({}, null, null);
@@ -129,9 +132,6 @@
 			alert("게시글 등록 완료");
 			history.replaceState({}, null, null);
 		}
-		
-		var pageDTO = [[${pageDTO}]];
-		makePagination(pageDTO);
 		
 		$("#pagination").on("click", "a", function(e) { 
 			event.preventDefault();
