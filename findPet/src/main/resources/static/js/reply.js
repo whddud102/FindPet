@@ -6,13 +6,10 @@ var replyManager = (function() {
 
 
 	var getAll = function(bno, callback){
-		console.log("댓글 목록 조회...");
 		$.getJSON(BASE_URL + "/" + bno, callback);
 	};	
 		
 	var add = function(reply, callback){
-		console.log("댓글 등록 요청");
-		
 		$.ajax({
 			type : 'post',
 			url : BASE_URL + '/new',
@@ -27,9 +24,17 @@ var replyManager = (function() {
 		console.log("댓글 수정...");
 	};
 		
-	var remove = function(obj, callback){
-		console.log("remove...");
-	};	
+	var remove = function(rno, callback){
+		$.ajax({
+			type : 'delete',
+			url : BASE_URL + '/' + rno,
+			dataType : 'json',
+			contentType: 'application/json',
+			success : callback
+		});
+		
+	};
+		
 	
 	return {
 		getAll : getAll,

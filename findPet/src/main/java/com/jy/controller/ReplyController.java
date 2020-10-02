@@ -53,9 +53,10 @@ public class ReplyController {
 	}
 	
 	
-	@DeleteMapping(value = "/{bno}/{rno}")
-	public ResponseEntity<List<ReplyDto>> delete(@PathVariable("bno") int bno, @PathVariable("rno") int rno) {
+	@DeleteMapping(value = "/{rno}")
+	public ResponseEntity<List<ReplyDto>> delete(@PathVariable("rno") int rno) {
 		log.info("ReplyController : " + rno + "번 댓글 삭제 요청....");
+		int bno = replyService.read(rno).getBno();
 		replyService.delete(rno);
 		
 		return new ResponseEntity<List<ReplyDto>>(replyService.getList(bno), HttpStatus.OK);
