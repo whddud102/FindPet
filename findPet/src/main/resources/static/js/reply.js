@@ -20,8 +20,15 @@ var replyManager = (function() {
 		});
 	};	
 	
-	var update = function(obj, callback){
-		console.log("댓글 수정...");
+	var update = function(reply, callback){
+		$.ajax({
+			type : 'put',
+			url : BASE_URL + '/' + reply.rno,
+			data : JSON.stringify(reply),
+			dataType : 'json',
+			contentType: 'application/json',
+			success : callback
+		});
 	};
 		
 	var remove = function(rno, callback){

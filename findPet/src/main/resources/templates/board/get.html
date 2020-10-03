@@ -157,7 +157,7 @@
 							
 							<!-- reply contents -->
 							<div class="col-sm-8 col-md-9 col-xl-10 col-12">
-								<textarea id="reply_contents" rows="4" class="form-control" placeholder="댓글을 입력하세요" required="required" style="resize: none;"></textarea>
+								<textarea id="reply_contents_input" rows="4" class="form-control" placeholder="댓글을 입력하세요" maxlength="2000"  required="required" style="resize: none;"></textarea>
 							</div>
 							<!-- /reply contents -->
 							
@@ -196,16 +196,18 @@
 					</div>
 					<div class="modal-body">
 						<input id="password" type="password" class="form-control" minlength="4" maxlength="4" required="required">
+						<textarea id="contents_modifyReply" rows="4" class="form-control d-none" maxlength="2000" required="required" style="resize: none;" ></textarea>
 					</div>
 					<div class="modal-footer">
 						<button id="btn_close" type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
 						<button id="btn_ok" type="button" class="btn btn-primary">확인</button>
+						<button id="modalBtn_modifyReply" type="button" class="btn btn-primary d-none">수정</button>
 					</div>
 				</div>
 			</div>
 		</div>
 		<!-- Modal -->
-
+		
 	</div>
 	<!-- /.Container -->
 
@@ -243,6 +245,10 @@
  	<script th:inline="javascript" th:src="@{/js/encryptPassword.js}"></script>
  	<!-- /encryptPassword -->
 	
+	<!-- ModalAction.js -->
+ 	<script th:inline="javascript" th:src="@{/js/modalAction.js}"></script>
+ 	<!-- /ModalAction.js -->
+	
 	<!-- Reply List Load -->
 	<script th:inline="javascript">
 		$(document).ready(function (e) {
@@ -253,7 +259,7 @@
 		});
 	</script>
 	<!-- /Reply List Load -->
-
+	
  	
 	<script th:inline="javascript">
 	$(document).ready(function() {
@@ -263,41 +269,25 @@
 		
 		// 게시글 수정 버튼 클릭 이벤트
 		$('#btn_modify').on('click', function() {
-			
-			$("#btn_ok").data("mode", "modify_board");
-			$("#btn_ok").data("type", "board");	// 지정된 타입의 비밀번호 암호화를 요청 (게시판 : board, 댓글 : reply)
-			$("#btn_ok").data("id", [[${board.bno}]]);	// data-id 에 bno 값을 세팅
-			$('#myModal').modal('show');
-			$("#password").focus();
+			showModal([[${board.bno}]], "board", "modify_board");
 		});
 		
 		// 게시글 삭제 버튼 클릭 이벤트
 		$('#btn_remove').on('click', function() {
-			$("#btn_ok").data("mode", "remove_board");  
-			$("#btn_ok").data("type", "board");	// 지정된 타입의 비밀번호 암호화를 요청 (게시판 : board, 댓글 : reply)
-			$("#btn_ok").data("id", [[${board.bno}]]);	// data-id 에 bno 값을 세팅
-			$('#myModal').modal('show');
-			$("#password").focus();	
+			showModal([[${board.bno}]], "board", "remove_board");
 		});
 
 		// 댓글 수정 버튼 클릭 이벤트
 		$(document).on('click', '#btn_modifyReply', function() {
-			var rno = $(event.target.closest(".card-body")).data("rno");	// 댓글 번호를 파악
-			$("#btn_ok").data("id", rno);	// data-id 에 rno 값을 세팅
-			$("#btn_ok").data("mode", "modify_reply");
-			$("#btn_ok").data("type", "reply");	// 지정된 타입의 비밀번호 암호화를 요청 (게시판 : board, 댓글 : reply)
-			$('#myModal').modal('show');
-			$("#password").focus();
+			var rno = $(event.target.closest(".card-body")).data("id");	// 댓글 번호를 파악
+			var contents = $(event.target.closest(".card-body")).children("#reply_contents").children().html();
+			showModal(rno, "reply", "modify_reply", contents);
 		});
 		
 		// 댓글 삭제 버튼 클릭 이벤트
 		$(document).on('click', '#btn_removeReply', function(event) {
-			var rno = $(event.target.closest(".card-body")).data("rno"); 	// 댓글 번호를 파악
-			$("#btn_ok").data("mode", "remove_reply");
-			$("#btn_ok").data("type", "reply");	// 지정된 타입의 비밀번호 암호화를 요청 (게시판 : board, 댓글 : reply)
-			$("#btn_ok").data("id", rno);	// data-id 에 rno 값을 세팅
-			$('#myModal').modal('show');
-			$("#password").focus();
+			var rno = $(event.target.closest(".card-body")).data("id");	// 댓글 번호를 파악
+			showModal(rno, "reply", "remove_reply");
 		});
 		
 		// 모달 확인 버튼 클릭 이벤트
@@ -308,60 +298,82 @@
 				alert("비밀번호 4자리를 모두 입력해주세요");
 				password.focus();
 			} else {
-				var type = $(event.target).data("type");
-				var id = $(event.target).data("id");
-				var mode = $(event.target).data("mode");
-				
+				var type = $(event.target.closest(".modal-footer")).data("type");
+				var id = $(event.target.closest(".modal-footer")).data("id");
+				var mode = $(event.target.closest(".modal-footer")).data("mode");
+
 				var result = encryptPassword(password.val(), id, type);
 				
 				// 비밀번호가 일치할 경우
 				if(result != "false") {
-					$('#myModal').modal('hide');
 					
 					$("#encrypted_password").val(result);		
 					
 					switch(mode) {
-					case "modify_board" :
+					case "modify_board" :	// 게시글 수정
+						$('#myModal').modal('hide');
 						action_form.attr("action",  BASE_URI + "/board/modify");
 						action_form.submit();
 						break;
-					case "remove_board" :
+					case "remove_board" :	// 게시글 삭제	
+						$('#myModal').modal('hide');
 						action_form.attr("action", BASE_URI + "/board/remove");
 						action_form.attr("method", "post");
 						action_form.submit();
 						break;
-					case "modify_reply" :
-						console.log("댓글 수정 모드, rno : " + id);
+					case "modify_reply" :	// 댓글 수정
+						var contents = $(event.target).data("contents");
+						$(event.target.closest(".card-body")).children("#reply_contents").children().html();
+					
+						replyModifyModal("show");
 						break;
-					case "remove_reply" :
-						console.log("댓글 삭제 모드 , rno : " + id);
-						
+					case "remove_reply" :	// 댓글 삭제
 						replyManager.remove(id, function(list){
+							$('#myModal').modal('hide');
+							alert("댓글 삭제 완료");
 							printReply(list);
-							
 						});
-						
 						break;
 					}
-					
-									
 				
 				} else {
 					password.val("");
 					alert("비밀번호가 일치하지 않습니다");
 					password.focus();
 				}
-				
-				
-				
 			}
 			
 		});
 		
 		// 모달 취소 버튼 클릭 이벤트
 		$('#btn_close').on('click', function() {
-			$('#myModal').modal('hide');
-			$("#password").val("");
+			replyModifyModal("hide");
+		});
+		
+		
+		// 댓글 수정 모달 버튼 클릭 이벤트
+		$('#modalBtn_modifyReply').on('click', function(event) {
+			var contents = $("#contents_modifyReply");
+			var rno = $(event.target.closest(".modal-footer")).data("id");
+			
+			if(contents.val().length == 0) {
+				alert("내용을 입력해주세요");
+				 $("#contents_modifyReply").focus();
+			} else {
+				var reply = {bno : [[${board.bno}]], rno : rno, contents : contents.val()};
+				
+				replyManager.update(reply, function(reply_list){
+					$("#reply_contents_input").val("");
+					replyModifyModal("hide");
+					alert("댓글 수정 완료");
+					
+					console.log("수정 완료 후 전달받은 댓글 목록 : " + reply_list);
+					
+					printReply(reply_list);
+				});
+				
+			
+			}
 		});
 		
 		
@@ -369,7 +381,7 @@
 			
 			var nickname = $("#reply_nickname");
 			var password = $("#reply_password");
-			var contents = $("#reply_contents");
+			var contents = $("#reply_contents_input");
 			
 			if(nickname.val().length == 0) {
 				alert("닉네임을 입력해주세요");
@@ -398,7 +410,7 @@
 				alert("댓글 등록 완료");
 				printReply(reply_list);
 				
-				$("#reply_contents").val("");
+				$("#reply_contents_input").val("");
 			});
 		});
 		

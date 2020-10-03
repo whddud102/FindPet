@@ -24,6 +24,7 @@ function encryptPassword(password, id, type) {
 		},
 		error: function(xhr, status, error) {
 			console.log("비밀번호 암호화 요청 실패....");
+			return false;
 		}
 	});
 	

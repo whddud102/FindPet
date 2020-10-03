@@ -41,9 +41,10 @@ public class ReplyController {
 		return replies;
 	}
 	
-	@PutMapping("/{bno}")
-	public ResponseEntity<List<ReplyDto>> modify(@PathVariable("bno") int bno, @RequestBody ReplyDto newReply) {
-		log.info("ReplyController : " + newReply.getRno() + "번 댓글 수정 요청....");
+	@PutMapping("/{rno}")
+	public ResponseEntity<List<ReplyDto>> modify(@RequestBody ReplyDto newReply) {
+		int bno = newReply.getBno();
+		log.info(newReply.getRno() + "번 댓글 수정 요청....");
 		ReplyDto oldReply = replyService.read(newReply.getRno());
 		oldReply.setContents(newReply.getContents());
 		log.info("수정된 댓글 내용 : " + oldReply.getContents());
@@ -56,6 +57,7 @@ public class ReplyController {
 	@DeleteMapping(value = "/{rno}")
 	public ResponseEntity<List<ReplyDto>> delete(@PathVariable("rno") int rno) {
 		log.info("ReplyController : " + rno + "번 댓글 삭제 요청....");
+		log.info(replyService.read(rno).toString());
 		int bno = replyService.read(rno).getBno();
 		replyService.delete(rno);
 		
