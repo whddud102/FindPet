@@ -28,7 +28,7 @@ function printToday(result) {
 			if(i <= petList.length) {
 			
 				cardStr += '<div class="col-xl-6">';
-				cardStr += 		'<div id="card' + i + '" class="card mb-2 border-dark px-4 pt-2" style="min-width: 18rem; background-color: #FDFEF2;">'; 
+				cardStr += 		'<div id="card' + i + '" class="card mb-2 border-dark px-4 py-2" style="min-width: 18rem; background-color: #FDFEF2; border-radius : 20px;">'; 
 				cardStr += 			'<div class="row no-gutters h-100">';
 				
 				// Card Image
