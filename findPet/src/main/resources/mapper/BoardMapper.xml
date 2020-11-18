@@ -72,4 +72,20 @@
 		]]>
 	</update>
 	
+	<update id="increase_replyCnt" parameterType="int">
+		<![CDATA[
+		    UPDATE tbl_board
+		    SET reply_cnt = reply_cnt + 1
+		    WHERE bno = #{bno};
+		]]>
+	</update>
+	
+	<update id="decrease_replyCnt" parameterType="int">
+		<![CDATA[
+		    UPDATE tbl_board
+		    SET reply_cnt = reply_cnt - 1
+		    WHERE bno = #{bno};
+		]]>
+	</update>
+	
 </mapper> 

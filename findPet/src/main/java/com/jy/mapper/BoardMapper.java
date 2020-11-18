@@ -17,4 +17,6 @@ public interface BoardMapper {
 	public int update(BoardDto board);
 	public int getTotalCount(Criteria cri);
 	public int increase_hitCnt(int bno);
+	public int increase_replyCnt(int bno);
+	public int decrease_replyCnt(int bno);
 }

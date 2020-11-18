@@ -13,5 +13,6 @@ public class BoardDto {
 	private String contents;	// 내용
 	private String salt;		// 암호화, 복호화를 위한 salt
 	private int hit_cnt;		// 게시판 조회수
+	private int reply_cnt;
 	private LocalDateTime created_datetime;		// 작성시간
 }

@@ -4,8 +4,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.jy.domain.reply.ReplyDto;
+import com.jy.mapper.BoardMapper;
 import com.jy.mapper.ReplyMapper;
 import com.jy.utils.SHA256Util;
 
@@ -17,6 +19,10 @@ public class ReplyServiceImpl implements ReplyService {
 	@Autowired
 	ReplyMapper replyMapper;
 	
+	@Autowired
+	BoardMapper boardMapper;
+	
+	@Transactional
 	@Override
 	public int insert(ReplyDto reply) {
 		log.info("==== " + reply.getBno()  + "번 게시글 댓글 등록 요청 =======");
@@ -25,6 +31,8 @@ public class ReplyServiceImpl implements ReplyService {
 		
 		reply.setPassword(SHA256Util.getEncrypt(reply.getPassword(), salt));
 		log.info(reply.toString());
+		
+		boardMapper.increase_replyCnt(reply.getBno());
 		return replyMapper.insert(reply);
 	}
 
@@ -34,9 +42,12 @@ public class ReplyServiceImpl implements ReplyService {
 		return replyMapper.read(rno);
 	}
 
+	@Transactional
 	@Override
 	public int delete(int rno) {
 		log.info(" ===== " + rno + "번 댓글 삭제 요청 ======= ");
+		
+		boardMapper.decrease_replyCnt(replyMapper.read(rno).getBno());
 		return replyMapper.delete(rno);
 	}
 
