@@ -9,28 +9,20 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
 	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
 	crossorigin="anonymous">
+	
+<!-- Font CSS -->
+<link rel="stylesheet" type="text/css" th:href="@{/CSS/font.css}">
+<!-- /Font CSS -->
 
-<style type="text/css">
-@import
-	url('https://fonts.googleapis.com/css2?family=Gaegu:wght@700&display=swap');
-
-@import url('https://fonts.googleapis.com/css?family=Do+Hyeon:400');
-
-.do-hyeon {
-	font-family: 'Do Hyeon', sans-serif;
-}
-
-</style>
-
-
-
+<!-- Background CSS -->
+<link rel="stylesheet" type="text/css" th:href="@{/CSS/background.css}">
+<!-- /Background CSS -->
 
 <title>유기동물 검색</title>
 </head>
 <body>
 	<div class="container-fluid d-flex flex-column min-vh-100">
-
-	
+		
 		<!-- Header -->
 		<div class="sticky-top">
 			<div th:insert="~{fragments/header::header}"></div>
@@ -39,7 +31,7 @@
 		
 		<div class="row">
 			<div class="col text-center mt-3">
-				<h1 class="do-hyeon">오늘 구조된 유기동물 : <span id="totalCount" class="count-num font-weight-bold" style="color: #fc4444;">0</span> 마리</h1>
+				<h1 class="do-hyeon bg-white p-1">오늘 구조된 유기동물 : <span id="totalCount" class="count-num font-weight-bold" style="color: #fc4444;">0</span> 마리</h1>
 			</div>
 		</div>
 
@@ -173,7 +165,7 @@
 			if(totalCount == 0) {
 				$("#left_btn").hide();
 				$("#right_btn").hide();
-				$("#card_row").html("<h1 class='do-hyeon'>현재까지 구조된 동물이 없습니다</h1>");
+				$("#card_row").html("<h1 class='do-hyeon' style='background-color: #e3f2fd;'>현재까지 구조된 동물이 없습니다</h1>");
 			} else {
 				printToday(result);
 				makePagination(result);

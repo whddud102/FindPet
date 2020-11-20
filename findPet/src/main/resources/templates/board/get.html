@@ -10,12 +10,10 @@
 	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
 	crossorigin="anonymous">
 
-<style type="text/css">
-@import
-	url('https://fonts.googleapis.com/css2?family=Gaegu:wght@700&display=swap');
+<!-- Font CSS -->
+<link rel="stylesheet" type="text/css" th:href="@{/CSS/font.css}">
+<!-- /Font CSS -->
 
-@import url('https://fonts.googleapis.com/css?family=Do+Hyeon:400');
-</style>
 
 <title>유기동물 검색</title>
 </head>
@@ -263,7 +261,7 @@
  	
 	<script th:inline="javascript">
 	$(document).ready(function() {
-		var BASE_URI = '';			// findPet or "" 값을 가짐
+		var BASE_URI = '/findPet';			// findPet or "" 값을 가짐
 		
 		var action_form = $("#action_form");
 		

@@ -33,7 +33,7 @@ function printToday(result) {
 				
 				// Card Image
 				cardStr += 				'<div class="col-md-4 d-flex align-items-center justify-content-center">';
-				cardStr +=	 					'<img class="card-img img-thumbnail border-dark" src=' + item.popfile  + '  alt="이미지 출력 불가" style="width : 50vh;">';
+				cardStr +=	 					'<img class="card-img img-thumbnail border-dark" src=' + item.popfile  + '  alt="이미지 출력 불가" style="width : 50vh; border-radius:15px;">';
 				cardStr += 				'</div>';
 				// Card Image End
 				
